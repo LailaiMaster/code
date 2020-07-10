@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+group 'com.ztiany'
+version '1.0'
+
+dependencies {
+    compile dataBaseLibs.jedis
+}

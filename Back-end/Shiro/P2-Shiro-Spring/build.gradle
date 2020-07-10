@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'me.ztiany'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    /*Servlet、JSTL*/
+    providedCompile webBaseLibs.servlet
+    providedCompile webBaseLibs.jspApi
+    compile webBaseLibs.jstl
+    compile webBaseLibs.tagLibsStandardSpec
+    compile webBaseLibs.tagLibsStandardImpl
+
+    //Spring核心架构
+    //core
+    compile springLibs.springCore
+    compile springLibs.springBeans
+    compile springLibs.springExpression
+    compile springLibs.springContext
+    //web
+    compile springLibs.springWeb
+    compile springLibs.springWebmvc
+    //aop
+    compile springLibs.springAop
+    compile springLibs.springAspects
+    compile springLibs.aspectJweaver
+    //database
+    compile springLibs.springJdbc
+    compile springLibs.springTx
+
+    //test
+    testCompile testLibs.junit
+
+    //shiro
+    compile shiro.shiroCore
+    compile shiro.shiroWeb
+    compile shiro.shiroSpring
+    compile shiro.shiroEhcache
+
+    //log
+    compile logLibs.log4j
+    compile logLibs.slf4jLog4j12
+}

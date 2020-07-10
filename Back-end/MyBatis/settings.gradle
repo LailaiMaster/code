@@ -1,0 +1,4 @@
+rootProject.name = 'MyBatis'
+
+include 'MyBatis-Base'
+include 'MyBatis-SpringMVC'

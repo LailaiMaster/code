@@ -1,0 +1,22 @@
+group 'com.ztiany'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    //test
+    testCompile testLibs.junit
+    //servlet
+    providedCompile webBaseLibs.servlet
+    //struts2
+    compile web.struts2
+    //utils
+    compile commonsLibs.beanUtils
+    compile commonsLibs.dom4j
+    compile commonsLibs.xpath
+    //log
+    compile logLibs.commonsLogging
+}

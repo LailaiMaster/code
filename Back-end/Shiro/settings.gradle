@@ -1,0 +1,4 @@
+rootProject.name = 'Shiro'
+include 'P1-QuickStart'
+include 'P2-Shiro-Spring'
+

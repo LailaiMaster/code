@@ -1,0 +1,3 @@
+D:/code/github/Programming-Notes/Android/00-Code/FFmpeg/FFmpegWindows-Clion/cmake-build-debug/CMakeFiles/FFmpegWindows_Clion.dir
+D:/code/github/Programming-Notes/Android/00-Code/FFmpeg/FFmpegWindows-Clion/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/code/github/Programming-Notes/Android/00-Code/FFmpeg/FFmpegWindows-Clion/cmake-build-debug/CMakeFiles/rebuild_cache.dir

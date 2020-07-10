@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+group 'com.ztiany'
+version '1.0'
+
+dependencies {
+    compile dataBaseLibs.mysqlConnector
+    compile dataBaseLibs.hibernate
+    compile dataBaseLibs.hibernateEhcache
+    compile dataBaseLibs.hibernateEntitymanager
+
+    //test
+    testCompile testLibs.junit
+}

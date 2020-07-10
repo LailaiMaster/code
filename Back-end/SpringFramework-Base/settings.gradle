@@ -1,0 +1,8 @@
+rootProject.name = 'SpringFramework-Base'
+
+include 'P1-GetStarted'
+include 'P2-Beans'
+include 'P3-AOP'
+include 'P4-SpringJDBC'
+include 'P5-SpringAnnotation'
+

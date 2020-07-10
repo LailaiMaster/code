@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!--
+    配置属性：读取 dp.properties 中的属性
+     -->
+    <properties resource="db.properties"/>
+
+    <!-- 用于配置多种数据库环境，比如开发、测试、生产，和spring整合后则不需要使用 environments-->
+    <environments default="development">
+        <!--开发环境，用于开发-->
+        <environment id="development">
+            <!-- 使用jdbc事务管理，可选项在 org.apache.ibatis.session.Configuration 类中 -->
+            <transactionManager type="JDBC"/>
+            <!-- 数据库连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- Mapper的位置  Mapper.xml 写Sql语句的文件的位置 -->
+    <mappers>
+        <mapper resource="sqlmap/User.xml"/>
+    </mappers>
+
+</configuration>

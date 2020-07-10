@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'com.ztiany'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    //test
+    testCompile testLibs.junit
+
+    //Spring核心架构
+    //core
+    compile springLibs.springCore
+    compile springLibs.springBeans
+    compile springLibs.springExpression
+    compile springLibs.springContext
+    //test
+    testCompile springLibs.springTest
+
+    /*数据库*/
+    compile dataBaseLibs.mysqlConnector
+    compile dataBaseLibs.c3p0
+}

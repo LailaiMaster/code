@@ -1,0 +1,6 @@
+rootProject.name = 'JPA'
+
+include 'JPA-Base'
+include 'JPA-Spring'
+include 'JPA-SpringData'
+

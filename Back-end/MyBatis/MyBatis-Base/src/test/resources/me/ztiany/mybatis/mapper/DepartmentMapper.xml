@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.ztiany.mybatis.mapper.DepartmentMapper">
+
+    <!--public Department getDeptById(Integer id);  -->
+    <select id="getDeptById" resultType="me.ztiany.mybatis.pojo.Department">
+        select id, dept_name departmentName
+        from tbl_dept
+        where id = #{id}
+    </select>
+
+    <!--嵌套结果集的方式，使用collection标签定义关联的集合类型的属性封装规则  -->
+    <resultMap type="me.ztiany.mybatis.pojo.Department" id="MyDept">
+        <id column="did" property="id"/>
+        <result column="dept_name" property="departmentName"/>
+        <!--
+            collection 定义关联集合类型的属性的封装规则
+            ofType 指定集合里面元素的类型
+        -->
+        <collection property="emps" ofType="me.ztiany.mybatis.pojo.Employee" javaType="list">
+            <!-- 定义这个集合中元素的封装规则 -->
+            <id column="eid" property="id"/>
+            <result column="last_name" property="lastName"/>
+            <result column="email" property="email"/>
+            <result column="gender" property="gender"/>
+        </collection>
+    </resultMap>
+    <!-- public Department getDeptByIdAssociated(Integer id); -->
+    <select id="getDeptByIdAssociated" resultMap="MyDept">
+        SELECT d.id        did,
+               d.dept_name dept_name,
+               e.id        eid,
+               e.last_name last_name,
+               e.email     email,
+               e.gender    gender
+        FROM tbl_dept d
+                 LEFT JOIN tbl_employee e ON d.id = e.d_id
+        WHERE d.id = #{id}
+    </select>
+
+    <!-- collection：分段查询 -->
+    <resultMap type="me.ztiany.mybatis.pojo.Department" id="MyDeptStep">
+        <id column="id" property="id"/>
+        <id column="dept_name" property="departmentName"/>
+        <!--
+            分段查询的值传递
+                单个参数只需要声明引用的列名即可。
+                        比如：column="id"
+
+                对于多个参数传递，需要将多列的值封装map传递（当然单个参数也可以使用此方式）。
+                        形式为：column="{key1=column1,key2=column2}"
+                        下面 column="id" 也开始写成 column="{deptId=id}"，其中 deptId 为 EmployeeMapperAssociation.getEmpsByDeptId 方法对应 sql 映射文件中使用的 key。
+
+            fetchType="lazy"：表示使用延迟加载；
+                    - lazy：延迟
+                    - eager：立即
+         -->
+        <collection property="emps"
+                    select="me.ztiany.mybatis.mapper.EmployeeMapperAssociation.getEmpsByDeptId"
+                    column="id"
+                    fetchType="lazy"/>
+    </resultMap>
+    <!-- public Department getDeptByIdAssociatedLazy(Integer id); -->
+    <select id="getDeptByIdAssociatedLazy" resultMap="MyDeptStep">
+        select id, dept_name
+        from tbl_dept
+        where id = #{id}
+    </select>
+
+</mapper>

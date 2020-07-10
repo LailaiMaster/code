@@ -1,0 +1,8 @@
+.vscode
+.DS_Store
+.gitattributes
+.classpath
+.project
+.settings
+.idea
+*.log

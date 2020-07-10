@@ -1,0 +1,19 @@
+buildscript {
+    apply from: '../config.gradle'
+
+    repositories {
+        maven { url 'https://jitpack.io' }
+        jcenter()
+        mavenCentral()
+    }
+}
+
+subprojects {
+
+    repositories {
+        maven { url 'https://jitpack.io' }
+        jcenter()
+        mavenCentral()
+    }
+
+}

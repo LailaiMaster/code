@@ -1,0 +1,15 @@
+group 'me.ztiany'
+version '1.0'
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    //轻量级线程
+    compile 'co.paralleluniverse:quasar-core:0.8.0'
+    compile 'co.paralleluniverse:quasar-actors:0.8.0'
+    compile 'co.paralleluniverse:quasar-reactive-streams:0.8.0'
+    compile 'co.paralleluniverse:quasar-disruptor:0.8.0'
+    //actor模式
+    compile 'com.typesafe.akka:akka-actor_2.11:2.4.9'
+    //stm
+    compile 'org.multiverse:multiverse-core:0.7.0'
+}

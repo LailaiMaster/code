@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion commonCompileSdkVersion
+    buildToolsVersion commonBuildToolsVersion
+
+    defaultConfig {
+        applicationId "com.ztiany.view"
+        minSdkVersion 19
+        //noinspection OldTargetApi
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary true
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs += "src/github/java"
+            res.srcDirs += "src/github/res"
+
+            java.srcDirs += "src/base/java"
+            res.srcDirs += "src/base/res"
+
+            java.srcDirs += "src/recyclerview/java"
+            res.srcDirs += "src/recyclerview/res"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+
+    //android
+    implementation libraries.annotation
+    implementation libraries.supportV4
+    implementation libraries.appcompat
+    implementation libraries.recyclerView
+    implementation libraries.material
+    implementation libraries.percentLayout
+    implementation libraries.constraintLayout
+    implementation libraries.dynamicAnimation
+
+    //third
+    implementation libraries.multiType
+}

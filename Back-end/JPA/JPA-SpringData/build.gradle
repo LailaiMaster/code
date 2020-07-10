@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+version 'unspecified'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //Spring核心架构
+    //core
+    compile springLibs.springCore
+    compile springLibs.springBeans
+    compile springLibs.springExpression
+    compile springLibs.springContext
+    //aop
+    compile springLibs.springAop
+    compile springLibs.springAspects
+    compile springLibs.aspectJweaver
+    //database
+    compile springLibs.springJdbc
+    compile springLibs.springTx
+    compile springLibs.springORM
+    //data
+    compile springLibs.springDataCore
+    compile springLibs.springDataJPA
+
+    //test
+    testCompile testLibs.junit
+
+    //database
+    compile dataBaseLibs.mysqlConnector
+    compile dataBaseLibs.c3p0
+    compile dataBaseLibs.hibernate
+    compile dataBaseLibs.hibernateEhcache
+    compile dataBaseLibs.hibernateEntitymanager
+}

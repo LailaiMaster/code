@@ -1,0 +1,16 @@
+group 'com.ztiany'
+version '1.0'
+
+buildscript {
+    apply from: '../config.gradle'
+}
+
+subprojects {
+
+    repositories {
+        maven { url 'https://jitpack.io' }
+        jcenter()
+        mavenCentral()
+    }
+
+}

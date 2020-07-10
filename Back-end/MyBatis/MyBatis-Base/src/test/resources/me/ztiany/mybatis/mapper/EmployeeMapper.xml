@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.ztiany.mybatis.mapper.EmployeeMapper">
+
+    <!--public Map<Integer, Employee> getEmpByLastNameLikeReturnMap(String lastName);  -->
+    <select id="getEmpByLastNameLikeReturnMap" resultType="me.ztiany.mybatis.pojo.Employee">
+        select *
+        from tbl_employee
+        where last_name like #{lastName}
+    </select>
+
+    <!--public Map<String, Object> getEmpByIdReturnMap(Integer id);  -->
+    <select id="getEmpByIdReturnMap" resultType="map">
+        select *
+        from tbl_employee
+        where id = #{id}
+    </select>
+
+    <!-- public List<Employee> getEmpsByLastNameLike(String lastName); -->
+    <!--resultType：如果返回的是一个集合，要写集合中元素的类型  -->
+    <select id="getEmpsByLastNameLike" resultType="me.ztiany.mybatis.pojo.Employee">
+        select *
+        from tbl_employee
+        where last_name like #{lastName}
+    </select>
+
+    <!-- public Employee getEmpByMap(Map<String, Object> map); -->
+    <!--这里表明作为参数传入-->
+    <select id="getEmpByMap" resultType="me.ztiany.mybatis.pojo.Employee">
+        select *
+        from ${tableName}
+        where id = ${id}
+          and last_name = #{lastName}
+    </select>
+
+    <!--  public Employee getEmpByIdAndLastName(Integer id,String lastName);-->
+    <select id="getEmpByIdAndLastName" resultType="me.ztiany.mybatis.pojo.Employee">
+        select *
+        from tbl_employee
+        where id = #{id}
+          and last_name = #{lastName}
+    </select>
+
+    <select id="getEmpById" resultType="me.ztiany.mybatis.pojo.Employee">
+        select *
+        from tbl_employee
+        where id = #{id}
+    </select>
+
+    <select id="getEmpById" resultType="me.ztiany.mybatis.pojo.Employee" databaseId="mysql">
+        select *
+        from tbl_employee
+        where id = #{id}
+    </select>
+
+    <select id="getEmpById" resultType="me.ztiany.mybatis.pojo.Employee" databaseId="oracle">
+        select EMPLOYEE_ID id, LAST_NAME lastName, EMAIL email
+        from employees
+        where EMPLOYEE_ID = #{id}
+    </select>
+
+    <!-- public void addEmp(Employee employee); -->
+    <!--
+    parameterType：参数类型，可以省略。
+        获取自增主键的值：
+            mysql支持自增主键，自增主键值的获取，mybatis 也是利用 statement.getGenreatedKeys()；
+            useGeneratedKeys="true"；使用自增主键获取主键值策略
+            keyProperty；指定对应的主键属性，也就是mybatis获取到主键值以后，将这个值封装给javaBean的哪个属性
+    -->
+    <insert id="addEmp"
+            parameterType="me.ztiany.mybatis.pojo.Employee"
+            useGeneratedKeys="true"
+            keyProperty="id"
+            databaseId="mysql">
+        insert into tbl_employee(last_name, email, gender)
+        values (#{lastName}, #{email}, #{gender})
+    </insert>
+
+    <!--
+    获取非自增主键的值：
+        Oracle不支持自增，Oracle使用序列来模拟自增，每次插入的数据的主键是从序列中拿到的值，如何获取到这个值？
+     -->
+    <insert id="addEmp" databaseId="oracle">
+        <!--
+        keyProperty：查出的主键值封装给javaBean的哪个属性
+        order="BEFORE":当前sql在插入sql之前运行
+                    AFTER：当前sql在插入sql之后运行
+        resultType:查出的数据的返回值类型
+
+        BEFORE运行顺序：
+            先运行selectKey查询id的sql；查出id值封装给javaBean的id属性
+            在运行插入的sql；就可以取出id属性对应的值
+
+        AFTER运行顺序：
+            先运行插入的sql（从序列中取出新值作为id）；
+            再运行selectKey查询id的sql；
+         -->
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="Integer">
+            <!-- 编写查询主键的sql语句 -->
+
+            <!-- BEFORE-->
+            select EMPLOYEES_SEQ.nextval from dual
+
+            <!-- AFTER：（有问题，如果是批量插入，则只能获取到最后一条插入的id）
+             select EMPLOYEES_SEQ.currval from dual -->
+        </selectKey>
+
+        <!-- 插入时的主键是从序列中拿到的 -->
+        <!-- BEFORE:-->
+        insert into employees(EMPLOYEE_ID,LAST_NAME,EMAIL)
+        values(#{id},#{lastName},#{email<!-- ,jdbcType=NULL -->})
+
+        <!-- AFTER：
+        insert into employees(EMPLOYEE_ID,LAST_NAME,EMAIL)
+        values(employees_seq.nextval,#{lastName},#{email}) -->
+    </insert>
+
+    <!-- public void updateEmp(Employee employee);  -->
+    <update id="updateEmp">
+        update tbl_employee
+        set last_name=#{lastName},
+            email=#{email},
+            gender=#{gender}
+        where id = #{id}
+    </update>
+
+    <!-- public void deleteEmpById(Integer id); -->
+    <delete id="deleteEmpById">
+        delete
+        from tbl_employee
+        where id = #{id}
+    </delete>
+
+</mapper>

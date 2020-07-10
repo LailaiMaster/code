@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+}
+
+group 'me.ztiany'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    testCompile testLibs.junit
+    compile shiro.shiroCore
+    compile logLibs.log4j
+    compile logLibs.slf4jLog4j12
+}

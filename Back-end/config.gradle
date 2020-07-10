@@ -1,0 +1,189 @@
+ext {
+
+    /*Servlet、JSTL API*/
+    webBaseLibs = [
+            servlet            : 'javax.servlet:javax.servlet-api:3.1.0',//providedCompile
+            jspApi             : 'javax.servlet.jsp:javax.servlet.jsp-api:2.2.1',//providedCompile
+            el                 : 'javax.el:el-api:2.2',//providedCompile
+            jstl               : 'javax.servlet.jsp.jstl:jstl:1.2',//compile
+            tagLibsStandardSpec: 'org.apache.taglibs:taglibs-standard-spec:1.2.5',//compile
+            tagLibsStandardImpl: 'org.apache.taglibs:taglibs-standard-impl:1.2.5'//compile
+    ]
+
+    /*Spring核心架构：https://mvnrepository.com/artifact/org.springframework*/
+    def springVersion = '5.2.0.RELEASE'
+    def springDataVersion = '2.2.0.RELEASE'
+    springLibs = [
+            //Spring的核心工具包
+            // https://mvnrepository.com/artifact/org.springframework/spring-core
+            springCore          : "org.springframework:spring-core:${springVersion}",
+            //Spring IOC的基础实现，包含访问配置文件、创建和管理bean等。
+            // https://mvnrepository.com/artifact/org.springframework/spring-beans
+            springBeans         : "org.springframework:spring-beans:${springVersion}",
+            //Spring表达式语言
+            // https://mvnrepository.com/artifact/org.springframework/spring-expression
+            springExpression    : "org.springframework:spring-expression:${springVersion}",
+            //在基础IOC功能上提供扩展服务，此外还提供许多企业级服务的支持，有邮件服务、任务调度、JNDI定位，EJB集成、远程访问、缓存以及多种视图层框架的支持。
+            // https://mvnrepository.com/artifact/org.springframework/
+            springContext       : "org.springframework:spring-context:${springVersion}",
+
+            /*SpringWeb*/
+            //包含Web应用开发时，用到Spring框架时所需的核心类，包括自动载入WebApplicationContext特性的类、Struts与JSF集成类、文件上传的支持类、Filter类和大量工具辅助类。
+            // https://mvnrepository.com/artifact/org.springframework/spring-web
+            springWeb           : "org.springframework:spring-web:${springVersion}",
+            //包含SpringMVC框架相关的所有类。包含国际化、标签、Theme、视图展现的FreeMarker、JasperReports、Tiles、Velocity、XSLT相关类。当然，如果你的应用使用了独立的MVC框架，则无需这个JAR文件里的任何类。
+            // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+            springWebmvc        : "org.springframework:spring-webmvc:${springVersion}",
+            //Spring context的扩展支持，用于MVC方面。
+            // https://mvnrepository.com/artifact/org.springframework/spring-context-support
+            springContextSupport: "org.springframework:spring-context-support:${springVersion}",
+
+            /*AOP*/
+            // https://mvnrepository.com/artifact/org.springframework/spring-aop
+            springAop           : "org.springframework:spring-aop:${springVersion}",
+            //Spring提供的对AspectJ框架的整合
+            // https://mvnrepository.com/artifact/org.springframework/spring-aspects
+            springAspects       : "org.springframework:spring-aspects:${springVersion}",
+            // https://mvnrepository.com/artifact/org.aspectj/aspectjweaver
+            aspectJweaver       : 'org.aspectj:aspectjweaver:1.8.9',
+
+            /*Spring 数据库*/
+            //对JDBC 的简单封装
+            // https://mvnrepository.com/artifact/org.springframework/spring-jdbc
+            springJdbc          : "org.springframework:spring-jdbc:${springVersion}",
+            //为JDBC、Hibernate、JDO、JPA等提供的一致的声明式和编程式事务管理。
+            // https://mvnrepository.com/artifact/org.springframework/spring-tx
+            springTx            : "org.springframework:spring-tx:${springVersion}",
+            //整合第三方的orm实现，如hibernate，ibatis，jdo以及spring 的jpa实现
+            // https://mvnrepository.com/artifact/org.springframework/spring-orm
+            springORM           : "org.springframework:spring-orm:${springVersion}",
+
+            //为简化JMS API的使用而作的简单封装
+            // https://mvnrepository.com/artifact/org.springframework/spring-jms
+            springJms           : "org.springframework:spring-jms:${springVersion}",
+            // https://mvnrepository.com/artifact/org.springframework/spring-messaging
+            springMessaging     : "org.springframework:spring-messaging:${springVersion}",
+
+            // https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons
+            springDataCore: "org.springframework.data:spring-data-commons:${springDataVersion}",
+            // https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
+            springDataJPA: "org.springframework.data:spring-data-jpa:${springDataVersion}",
+
+            /*Spring测试*/
+            // https://mvnrepository.com/artifact/org.springframework/spring-test
+            springTest          : "org.springframework:spring-test:${springVersion}"//testCompile
+    ]
+
+    web = [
+            // https://mvnrepository.com/artifact/org.apache.struts/struts2-core
+            struts2                              : 'org.apache.struts:struts2-core:2.3.30',
+            // https://mvnrepository.com/artifact/org.apache.struts/struts2-spring-plugin
+            struts2SpringPlugin                  : 'org.apache.struts:struts2-spring-plugin:2.5.22',
+            // https://mvnrepository.com/artifact/freemarker/freemarker
+            freemarker                           : 'freemarker:freemarker:2.3.9',
+
+            // https://mvnrepository.com/artifact/javax.validation/validation-api
+            validationApi                        : 'javax.validation:validation-api:2.0.1.Final',
+            //Hibernate Validator是Java Validation API(JSR 303)标准的一个具体实现
+            // https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
+            hibernateValidator                   : 'org.hibernate.validator:hibernate-validator:6.0.19.Final',
+            // https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator-annotation-processor
+            hibernateValidatorAnnotationProcessor: 'org.hibernate.validator:hibernate-validator-annotation-processor:6.0.19.Final', //annotationProcessor
+    ]
+
+    /*数据库*/
+    dataBaseLibs = [
+            // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+
+            mysqlConnector        : 'mysql:mysql-connector-java:6.0.5',
+            // https://mvnrepository.com/artifact/com.mchange/c3p0
+            c3p0                  : 'com.mchange:c3p0:0.9.5.2',
+            // https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
+            dbcp2                 : 'org.apache.commons:commons-dbcp2:2.3.0',
+            // https://mvnrepository.com/artifact/com.h2database/h2
+            h2database            : 'com.h2database:h2:1.4.197',
+
+            // https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils
+            dbutils               : 'commons-dbutils:commons-dbutils:1.7',
+
+            //mybatis
+            // https://mvnrepository.com/artifact/org.mybatis/mybatis
+            mybatis               : 'org.mybatis:mybatis:3.5.4',
+            // https://mvnrepository.com/artifact/org.mybatis/mybatis-spring
+            mybatisSpring         : 'org.mybatis:mybatis-spring:2.0.4',
+
+            //hibernate
+            // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+            hibernate             : 'org.hibernate:hibernate-core:5.4.13.Final',
+            // https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache
+            hibernateEhcache      : 'org.hibernate:hibernate-ehcache:5.4.13.Final',
+            // https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager
+            hibernateEntitymanager: 'org.hibernate:hibernate-entitymanager:5.4.13.Final',
+
+            // https://mvnrepository.com/artifact/redis.clients/jedis
+            jedis                 : 'redis.clients:jedis:2.8.0',
+    ]
+
+    commonsLibs = [
+            //commons
+            beanUtils         : 'commons-beanutils:commons-beanutils:1.9.4',
+            commonsIO         : 'commons-io:commons-io:2.6',
+            commonsFileUpload : 'commons-fileupload:commons-fileupload:1.3.3',
+            commonsCodec      : 'commons-codec:commons-codec:1.10',
+            commonsLang3      : 'org.apache.commons:commons-lang:3:4',
+            commonsCollections: 'commons-collections:commons-collections:3.2.1',
+            //json
+            gson              : 'com.google.code.gson:gson:2.7',
+            jacksonCore       : 'com.fasterxml.jackson.core:jackson-core:2.9.10',
+            jacksonAnnotations: 'com.fasterxml.jackson.core:jackson-annotations:2.9.10',
+            jacksonDatabind   : 'com.fasterxml.jackson.core:jackson-databind:2.9.10',
+            //xml
+            dom4j             : 'dom4j:dom4j:1.6.1',
+            xpath             : 'jaxen:jaxen:1.1.6',
+            //proxy
+            // https://mvnrepository.com/artifact/cglib/cglib-nodep
+            cglib             : 'cglib:cglib-nodep:2.2'
+    ]
+
+    shiro = [
+            shiroCore   : 'org.apache.shiro:shiro-core:1.3.2',
+            shiroWeb    : 'org.apache.shiro:shiro-web:1.3.2',
+            shiroSpring : 'org.apache.shiro:shiro-spring:1.3.2',
+            shiroEhcache: 'org.apache.shiro:shiro-ehcache:1.3.2'
+    ]
+
+    testLibs = [
+            junit   : 'junit:junit:4.12', //testCompile
+            mockito : 'org.mockito:mockito-core:2.7.22', //testCompile
+            hamcrest: 'org.hamcrest:hamcrest-library:1.3'//testCompile
+    ]
+
+    /*
+    Spring 默认使用的日志
+        spring-core中原生依赖commons-logging，所以只需要添加log4j和log4j的配置文件就能work，
+        如果需要需改日志框架，可以把commons-logging桥接到其他框架， 需要用jcl-over-slf4j.jar桥接包
+        来代替commons-logging把具体实现委托给slf4j。jcl-over-slf4j和commons-logging拥有相同的包名、类名、接口，
+        所以项目中要排除掉commons-logging。
+    */
+
+    logLibs = [
+            // spring依赖日志包
+            // https://mvnrepository.com/artifact/commons-logging/commons-logging
+            commonsLogging: 'commons-logging:commons-logging:1.2',
+            // https://mvnrepository.com/artifact/log4j/log4j
+            log4j         : 'log4j:log4j:1.2.17',
+
+            //log4j v2
+            // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+            log4jV2       : 'org.apache.logging.log4j:log4j-api:2.1',
+            // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+            log4JV2Core   : 'org.apache.logging.log4j:log4j-core:2.1',
+
+            //slf4j
+            // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+            slf4jApi      : 'org.slf4j:slf4j-api:1.7.26',
+            // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
+            slf4jLog4j12  : 'org.slf4j:slf4j-log4j12:1.7.26'
+    ]
+
+}

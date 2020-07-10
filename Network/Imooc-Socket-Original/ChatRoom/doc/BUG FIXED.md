@@ -1,0 +1,6 @@
+* IoSelectorProvider Selector、Channel、SelectionKey之间的并发锁死等待BUG
+* IoSelectorProvider Selector、Channel、SelectionKey已关闭的异常捕获
+
+* 关闭链接时关闭Packet没有重新设置node导致的线程无限循环问题
+* 关闭链接时可能出现Writer中packetMap被清空导致空指针异常问题
+* 基础的键盘IO输入在强制关闭时可能触发空指针异常

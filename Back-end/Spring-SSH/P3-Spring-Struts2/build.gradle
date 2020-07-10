@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'me.ztiany'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    //test
+    testCompile testLibs.junit
+
+    //servlet
+    providedCompile webBaseLibs.servlet
+
+    //Spring核心架构
+    //core
+    compile springLibs.springCore
+    compile springLibs.springBeans
+    compile springLibs.springExpression
+    compile springLibs.springContext
+    //aop
+    compile springLibs.springAop
+    compile springLibs.springAspects
+    compile springLibs.aspectJweaver
+    //database
+    compile springLibs.springJdbc
+    compile springLibs.springTx
+    compile springLibs.springORM
+    //web
+    compile springLibs.springWeb
+    compile springLibs.springWebmvc
+    //test
+    testCompile springLibs.springTest
+
+    //struts2
+    compile web.struts2
+    compile web.struts2SpringPlugin
+
+    /*数据库*/
+    compile dataBaseLibs.mysqlConnector
+    compile dataBaseLibs.c3p0
+    compile dataBaseLibs.hibernate
+
+    /*日志*/
+    compile logLibs.commonsLogging
+    compile logLibs.log4j
+}
