@@ -15,6 +15,10 @@ namespace cv_base {
     using namespace cv;
     using namespace std;
 
+    #define DEFAULT_CARD_WIDTH 640
+    #define DEFAULT_CARD_HEIGHT 400
+    #define FIX_IDCARD_SIZE Size(DEFAULT_CARD_WIDTH,DEFAULT_CARD_HEIGHT)
+
 //OpenCV实现最基本的形态学运算之一——腐蚀，即用图像中的暗色部分“腐蚀”掉图像中的高亮部分。
     void erodeImage(std::string &path) {
         //载入原图
@@ -72,6 +76,8 @@ namespace cv_base {
         Mat number_img;
         bool found = false;
 
+        //变为 640*400 的size，这是身份证的size。
+        resize(src, src,FIX_IDCARD_SIZE);
         //灰度化
         cvtColor(src, dest, COLOR_BGR2GRAY);
         //二值化
