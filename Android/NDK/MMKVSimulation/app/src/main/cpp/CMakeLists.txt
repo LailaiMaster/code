@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.4.1)
 
-add_subdirectory(mmkv)
-
 add_library(
         native-lib
         SHARED
@@ -10,4 +8,4 @@ add_library(
 
 find_library(log-lib log)
 
-target_link_libraries(native-lib mmkv ${log-lib})
+target_link_libraries(native-lib ${log-lib})
