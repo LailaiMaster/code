@@ -75,4 +75,5 @@ size_t computeMapSize(std::unordered_map<std::string, InputBuffer *> map) {
     }
     return size;
 }
+
 #endif //ENJOYMMKV_PBUTILITY_H

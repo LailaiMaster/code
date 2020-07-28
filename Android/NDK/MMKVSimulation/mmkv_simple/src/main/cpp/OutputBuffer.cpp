@@ -11,7 +11,7 @@ OutputBuffer::OutputBuffer(int8_t *buf, size_t size) {
 }
 
 OutputBuffer::~OutputBuffer() {
-    m_buf = 0;
+    m_buf = nullptr;
 }
 
 void OutputBuffer::writeByte(int8_t value) {
@@ -55,10 +55,19 @@ void OutputBuffer::writeInt64(int64_t value) {
     }
 }
 
+/**
+ * 将 float 无损转变为 int 共有两种方式：
+ *      1. 共用体
+ *      2. 指针修改
+ *
+ * 这里标识是否使用共用体的方式来将 float 无损转变为 int。
+ */
+#define USE_CONVERTER 0
+
 void OutputBuffer::writeFloat(float value) {
     //float 4字节 转为int32处理
     //共用体或者指针修改
-#if 0
+#if USE_CONVERTER
     union Converter{
         int32_t first;
         float sencond;
@@ -70,7 +79,7 @@ void OutputBuffer::writeFloat(float value) {
     int32_t i = *(int32_t *) &value;
 #endif
 
-    //取低8位写入
+    //分四次取低8位写入
     writeByte((i) & 0xff);
     writeByte((i >> 8) & 0xff);
     writeByte((i >> 16) & 0xff);
@@ -83,7 +92,7 @@ void OutputBuffer::writeString(std::string value) {
     writeInt32(numberOfBytes);
     //写入数据
     memcpy(m_buf + m_position, value.data(), numberOfBytes);
-    m_position += numberOfBytes;
+    m_position += numberOfBytes;//更新位置
 }
 
 void OutputBuffer::writeData(InputBuffer *value) {

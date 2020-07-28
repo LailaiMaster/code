@@ -28,10 +28,7 @@ public:
 
     void putInt(const char *key, int value);
 
-
     void appendDataWithKey(string key, InputBuffer *value);
-
-
 
 private:
     void loadFromFile();
