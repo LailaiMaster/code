@@ -48,7 +48,7 @@ std::string InputBuffer::readString() {
 }
 
 int32_t InputBuffer::readInt32() {
-
+    //todo
     return 0;
 }
 
@@ -66,7 +66,6 @@ int32_t InputBuffer::readInt64() {
     // tmp |= newTemp <<7;
     return 0;
 }
-
 
 InputBuffer *InputBuffer::readData() {
     //获得数据长度
@@ -89,10 +88,7 @@ float InputBuffer::readFloat() {
     int8_t b2 = readByte();
     int8_t b3 = readByte();
     int8_t b4 = readByte();
-    int32_t value =
-            (((int32_t) b1 & 0xff)) | (((int32_t) b2 & 0xff) << 8) | (((int32_t) b3 & 0xff) << 16) |
-            (((int32_t) b4 & 0xff) << 24);
-
+    int32_t value =(((int32_t) b1 & 0xff)) | (((int32_t) b2 & 0xff) << 8) | (((int32_t) b3 & 0xff) << 16) |(((int32_t) b4 & 0xff) << 24);
     float returnValue = *(float *) &value;
     return returnValue;
 }

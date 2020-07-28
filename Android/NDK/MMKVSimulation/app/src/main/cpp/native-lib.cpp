@@ -36,7 +36,7 @@ Java_me_ztiany_mmkv_simulation_NativeBridge_mmapInit(JNIEnv *env, jobject thiz, 
     m_fd = open(c_path, O_RDWR | O_CREAT, S_IRWXU);
 
     //获得一页内存大小：Linux采用了分页来管理内存，即内存的管理中，内存是以页为单位，一般的 32 位系统一页为 4096 个字节
-    m_size = getpagesize();
+    m_size = getpagesize()/4;
     LOGD("page size = %d", m_size);
 
     //设置文件的大小为1页，使用空字节填充

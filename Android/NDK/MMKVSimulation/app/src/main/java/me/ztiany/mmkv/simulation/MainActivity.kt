@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         askPermission()
 
         btnInit.setOnClickListener {
-            val file = File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "mmap/text.txt")
+            val file = File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "mmap/test.txt")
             file.createNew()
             nativeBridge.mmapInit(file.absolutePath)
         }

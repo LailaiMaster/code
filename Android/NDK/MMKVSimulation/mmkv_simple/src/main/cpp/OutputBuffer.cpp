@@ -4,12 +4,10 @@
 
 #include "OutputBuffer.h"
 
-
 OutputBuffer::OutputBuffer(int8_t *buf, size_t size) {
     m_position = 0;
     m_size = size;
     m_buf = buf;
-
 }
 
 OutputBuffer::~OutputBuffer() {
@@ -25,33 +23,32 @@ void OutputBuffer::writeByte(int8_t value) {
     m_buf[m_position++] = value;
 }
 
-
 void OutputBuffer::writeInt32(int32_t value) {
     if (value < 0) {
         writeInt64(value);
     } else {
-        while (true){
-            if (value <= 0x7f){
+        while (true) {
+            if (value <= 0x7f) {
                 writeByte(value);
                 break;
-            } else{
-                // 取低7位，再最高位赋1
+            } else {
+                // 取低7位，在最高位赋1
                 writeByte(value & 0x7f | 0x80);
                 value >>= 7;
             }
         }
     }
-
 }
 
 void OutputBuffer::writeInt64(int64_t value) {
-    uint64_t  i = value;
-    while (true){
-        if (i & ~0x7f == 0){
+    //转为无符号整型
+    uint64_t i = value;
+    while (true) {
+        if (i & ~0x7f == 0) {
             writeByte(i);
             break;
-        } else{
-            // 取低7位，再最高位赋1
+        } else {
+            // 取低7位，在最高位赋 1，表示边长编码
             writeByte(i & 0x7f | 0x80);
             i >>= 7;
         }
