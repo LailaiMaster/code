@@ -26,6 +26,7 @@ app/backup
 *.out
 *.aac
 .cxx
+cmake-build-debug
 
 # VisualStudio
 ## Ignore Visual Studio temporary files, build results, and
@@ -379,4 +380,3 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
->>>>>>> a76f3bf43d18e76a2d6797bfec05baa67b378a30
