@@ -20,6 +20,7 @@ public class NullChecker {
 
     private static void justNull() {
         Flowable.just(null);
+
         io.reactivex.Observable.just(1)
                 .flatMap(new Function<Integer, ObservableSource<String>>() {
                     @Override
@@ -27,13 +28,13 @@ public class NullChecker {
                         return null;
                     }
                 })
-
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
                         System.out.println(s);
                     }
                 });
+
         System.out.println("NullChecker.justNull");
     }
 

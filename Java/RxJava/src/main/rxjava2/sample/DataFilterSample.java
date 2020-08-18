@@ -1,17 +1,16 @@
 package sample;
 
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import io.reactivex.Observable;
+
 /**
  * @author ztiany
- *         Email: ztiany3@gmail.com
+ * Email: ztiany3@gmail.com
  */
 public class DataFilterSample {
 
@@ -34,12 +33,12 @@ public class DataFilterSample {
             this.id = id;
             this.remote_id = remote_id;
             this.date = date;
-
         }
     }
 
 
     private static final List<Data> dataList = new ArrayList<>();
+
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private static String currentTime(int i) {
@@ -47,9 +46,8 @@ public class DataFilterSample {
     }
 
     public static void main(String... args) {
-
-
         initData();
+
         Observable.fromIterable(dataList)
                 .filter(data -> {
                     if (data.remote_id == null) {
@@ -60,7 +58,9 @@ public class DataFilterSample {
                 .groupBy(data -> data.remote_id)
                 .flatMap(stringDataGroupedObservable -> stringDataGroupedObservable.sorted(Comparator.comparing(o2 -> o2.date)).takeLast(1))
                 .subscribe(System.out::println);
+
         System.out.println("------------------------------------------------------------");
+
         Observable.fromIterable(dataList)
                 .sorted(Comparator.comparing(o -> o.date))
                 .subscribe(System.out::println);

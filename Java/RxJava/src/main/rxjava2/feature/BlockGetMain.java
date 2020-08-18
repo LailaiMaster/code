@@ -17,4 +17,5 @@ public class BlockGetMain {
                 .blockingGet();
         System.out.println(integer);
     }
+
 }

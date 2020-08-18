@@ -1,9 +1,5 @@
 package sample;
 
-import io.reactivex.Flowable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -13,6 +9,10 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import io.reactivex.Flowable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author ztiany
@@ -120,6 +120,7 @@ public class MultiFileUploadSample {
                 });
     }
 }
+
 /*
 MultiFileUploadSample.onNext-------------->taskCount = 48 failTaskCount = 47
 MultiFileUploadSample.apply-->Task =97

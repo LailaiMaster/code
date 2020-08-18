@@ -9,9 +9,7 @@
         <item name="skinTypeface">@string/typeface</item>
     </style>
 
-
-    <style name="AppTheme" parent="BaseTheme">
-    </style>
+    <style name="AppTheme" parent="BaseTheme"/>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowActionBar">false</item>

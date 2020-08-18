@@ -4,7 +4,7 @@ package me.ztiany.serialization
 @Serializable
 data class Data(val a: Int, @Optional val b: String = "42")
 
-fun main(args: Array<String>) {
+fun me.ztiany.tools.main(args: Array<String>) {
     // serializing objects
     val jsonData = Json.stringify(Data.serializer(), Data(42))
     // serializing lists

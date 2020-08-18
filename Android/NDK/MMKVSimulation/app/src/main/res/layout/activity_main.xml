@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="测试 mmap 函数写数据"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnInit"/>
+        app:layout_constraintTop_toBottomOf="@id/btnInit" />
 
     <Button
         android:id="@+id/btnMMapRead"
@@ -32,6 +32,15 @@
         android:layout_height="wrap_content"
         android:text="测试 mmap 函数读数据"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnMMapWrite"/>
+        app:layout_constraintTop_toBottomOf="@id/btnMMapWrite" />
+
+    <Button
+        android:id="@+id/btnTestMMVK"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试 mmkv"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnMMapRead" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

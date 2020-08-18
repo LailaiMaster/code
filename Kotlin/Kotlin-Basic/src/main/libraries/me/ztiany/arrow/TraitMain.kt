@@ -67,9 +67,11 @@ interface WithDescriptionAndItsPrinter<T> : WithDescriptionEnhance<T> {
 }
 
 object StringWithDescriptionAndItsPrinter : WithDescriptionAndItsPrinter<String>
+
 object CharWithDescriptionAndItsPrinter : WithDescriptionAndItsPrinter<Char>, WithDescriptionEnhance<Char> by CharWithDescription
 
 private fun testWithDescriptionEnhance() {
+
     println(StringWithDescription.run { "hello".description })
 
     with(CharWithDescription) {
@@ -79,11 +81,13 @@ private fun testWithDescriptionEnhance() {
     StringWithDescription.run {
         printDescription("Kotlin")
     }
+
     CharWithDescription.run {
         printDescription('①')
     }
 
     "hltj.me".printDescription2(StringWithDescription)
+
     '`'.printDescription2(CharWithDescription)
 
     StringWithDescriptionAndItsPrinter.run {
