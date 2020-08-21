@@ -2,9 +2,10 @@ cmake_minimum_required(VERSION 3.12)
 project(opencv_windows)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-
-include_directories("D:/code/opencv-4.1.1/mingw-build/install/include")
-link_directories("D:/code/opencv-4.1.1/mingw-build/install/x64/mingw/lib" )
+#indicate the location of header files
+include_directories("D:/code/opencv/opencv4.1.1/mingw-build/install/include")
+#indicate the location of import library which is named libopencv_world411.dll.a
+link_directories("D:/code/opencv/opencv4.1.1/mingw-build/install/x64/mingw/lib" )
 
 aux_source_directory(base dir_base)
 
