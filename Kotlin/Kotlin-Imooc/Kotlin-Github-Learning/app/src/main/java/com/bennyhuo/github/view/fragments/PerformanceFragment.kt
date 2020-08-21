@@ -21,8 +21,9 @@ class PerformanceFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         thread {
-            // avoid loading classes in tests.
+            // 提前加载 dsl 要用到的类，防止类加载影响测试
             PerformanceFragmentUI().createView(AnkoContext.create(container!!.context, this))
+            //提前加载 xml 要用到的类，防止类加载影响测试（这里要使用与实际测试时不一样的布局，因为 Android 对 xml 是有缓存的）
             inflater.inflate(R.layout.activity_login, container, false)
             System.nanoTime()
 
@@ -30,6 +31,7 @@ class PerformanceFragment : Fragment() {
                 System.gc()
                 System.gc()
                 val start = System.nanoTime()
+                //只能重复一次，因为 Android 对 xml 是有缓存的。
                 repeat(1) {
                     block()
                 }
@@ -71,19 +73,6 @@ class PerformanceFragmentUI : AnkoComponent<PerformanceFragment> {
                 }
                 themedTextView(R.string.open_source_licenses, R.style.detail_description) {
                     textColor = R.color.colorPrimary
-
-//                    onClick {
-//                        alert {
-//                            customView {
-//                                scrollView {
-//                                    textView {
-//                                        padding = dip(10)
-//                                        markdownText = context.assets.open("licenses.md").bufferedReader().readText()
-//                                    }
-//                                }
-//                            }
-//                        }.show()
-//                    }
                 }.lparams(width = wrapContent, height = wrapContent) {
                     gravity = Gravity.CENTER_HORIZONTAL
                 }

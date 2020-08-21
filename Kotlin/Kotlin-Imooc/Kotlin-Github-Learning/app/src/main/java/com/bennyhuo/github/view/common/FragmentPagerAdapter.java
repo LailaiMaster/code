@@ -89,6 +89,7 @@ public abstract class FragmentPagerAdapter extends PagerAdapter {
     @SuppressWarnings("ReferenceEquality")
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        Log.d(TAG, "instantiateItem() called with: container = [" + container + "], position = [" + position + "]");
         if (mCurTransaction == null) {
             mCurTransaction = mFragmentManager.beginTransaction();
         }
@@ -117,6 +118,7 @@ public abstract class FragmentPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
+        Log.d(TAG, "destroyItem() called with: container = [" + container + "], position = [" + position + "], object = [" + object + "]");
         if (mCurTransaction == null) {
             mCurTransaction = mFragmentManager.beginTransaction();
         }

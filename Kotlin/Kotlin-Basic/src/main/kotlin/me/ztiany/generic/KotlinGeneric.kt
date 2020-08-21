@@ -26,6 +26,7 @@ private class Box<T>(t: T) {
 }
 
 private val box1: Box<Int> = Box<Int>(1)
+
 // 1 具有类型 Int，所以编译器知道我们说的是 Box<Int>。则可以省略掉返现说明
 private val box2 = Box(1)
 
@@ -235,7 +236,6 @@ private fun testSort() {
 private fun <T> cloneWhenGreater(list: List<T>, threshold: T): List<T> where T : Comparable<T>, T : Cloneable {
     return list.filter { it > threshold }
 }
-
 
 /**
 

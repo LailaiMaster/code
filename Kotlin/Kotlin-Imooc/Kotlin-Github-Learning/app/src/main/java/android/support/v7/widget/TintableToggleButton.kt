@@ -1,18 +1,22 @@
 package android.support.v7.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff.Mode
 import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
 import android.support.v4.view.TintableBackgroundView
+import android.support.v7.app.AppCompatDelegate
 import android.util.AttributeSet
 import android.widget.ToggleButton
 
-class TintableToggleButton
-@JvmOverloads
-constructor(context: Context, attrs: AttributeSet?= null,  defStyleAttr: Int = 0)
-    : ToggleButton(TintContextWrapper.wrap(context), attrs, defStyleAttr), TintableBackgroundView {
+@SuppressLint("RestrictedApi")
+class TintableToggleButton @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+) : ToggleButton(TintContextWrapper.wrap(context), attrs, defStyleAttr), TintableBackgroundView {
 
     private var backgroundTintHelper: AppCompatBackgroundHelper? = null
 
@@ -42,4 +46,5 @@ constructor(context: Context, attrs: AttributeSet?= null,  defStyleAttr: Int = 0
         super.setBackgroundDrawable(background)
         backgroundTintHelper?.onSetBackgroundDrawable(background)
     }
+
 }
