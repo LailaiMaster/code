@@ -3,9 +3,11 @@ package reactvie
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.reactive.collect
 import kotlinx.coroutines.reactive.consumeEach
 import kotlinx.coroutines.reactive.publish
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.rx2.collect
 import kotlin.coroutines.CoroutineContext
 
 //----------------------------------------------------------------------------------------------------------
@@ -26,5 +28,5 @@ fun CoroutineScope.range(context: CoroutineContext, start: Int, count: Int) = pu
 @ExperimentalCoroutinesApi
 fun main() = runBlocking<Unit> {
     // Range inherits parent job from runBlocking, but overrides dispatcher with Dispatchers.Default
-    range(Dispatchers.Default, 1, 5).consumeEach { println(it) }
+    range(Dispatchers.Default, 1, 5).collect { println(it) }
 }

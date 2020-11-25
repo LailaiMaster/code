@@ -2,6 +2,7 @@ package reactvie
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.reactive.collect
 import kotlinx.coroutines.reactive.consumeEach
 import kotlinx.coroutines.reactive.publish
 import kotlinx.coroutines.runBlocking
@@ -33,14 +34,14 @@ fun main(args: Array<String>) = runBlocking<Unit> {
 
     // 打印 source 的数据
     println("Elements:")
-    source.consumeEach {
+    source.collect {
         // 消费数据
         println(it)
     }
 
     // 再次打印 source 的数据
     println("Again:")
-    source.consumeEach {
+    source.collect {
         // 消费数据
         println(it)
     }

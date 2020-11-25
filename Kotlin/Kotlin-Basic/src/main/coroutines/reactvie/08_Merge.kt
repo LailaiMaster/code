@@ -1,8 +1,10 @@
 package reactvie
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.reactive.collect
 import kotlinx.coroutines.reactive.consumeEach
 import kotlinx.coroutines.reactive.publish
+import kotlinx.coroutines.rx2.collect
 import org.reactivestreams.Publisher
 import kotlin.coroutines.CoroutineContext
 
@@ -10,14 +12,14 @@ import kotlin.coroutines.CoroutineContext
 使用协程，至少有两种方法可以处理多个数据流的问题。其一，像上一个例子里展示的那样调用 select；其二就是启动多个协程。我们就用后者来实现一下 merge 操作符吧：
  */
 @ExperimentalCoroutinesApi
-fun <T> Publisher<Publisher<T>>.merge(context: CoroutineContext) = GlobalScope.publish<T>(context) {
-    consumeEach { pub ->
+fun <T> Publisher<Publisher<T>>.merge(context: CoroutineContext) = publish(context) {
+    collect { pub ->
         //遍历每一个发射的 Publisher
         // for each publisher received on the source channel
         launch {
             //启动一个协程，消费该 pub，再次发射该 pub 发射的数据到统一的下游，这里必须启动一个新的协程，否则会顺序的发送每一个 pub 所发射的数据。
             // launch a child coroutine
-            pub.consumeEach { send(it) } // resend all element from this publisher
+            pub.collect { send(it) } // resend all element from this publisher
         }
     }
 }
@@ -32,5 +34,5 @@ fun CoroutineScope.testPub() = publish<Publisher<Int>> {
 
 @ExperimentalCoroutinesApi
 fun main() = runBlocking<Unit> {
-    testPub().merge(coroutineContext).consumeEach { println(it) } // print the whole stream
+    testPub().merge(coroutineContext).collect { println(it) } // print the whole stream
 }

@@ -3,6 +3,7 @@ package reactvie
 import io.reactivex.Flowable
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.consume
+import kotlinx.coroutines.reactive.collect
 import kotlinx.coroutines.reactive.consumeEach
 import kotlinx.coroutines.reactive.openSubscription
 import kotlinx.coroutines.runBlocking
@@ -38,7 +39,7 @@ fun main(args: Array<String>) = runBlocking<Unit> {
     //注意，"Finally" 打印在尾元素 "5" 之前。这个例子里面的 me.ztiany.tools.main 函数通过 runBlocking 开启一个协程，这个主协程通过 source.consumeEach { ... } 接收 channel 的数据，
     // 当它等待数据源的数据时就会挂起。 在接收 Flowable.range(1, 5) 发射的最后一项数据时，主协程恢复，并在调度后的某个时间点打印该元素，但数据源会立刻结束并打印 "Finally"。
     println("---------------------consumeEach")
-    source.consumeEach {
+    source.collect {
         println(it)
     }
 

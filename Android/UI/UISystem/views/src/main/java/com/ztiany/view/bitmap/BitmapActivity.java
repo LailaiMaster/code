@@ -19,7 +19,7 @@ public class BitmapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.common_activity_content);
+        setContentView(R.layout.common_content);
         if (savedInstanceState == null) {
             showFragment(new ShowBitmapSizeFragment());
         }
@@ -48,6 +48,13 @@ public class BitmapActivity extends AppCompatActivity {
         menu.add("MatrixBitmap")
                 .setOnMenuItemClickListener(item -> {
                     showFragment(new MatrixBitmapFragment());
+                    return true;
+                });
+
+
+        menu.add("PhotoView")
+                .setOnMenuItemClickListener(item -> {
+                    showFragment(new PhotoViewFragment());
                     return true;
                 });
 

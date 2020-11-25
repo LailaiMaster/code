@@ -11,6 +11,7 @@ import com.ztiany.recyclerview.itemtouch.GridFragment;
 import com.ztiany.recyclerview.itemtouch.ItemTouchListenerFragment;
 import com.ztiany.recyclerview.itemtouch.LinearFragment;
 import com.ztiany.recyclerview.layout_manager.CustomLayoutManagerFragment;
+import com.ztiany.recyclerview.layout_manager.SideCardLayoutManagerFragment;
 import com.ztiany.recyclerview.snap.SnapHelperFragment;
 import com.ztiany.recyclerview.swipe_menu.SwipeMenu1Fragment;
 import com.ztiany.recyclerview.wrap_content.WithScrollViewFragment;
@@ -67,6 +68,7 @@ public class RvMainActivity extends AppCompatActivity {
         LIST.add(new Item("Pager Snap Helper", SnapHelperFragment.class));
         LIST.add(new Item("ScrollView 实现 SwipeMenu", SwipeMenu1Fragment.class));
         LIST.add(new Item("自定义LinearLayoutManager", CustomLayoutManagerFragment.class));
+        LIST.add(new Item("自定义卡片LayoutManager", SideCardLayoutManagerFragment.class));
         LIST.add(new Item("DiffUtil示例", DiffUtilFragment.class));
         LIST.add(new Item("AsyncListDiffer示例", AsyncListDifferFragment.class));
         LIST.add(new Item("Adapter对比 ListView", ListViewFragment.class));

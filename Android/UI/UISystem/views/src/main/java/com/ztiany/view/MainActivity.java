@@ -1,6 +1,8 @@
 package com.ztiany.view;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.ztiany.recyclerview.RvMainActivity;
 import com.ztiany.view.animation.circular_reveal.CircularRevealActivity;
@@ -29,10 +31,12 @@ import com.ztiany.view.drawable.DrawableLayerFragment;
 import com.ztiany.view.drawable.DrawableRotateFragment;
 import com.ztiany.view.drawable.DrawableSelectorFragment;
 import com.ztiany.view.drawable.DrawableVectorFragment;
+import com.ztiany.view.drawable.FishDrawableFragment;
 import com.ztiany.view.hencoderplus.HenCoderPlusFragment;
 import com.ztiany.view.inflater.LayoutInflaterActivity;
 import com.ztiany.view.scroll.ScrollFragment;
 import com.ztiany.view.scroll.sticky.StickyNavigationFragment;
+import com.ztiany.view.utils.DeviceIdUtil;
 import com.ztiany.view.window.RealWindowSizeActivity;
 
 import java.util.ArrayList;
@@ -45,12 +49,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private static final List<Item> LIST = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        //B2835DA6A87278DBA3F86679066AF1BE35FD4566
+        //6C11E3BC5011434714F50359A5D2F96220811CFC
+        Log.d(TAG, DeviceIdUtil.getDeviceId(this));
+        Toast.makeText(this, DeviceIdUtil.getDeviceId(this), Toast.LENGTH_LONG).show();
         initView();
     }
 
@@ -96,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         LIST.add(new Item("RotateDrawable", DrawableRotateFragment.class));
         LIST.add(new Item("SelectorDrawable", DrawableSelectorFragment.class));
         LIST.add(new Item("VectorDrawable", DrawableVectorFragment.class));
+        LIST.add(new Item("FishDrawable", FishDrawableFragment.class));
 
         LIST.add(new Item("Dialog", DialogsActivity.class));
         LIST.add(new Item("Window Size", RealWindowSizeActivity.class));

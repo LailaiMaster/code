@@ -2,7 +2,7 @@ package core.cancel_timeouts
 
 
 /*
-在小应用程序中，从“me.ztiany.tools.main”方法返回可能像是一个好主意，可以让所有协程程序隐式终止。
+在小应用程序中，从“main”方法返回可能像是一个好主意，可以让所有协程程序隐式终止。
 但是一个长时间运行的程序，需要细粒度的控制协程，launch函数返回一个可用于取消正在运行的协程的作业
  */
 import kotlinx.coroutines.delay

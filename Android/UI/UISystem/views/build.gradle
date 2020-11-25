@@ -7,9 +7,8 @@ android {
 
     defaultConfig {
         applicationId "com.ztiany.view"
-        minSdkVersion 19
-        //noinspection OldTargetApi
-        targetSdkVersion 27
+        minSdkVersion buildVersion.minSdkVersion
+        targetSdkVersion buildVersion.targetSdkVersion
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary true
@@ -44,8 +43,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
-
+    testImplementation 'junit:junit:4.13'
     //android
     implementation libraries.annotation
     implementation libraries.supportV4
@@ -55,7 +53,7 @@ dependencies {
     implementation libraries.percentLayout
     implementation libraries.constraintLayout
     implementation libraries.dynamicAnimation
-
     //third
     implementation libraries.multiType
+    implementation libraries.glide
 }

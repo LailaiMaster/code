@@ -4,6 +4,7 @@ import io.reactivex.subjects.BehaviorSubject
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.rx2.collect
 import kotlinx.coroutines.rx2.consumeEach
 
 //RxJava 有个概念叫做 Subject，它会向它所有的订阅者广播数据。而协程里相对应的概念叫做 BroadcastChannel。
@@ -27,7 +28,7 @@ fun main2() = runBlocking<Unit> {
     subject.onNext("two")
     // now launch a coroutine to print everything
     GlobalScope.launch(Dispatchers.Unconfined) { // launch coroutine in unconfined context
-        subject.consumeEach { println(it) }
+        subject.collect { println(it) }
     }
     subject.onNext("three")
     subject.onNext("four")
@@ -42,7 +43,7 @@ fun main3() = runBlocking<Unit> {
     subject.onNext("two")
     // now launch a coroutine to print the most recent update
     launch { // use the context of the me.ztiany.tools.main thread for a coroutine
-        subject.consumeEach { println(it) }
+        subject.collect { println(it) }
     }
     subject.onNext("three")
     subject.onNext("four")

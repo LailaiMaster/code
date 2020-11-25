@@ -1,20 +1,10 @@
 package com.mooc.ppjoke.ui.detail;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.paging.ItemKeyedDataSource;
-import androidx.paging.PagedList;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.mooc.libcommon.extention.AbsPagedListAdapter;
 import com.mooc.libcommon.utils.PixUtils;
@@ -23,7 +13,13 @@ import com.mooc.ppjoke.model.Comment;
 import com.mooc.ppjoke.ui.InteractionPresenter;
 import com.mooc.ppjoke.ui.MutableItemKeyedDataSource;
 import com.mooc.ppjoke.ui.login.UserManager;
-import com.mooc.ppjoke.ui.publish.PreviewActivity;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.paging.ItemKeyedDataSource;
+import androidx.paging.PagedList;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class FeedCommentAdapter extends AbsPagedListAdapter<Comment, FeedCommentAdapter.ViewHolder> {
     private LayoutInflater mInflater;
@@ -64,7 +60,7 @@ public class FeedCommentAdapter extends AbsPagedListAdapter<Comment, FeedComment
                         }));
         holder.mBinding.commentCover.setOnClickListener(v -> {
             boolean isVideo = item.commentType == Comment.COMMENT_TYPE_VIDEO;
-            PreviewActivity.startActivityForResult((Activity) mContext, isVideo ? item.videoUrl : item.imageUrl, isVideo, null);
+            //PreviewActivity.startActivityForResult((Activity) mContext, isVideo ? item.videoUrl : item.imageUrl, isVideo, null);
         });
 
     }

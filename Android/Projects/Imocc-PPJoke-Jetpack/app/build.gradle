@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+
     signingConfigs {
         joke {
             storePassword '123456'
@@ -9,7 +10,9 @@ android {
             storeFile file('../key')
         }
     }
+
     compileSdkVersion 29
+
     defaultConfig {
         applicationId "com.mooc.ppjoke"
         minSdkVersion 21
@@ -25,6 +28,7 @@ android {
             }
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -36,7 +40,6 @@ android {
         }
     }
 
-
     compileOptions {
         sourceCompatibility "1.8"
         targetCompatibility "1.8"
@@ -45,19 +48,18 @@ android {
     dataBinding{
         enabled=true
     }
+
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':libnavannotation')
-    //如果你使用kotlin,这里需要使用 kapt project
+    //如果你使用kotlin，这里需要使用 kapt project
     annotationProcessor project(":libnavcompiler")
     implementation project(':libnetwork')
     implementation project(':libcommon')
-
     //QQ快捷登录
     implementation files('libs/open_sdk_r6140_lite.jar')
-
     //错误收集
     implementation 'com.tencent.bugly:crashreport:latest.release'
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'

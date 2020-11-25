@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ztiany.view.R;
-import com.ztiany.recyclerview.itemtouch.help.OnStartDragListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -26,16 +27,11 @@ public class LinearFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(LayoutInflater.from(getContext()), new OnStartDragListener() {
-            @Override
-            public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-                mTouchHelper.startDrag(viewHolder);
-            }
-        });
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(LayoutInflater.from(getContext()), viewHolder -> mTouchHelper.startDrag(viewHolder));
         recyclerView.setAdapter(recyclerAdapter);
         mTouchHelper = new ItemTouchHelper(new HelperCallBack(recyclerAdapter));
         mTouchHelper.attachToRecyclerView(recyclerView);

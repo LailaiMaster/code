@@ -1,16 +1,12 @@
 package com.mooc.ppjoke.ui.detail;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Looper;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,18 +15,11 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.arch.core.executor.ArchTaskExecutor;
-import androidx.lifecycle.Observer;
-
 import com.mooc.libcommon.dialog.LoadingDialog;
 import com.mooc.libcommon.global.AppGlobals;
 import com.mooc.libcommon.utils.FileUploadManager;
 import com.mooc.libcommon.utils.FileUtils;
 import com.mooc.libcommon.utils.PixUtils;
-import com.mooc.libcommon.view.PPEditTextView;
 import com.mooc.libcommon.view.ViewHelper;
 import com.mooc.libnetwork.ApiResponse;
 import com.mooc.libnetwork.ApiService;
@@ -39,9 +28,14 @@ import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.databinding.LayoutCommentDialogBinding;
 import com.mooc.ppjoke.model.Comment;
 import com.mooc.ppjoke.ui.login.UserManager;
-import com.mooc.ppjoke.ui.publish.CaptureActivity;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.arch.core.executor.ArchTaskExecutor;
+import androidx.lifecycle.Observer;
 
 public class CommentDialog extends AppCompatDialogFragment implements View.OnClickListener {
     private LayoutCommentDialogBinding mBinding;
@@ -115,7 +109,7 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
         if (v.getId() == R.id.comment_send) {
             publishComment();
         } else if (v.getId() == R.id.comment_video) {
-            CaptureActivity.startActivityForResult(getActivity());
+            //CaptureActivity.startActivityForResult(getActivity());
         } else if (v.getId() == R.id.comment_delete) {
             filePath = null;
             isVideo = false;
@@ -133,7 +127,7 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CaptureActivity.REQ_CAPTURE && resultCode == Activity.RESULT_OK) {
+        /*if (requestCode == CaptureActivity.REQ_CAPTURE && resultCode == Activity.RESULT_OK) {
             filePath = data.getStringExtra(CaptureActivity.RESULT_FILE_PATH);
             width = data.getIntExtra(CaptureActivity.RESULT_FILE_WIDTH, 0);
             height = data.getIntExtra(CaptureActivity.RESULT_FILE_HEIGHT, 0);
@@ -149,7 +143,7 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
 
             mBinding.commentVideo.setEnabled(false);
             mBinding.commentVideo.setAlpha(80);
-        }
+        }*/
     }
 
     private void publishComment() {

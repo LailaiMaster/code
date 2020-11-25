@@ -3,7 +3,7 @@ package com.ztiany.recyclerview.itemtouch.help;
 import  androidx.recyclerview.widget.RecyclerView;
 
 /**
- * RecyclerView的适配器需要实现的接口，用来回调Iten移动或者删除后的数据操作
+ * RecyclerView 的适配器需要实现的接口，用来回调 Item 移动或者删除后的数据操作。
  */
 public interface ItemTouchHelperAdapter {
 
@@ -26,4 +26,5 @@ public interface ItemTouchHelperAdapter {
      * @see RecyclerView.ViewHolder#getAdapterPosition()
      */
     void onItemDismiss(int position);
+
 }

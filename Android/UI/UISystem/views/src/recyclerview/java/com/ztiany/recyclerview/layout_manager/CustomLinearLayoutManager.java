@@ -106,7 +106,7 @@ class CustomLinearLayoutManager extends LayoutManager {
             return;
         }
 
-        if (dy >= 0) {//上滑动，顶部的view可能被滑出屏幕，所有检测是否要被回收
+        if (dy >= 0) {//上滑动，顶部的view可能被滑出屏幕，所以检测是否要被回收
             int topEdge = mOrientationHelper.getStartAfterPadding();
             int fixIndex = 0;
             for (int i = 0; i < childCount; i++) {
@@ -118,7 +118,7 @@ class CustomLinearLayoutManager extends LayoutManager {
                 }
             }
         } else {
-            //下滑动，底部的view可能被滑出屏幕，所有检测是否要被回收
+            //下滑动，底部的view可能被滑出屏幕，所以检测是否要被回收
             int bottomEdge = mOrientationHelper.getEndAfterPadding();
             for (int i = childCount - 1; i >= 0; i--) {
                 View child = getChildAt(i);
@@ -168,7 +168,6 @@ class CustomLinearLayoutManager extends LayoutManager {
         return -delta;
     }
 
-
     @Override
     public void scrollToPosition(int position) {
         // TODO: 17.10.12
@@ -178,4 +177,5 @@ class CustomLinearLayoutManager extends LayoutManager {
     public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
         // TODO: 17.10.12
     }
+
 }

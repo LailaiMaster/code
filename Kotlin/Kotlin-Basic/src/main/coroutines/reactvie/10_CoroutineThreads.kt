@@ -9,7 +9,7 @@ import kotlin.coroutines.CoroutineContext
 
 
 //在协程的世界，Schedulers.computation() 可以粗略地与 Dispatchers.Default 相对应，所以上一个例子可以这样改：
-fun rangeWithInterval(context: CoroutineContext, time: Long, start: Int, count: Int) = GlobalScope.publish<Int>(context) {
+fun rangeWithInterval(context: CoroutineContext, time: Long, start: Int, count: Int) = publish(context) {
     for (x in start until start + count) {
         delay(time) // wait before sending each number
         send(x)

@@ -5,7 +5,7 @@
 implementation project(":android-gesture-detectors")
 ```
 
-## largei image
+## large image
 
 ```groovy
 //https://github.com/LuckyJayce/LargeImage

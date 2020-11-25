@@ -2,6 +2,7 @@ package reactvie
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.reactive.collect
 import kotlinx.coroutines.reactive.consumeEach
 import kotlinx.coroutines.reactive.publish
 import kotlinx.coroutines.runBlocking
@@ -15,8 +16,8 @@ private fun <T, R> Publisher<T>.fusedFilterMap(
         context: CoroutineContext,   // the context to execute this coroutine in
         predicate: (T) -> Boolean,   // the filter predicate
         mapper: (T) -> R             // the mapper function
-) = GlobalScope.publish<R>(context) {
-    consumeEach {
+) = publish(context) {
+    collect {
         // consume the source stream
         if (predicate(it))       // filter part
             send(mapper(it))     // map part
@@ -27,5 +28,5 @@ private fun <T, R> Publisher<T>.fusedFilterMap(
 fun main() = runBlocking<Unit> {
     range(this.coroutineContext, 1, 5)
             .fusedFilterMap(coroutineContext, { it % 2 == 0 }, { "$it is even" })
-            .consumeEach { println(it) } // print all the resulting strings
+            .collect { println(it) } // print all the resulting strings
 }

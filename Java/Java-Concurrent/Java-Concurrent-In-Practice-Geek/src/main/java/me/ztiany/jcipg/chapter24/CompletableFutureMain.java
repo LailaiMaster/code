@@ -1,8 +1,13 @@
 package me.ztiany.jcipg.chapter24;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @author Ztiany
@@ -12,10 +17,56 @@ import java.util.concurrent.TimeUnit;
 public class CompletableFutureMain {
 
     public static void main(String... args) {
-        sample1();
+        //sample1();
         //sample2();
         //sample3();
         //sample4();
+        sample5();
+    }
+
+    private static class Bitmap {
+        public Bitmap() {
+            System.out.println("Bitmap.Bitmap");
+            try {
+                Thread.sleep(new Random().nextInt(1000));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void sample5() {
+        List<String> url = Arrays.asList("url1", "url2", "url3");
+
+        List<CompletableFuture<Bitmap>> collect = url.stream().map(s -> CompletableFuture
+                .supplyAsync(Bitmap::new))
+                .collect(Collectors.toList());
+
+        CompletableFuture<Bitmap>[] objects = collect.toArray(new CompletableFuture[]{});
+
+        Function<Void, Object> function = unused -> collect.stream().map(bitmapCompletableFuture -> {
+            try {
+                return bitmapCompletableFuture.get();
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }).toArray();
+
+        //allOf：Returns a new CompletableFuture that is completed when all of the given CompletableFutures complete.
+        CompletableFuture.allOf(objects).
+                thenApply(function).
+                thenAccept(o -> {
+                    for (Object bitmap : ((Object[]) o)) {
+                        System.out.println(bitmap);
+                    }
+                });
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void sample4() {

@@ -2,9 +2,11 @@ package reactvie
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.consume
+import kotlinx.coroutines.reactive.collect
 import kotlinx.coroutines.reactive.consumeEach
 import kotlinx.coroutines.reactive.openSubscription
 import kotlinx.coroutines.reactive.publish
+import kotlinx.coroutines.rx2.collect
 import kotlinx.coroutines.selects.whileSelect
 import org.reactivestreams.Publisher
 import kotlin.coroutines.CoroutineContext
@@ -15,7 +17,7 @@ import kotlin.coroutines.CoroutineContext
  */
 @ExperimentalCoroutinesApi
 @ObsoleteCoroutinesApi
-fun <T, U> Publisher<T>.takeUntil(context: CoroutineContext, other: Publisher<U>) = GlobalScope.publish<T>(context) {
+fun <T, U> Publisher<T>.takeUntil(context: CoroutineContext, other: Publisher<U>) = publish(context) {
     this@takeUntil.openSubscription().consume {
         // explicitly open channel to Publisher<T>
         val current = this
@@ -48,5 +50,5 @@ fun CoroutineScope.rangeWithInterval(time: Long, start: Int, count: Int) = publi
 fun main() = runBlocking<Unit> {
     val slowNums = rangeWithInterval(200, 1, 10)         // numbers with 200ms interval
     val stop = rangeWithInterval(500, 1, 10)             // the first one after 500ms
-    slowNums.takeUntil(coroutineContext, stop).consumeEach { println(it) } // let's test it
+    slowNums.takeUntil(coroutineContext, stop).collect { println(it) } // let's test it
 }

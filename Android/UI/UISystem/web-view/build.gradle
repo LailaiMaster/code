@@ -7,9 +7,8 @@ android {
 
     defaultConfig {
         applicationId "com.ztiany.webview"
-        minSdkVersion 19
-        //noinspection OldTargetApi
-        targetSdkVersion 26
+        minSdkVersion buildVersion.minSdkVersion
+        targetSdkVersion buildVersion.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -26,5 +25,5 @@ dependencies {
     implementation libraries.annotation
     implementation libraries.appcompat
     implementation libraries.constraintLayout
-    implementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.13'
 }

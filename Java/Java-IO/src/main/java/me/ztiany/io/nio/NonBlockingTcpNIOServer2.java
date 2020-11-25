@@ -35,7 +35,6 @@ public class NonBlockingTcpNIOServer2 {
             return;
         }
 
-
         //6. 轮询式的获取选择器上已经“准备就绪”的事件
         while (true) {
 

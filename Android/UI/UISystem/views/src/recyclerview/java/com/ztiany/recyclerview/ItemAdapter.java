@@ -1,13 +1,16 @@
 package com.ztiany.recyclerview;
 
+import android.app.Activity;
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
-import  androidx.recyclerview.widget.RecyclerView;
+import android.content.Intent;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 class ItemAdapter extends RecyclerView.Adapter {
@@ -34,7 +37,11 @@ class ItemAdapter extends RecyclerView.Adapter {
         final Item item = mItems.get(position);
         Button button = (Button) holder.itemView;
         button.setText(item.mName);
-        button.setOnClickListener(v -> mContext.startActivity(RvContentActivity.getLaunchIntent(mContext, item.mName, item.mClazz)));
+        if (Activity.class.isAssignableFrom(item.mClazz)) {
+            button.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, item.mClazz)));
+        } else {
+            button.setOnClickListener(v -> mContext.startActivity(RvContentActivity.getLaunchIntent(mContext, item.mName, item.mClazz)));
+        }
     }
 
     @Override

@@ -6,9 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.ztiany.systemui"
-        minSdkVersion 16
-        //noinspection OldTargetApi
-        targetSdkVersion 27
+        minSdkVersion buildVersion.minSdkVersion
+        targetSdkVersion buildVersion.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -24,5 +23,5 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation libraries.appcompat
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
 }

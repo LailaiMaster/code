@@ -7,7 +7,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.reactive.consumeEach
+import kotlinx.coroutines.reactive.collect
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
 
@@ -17,8 +17,7 @@ import java.util.concurrent.TimeUnit
 private fun rangeWithIntervalRx(scheduler: Scheduler, time: Long, start: Int, count: Int): Flowable<Int> =
         Flowable.zip(
                 Flowable.range(start, count),
-                Flowable.interval(time, TimeUnit.MILLISECONDS, scheduler),
-                BiFunction { x, _ -> x })
+                Flowable.interval(time, TimeUnit.MILLISECONDS, scheduler), { x, _ -> x })
 
 /*
 现在的运行结果显示，它在 Rx 的计算线程池中执行，我们最开始用 Rx 的 subscribe 操作符那样：
@@ -35,7 +34,7 @@ private fun rangeWithIntervalRx(scheduler: Scheduler, time: Long, start: Int, co
 fun main() = runBlocking<Unit> {
     val job = launch(Dispatchers.Unconfined) { // launch new coroutine in Unconfined context (without its own thread pool)
         rangeWithIntervalRx(Schedulers.computation(), 100, 1, 3)
-                .consumeEach { println("$it on thread ${Thread.currentThread().name}") }
+                .collect { println("$it on thread ${Thread.currentThread().name}") }
     }
     job.join() // wait for our coroutine to complete
 }

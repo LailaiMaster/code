@@ -4,7 +4,7 @@ import io.reactivex.Flowable
 import io.reactivex.Scheduler
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.reactive.consumeEach
+import kotlinx.coroutines.reactive.collect
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
 
@@ -23,5 +23,5 @@ fun main() = runBlocking<Unit> {
             3 on thread me.ztiany.tools.main
      */
     rangeWithIntervalRx(Schedulers.computation(), 100, 1, 3)
-            .consumeEach { println("$it on thread ${Thread.currentThread().name}") }
+            .collect { println("$it on thread ${Thread.currentThread().name}") }
 }

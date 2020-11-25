@@ -20,7 +20,6 @@ fun main() = runBlocking {
                 delay(500L)
             }
         } catch (e: CancellationException) {
-            //去掉给挂起的
             e.printStackTrace()
         } finally {
             //如果暂停状态被取消，将会抛出异常，所以需要在finally中释放资源

@@ -44,5 +44,5 @@ fun main(args: Array<String>) {
     println(intList)
 
     // !! 操作符
-    println(b!!)
+    val bb = aInt!!
 }

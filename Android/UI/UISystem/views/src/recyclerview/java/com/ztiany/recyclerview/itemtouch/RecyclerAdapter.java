@@ -1,5 +1,6 @@
 package com.ztiany.recyclerview.itemtouch;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -23,7 +24,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements ItemTouchHelperAdapter {
 
-    private static final String TAG = RecyclerAdapter.class.getSimpleName();
     private List<String> mData;
     private LayoutInflater mLayoutInflater;
     private OnStartDragListener mOnStartDragListener;
@@ -41,11 +41,13 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> i
         mOnStartDragListener = listener;
     }
 
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         return new ViewHolder(mLayoutInflater.inflate(R.layout.item_touch_item, parent, false));
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mTextView.setText(String.format("position = %s", mData.get(position)));
@@ -83,8 +85,8 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> i
 
         ViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.text);
-            mHandIv = (ImageView) itemView.findViewById(R.id.handle);
+            mTextView = itemView.findViewById(R.id.text);
+            mHandIv = itemView.findViewById(R.id.handle);
         }
 
         @Override

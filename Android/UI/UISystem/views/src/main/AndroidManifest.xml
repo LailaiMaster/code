@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ztiany.view">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name=".AppContext"
         android:allowBackup="true"
@@ -33,6 +37,8 @@
 
         <activity android:name=".window.RealWindowSizeActivity" />
 
+        <activity android:name=".inflater.LayoutInflaterActivity" />
+
         <activity android:name=".animation.circular_reveal.CircularRevealActivity" />
 
         <activity
@@ -50,8 +56,7 @@
             android:name="com.ztiany.recyclerview.RvContentActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name=".bitmap.BitmapActivity"/>
+        <activity android:name=".bitmap.BitmapActivity" />
 
     </application>
 
