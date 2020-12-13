@@ -12,7 +12,8 @@ import com.netflix.rewrite.refactor.Refactor;
  */
 public class RewriteMain {
 
-    private static Parser parser = new OracleJdkParser(); // pass binary dependencies to this constructor on a real project
+    // pass binary dependencies to this constructor on a real project
+    private static Parser parser = new OracleJdkParser();
 
     public static void main(String... args) {
         String a = "class A {{ B.foo(0); }}";

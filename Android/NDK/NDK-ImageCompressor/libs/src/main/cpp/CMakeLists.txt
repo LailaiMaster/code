@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.4.1)
 
-#引入头文件
+# 引入头文件
 include_directories(libjpeg)
+
 # 添加libjpeg库（静态方式）
 add_library(libjpeg STATIC IMPORTED)
 set_target_properties(libjpeg PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${ANDROID_ABI}/libturbojpeg.a)

@@ -10,8 +10,11 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    // https://mvnrepository.com/artifact/edu.washington.cs.types.jsr308/jsr308-compiler
-    compile group: 'edu.washington.cs.types.jsr308', name: 'jsr308-compiler', version: '1.7.5'
+
+    // com.sun.source and com.sun.tools api
+    compile 'edu.washington.cs.types.jsr308:jsr308-compiler:1.7.5'
+
+    //open tools, used to modify ATS Tree.
     compile 'com.netflix.devinsight.rewrite:rewrite-core:1.2.0'
     compile 'com.github.javaparser:javaparser-core-serialization:3.13.6'
 }

@@ -1,2 +1,2 @@
-# Android NDK开发代码
+# Android NDK 开发代码
 

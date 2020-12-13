@@ -1,10 +1,6 @@
 package com.ztiany.runtimeannotation;
 
 /**
- * <pre>
- *
- * </pre>
- *
  * @author Ztiany
  *         Date : 2017-02-15 22:11
  *         Email: ztiany3@gmail.com

@@ -1,13 +1,13 @@
 package me.ztiany.buildsrc
 
-import com.android.build.api.transform.QualifiedContent
-import com.android.build.api.transform.Transform
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.android.build.gradle.internal.pipeline.TransformTask
-import com.google.common.collect.Sets
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
+import org.gradle.api.execution.TaskExecutionListener
+import org.gradle.api.tasks.TaskState
 
 /**
  *@author Ztiany
@@ -25,12 +25,29 @@ internal class CustomTransformPlugin : Plugin<Project> {
         android.registerTransform(LogTransform())
 
         project.afterEvaluate {
-            android.applicationVariants.all {
-                project.gradle.taskGraph.addTaskExecutionGraphListener {
-                    //no op
+            project.gradle.taskGraph.addTaskExecutionListener(object : TaskExecutionListener {
+                override fun beforeExecute(p0: Task) {
+
                 }
-            }
+
+                override fun afterExecute(task: Task, taskState: TaskState) {
+                    try {
+                        project.logger.error("afterExecute-->$task isTransformTask = ${task is TransformTask}")
+                        project.logger.error("        input: ")
+                        for (file in task.inputs.files.files) {
+                            project.logger.error("                $file")
+                        }
+                        project.logger.error("        output: ")
+                        for (file in task.outputs.files.files) {
+                            project.logger.error("                $file")
+                        }
+                    } catch (e: NullPointerException) {
+                        e.printStackTrace()
+                    }
+                }
+            })
         }
+
     }
 
 }

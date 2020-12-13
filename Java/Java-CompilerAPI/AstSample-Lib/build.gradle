@@ -12,6 +12,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'com.google.auto.service:auto-service:1.0-rc2'
 
-    // https://mvnrepository.com/artifact/edu.washington.cs.types.jsr308/jsr308-compiler
-    compile group: 'edu.washington.cs.types.jsr308', name: 'jsr308-compiler', version: '1.7.5'
+    // com.sun.source and com.sun.tools api
+    compile 'edu.washington.cs.types.jsr308:jsr308-compiler:1.7.5'
+
 }

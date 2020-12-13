@@ -13,8 +13,14 @@ buildscript {
 
 allprojects {
     repositories {
-        mavenCentral()
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url "https://maven.aliyun.com/repository/google"}
+        maven { url 'https://dl.google.com/dl/android/maven2/' }
+        maven { url 'https://jitpack.io' }
+        maven { url "https://kotlin.bintray.com/kotlinx" }
+        google()
         jcenter()
+        mavenCentral()
     }
 
     //升级到 idea 2019后，内置支持 apt，不需要再配置了。
