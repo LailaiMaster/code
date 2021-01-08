@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "s-realm": "/components/realm/index",
+    "s-tab-bar": "/components/tab-bar/index"
+  }
+}

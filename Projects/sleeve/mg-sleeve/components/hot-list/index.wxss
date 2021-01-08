@@ -1,0 +1,44 @@
+/* components/hot-list/index.wxss */
+
+/*app.wxss 中的定义的全局样式不会应用组件，因为组件时内封闭的。*/
+@import "../../wxss/sleeve.wxss";
+
+.container {
+    padding-top: 40rpx;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inner-container {
+    margin-top: 32rpx;
+    display: flex;
+    flex-direction: row;
+    /*如果没有被撑起高度或宽度，则 space-between 需要设置高度或宽度*/
+    width: 100%;
+    justify-content: space-between;
+}
+
+.left {
+    display: flex;
+    width: 346rpx;
+    height: 522rpx;
+}
+
+.right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.right-size {
+    display: flex;
+    width: 400rpx;
+    height: 260rpx;
+}
+
+.title {
+    width: 690rpx;
+    height: 90rpx;
+}

@@ -1,0 +1,30 @@
+<!--components/spu-scroll/index.wxml-->
+
+        <!--wxs 只支持ES5-->
+<wxs src="../../miniprogram_npm/lin-ui/filter/string.wxs" module="s"></wxs>
+<wxs src="../../wxs/price.wxs" module="p"></wxs>
+
+        <!--l-class 对应 externalClasses 中的 l-class-->
+<view class="container l-class">
+
+    <!--顶部图-->
+    <image src="{{theme.title_img}}" class="title"></image>
+
+    <!--scroll-view 需要使用 enable-flex 开启 flex 功能【旧版本的 scroll-view 开启 flex 有bug，解决方案是在内部使用一个 view 包裹要滑动的内容，在这个 view 上使用 flex 布局】-->
+    <scroll-view scroll-x enable-flex class="scroll-view">
+        <block wx:for="{{spuList}}">
+            <view class="sup-container">
+                <image src="{{item.img}}" class="spu-img"></image>
+                <text class="spu-text">
+                    {{(item.title.length >= 8) ? s.substring(item.title, 0, 7) + '...' : item.title}}
+                </text>
+                <l-price
+                        value="{{p.mainPrice(item.price,item.discount_prices).price}}"
+                        l-value-class="price-value"
+                        l-unit-class="price-unit">
+                </l-price>
+            </view>
+        </block>
+    </scroll-view>
+
+</view>

@@ -1,1 +1,2 @@
-include ':Paging-Sample', ':Navigation-Sample'
+include ':app'
+rootProject.name = "AAC-Sample"

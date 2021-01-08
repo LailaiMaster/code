@@ -16,6 +16,8 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementScanner7;
 
+import me.ztiany.compiler.common.HelloTag;
+
 //指定支持的java版本
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 //表示该处理器用于处理哪些注解，这里表示处理所有元素
@@ -32,6 +34,8 @@ public class ElementVisitProcessor extends AbstractProcessor {
      */
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        Set<? extends Element> elementsAnnotatedWith = roundEnv.getElementsAnnotatedWith(HelloTag.class);
+        System.out.println("elementsAnnotatedWith = " + elementsAnnotatedWith);
         Scanner scanner = new Scanner();
         if (!roundEnv.processingOver()) {
             for (Element element : roundEnv.getRootElements()) {

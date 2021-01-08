@@ -1,0 +1,24 @@
+group 'me.ztiany'
+version '1.0'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile "org.apache.bcel:bcel:6.5.0"
+}
+
+jar {
+    //define jar name
+    archiveFileName = "JavaAgent.jar"
+    //include libs into jar. https://discuss.gradle.org/t/how-to-include-dependencies-in-jar/19571/5
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    //define META-INF
+    manifest {
+        attributes 'Manifest-Version': '1.0', 'Premain-Class': 'me.ztiany.instrumentation.GreetingFileTransformer', 'Can-Redefine-Classes': true
+    }
+}

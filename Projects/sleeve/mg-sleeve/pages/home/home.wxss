@@ -1,0 +1,59 @@
+/*
+小程序基础知识：
+    1. 设计稿上是 130 px，则小程序上是 260 rpx，总之就是两倍【IPhone6上】。
+*/
+.top-theme {
+    width: 100%;
+    height: 260rpx;
+    /*去掉图片的默认margin*/
+    display: flex;
+}
+
+.swiper {
+    width: 100%;
+    height: 360rpx;
+}
+
+.activity {
+    margin-top: 20rpx;
+    width: 100%;
+    height: 310rpx;
+    /*去掉图片的默认margin*/
+    display: flex;
+    margin-bottom: 20rpx;
+}
+
+.spu-scroll {
+    background-color: black;
+}
+
+.quality {
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+    width: 100%;
+    height: 880rpx;
+    display: flex;
+}
+
+.fashion {
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+    width: 100%;
+    height: 880rpx;
+    display: flex;
+}
+
+.spu-bottom {
+    margin-top: 20rpx;
+    padding-top: 30rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+.title-spu-bottom {
+    width: 690rpx;
+    height: 70rpx;
+    margin-bottom: 38rpx;
+}

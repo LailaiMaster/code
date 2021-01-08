@@ -1,0 +1,15 @@
+<!--components/fence/index.wxml-->
+<view class="container">
+
+    <!--规格名-->
+    <view class="title">{{fence.title}}</view>
+
+    <!--规格项-->
+    <view class="row-container">
+        <block wx:for="{{fence.cells}}" wx:key="{{index}}">
+            <s-cell x="{{x}}" y="{{index}}" cell="{{item}}" class="cell"></s-cell>
+        </block>
+        <view class="hr"></view>
+    </view>
+
+</view>

@@ -1,0 +1,52 @@
+/* components/spu-scroll/index.wxss */
+.container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 42rpx 0 34rpx 28rpx;
+    background-color: white;
+}
+
+.title {
+    width: 694rpx;
+    height: 90rpx;
+}
+
+.price-unit {
+    /*加上 important 可以保证覆盖内部样式类【原理是提高权重】*/
+    font-size: 24rpx !important;
+    color: #157658 !important;
+}
+
+.price-value {
+    font-size: 26rpx !important;
+    color: #157658 !important;
+}
+
+.spu-img {
+    height: 160rpx;
+    width: 160rpx;
+}
+
+.scroll-view {
+    margin-top: 28rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sup-container {
+    margin-right: 60rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.spu-text {
+    font-size: 20rpx;
+    color: #666666;
+    margin-top: 20rpx;
+    /*让文本单行显示，出现省略号的条件是，text 标签的宽度是固定的。但是设置固定宽度很难保证文本在容器内是居中的，所以推荐使用 wxs 控制文本展示*/
+    /*overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;*/
+}

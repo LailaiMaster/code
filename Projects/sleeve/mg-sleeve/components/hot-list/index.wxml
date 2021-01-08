@@ -1,0 +1,22 @@
+<!--components/hot-list/index.wxml-->
+<view class="container">
+
+    <!--头图-->
+    <image src="{{banner.img}}" class="title"></image>
+
+    <!--商品图-->
+    <view class="inner-container">
+
+        <!--view 内置了动画类，比如 hover-class-->
+        <view hover-class="rect-hover" hover-stay-time="200">
+            <image src="{{left.img}}" class="left"></image>
+        </view>
+
+        <view class="right-container">
+            <image src="{{rightTop.img}}" class="right-size"></image>
+            <image src="{{rightBottom.img}}" class="right-size"></image>
+        </view>
+
+    </view>
+
+</view>

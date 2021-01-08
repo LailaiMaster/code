@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * Email: ztiany3@gmail.com
  */
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD})
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 public @interface SamplePrint {
 
 }

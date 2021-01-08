@@ -1,0 +1,191 @@
+{
+  "category_id": 12,
+  "default_sku_id": 2,
+  "discount_price": "62.00",
+  "for_theme_img": "https://gitee.com/lrelia7/sleeve-static/raw/master/theme/spu1.png",
+  "id": 2,
+  "img": "http://i1.sleeve.talelin.com/assets/ecf8d824-19d4-4db2-a5da-872ab014fecd.png",
+  "is_test": true,
+  "online": true,
+  "price": "77.00",
+  "root_category_id": 2,
+  "sketch_spec_id": 1,
+  "sku_list": [
+    {
+      "category_id": 17,
+      "code": "2$1-45#3-9#4-14",
+      "id": 2,
+      "img": "http://i1.sleeve.talelin.com/assets/2d22ffec-b1c1-43e0-ad21-25aa5c26ab34.png",
+      "online": true,
+      "price": 77.76,
+      "root_category_id": 3,
+      "specs": [
+        {
+          "key": "颜色",
+          "key_id": 1,
+          "value": "金属灰",
+          "value_id": 45
+        },
+        {
+          "key": "图案",
+          "key_id": 3,
+          "value": "七龙珠",
+          "value_id": 9
+        },
+        {
+          "key": "尺码",
+          "key_id": 4,
+          "value": "小号 S",
+          "value_id": 14
+        }
+      ],
+      "spu_id": 2,
+      "stock": 0,
+      "title": "金属灰·七龙珠"
+    },
+    {
+      "category_id": 17,
+      "code": "2$1-42#3-10#4-15",
+      "discount_price": 59.00,
+      "id": 3,
+      "img": "http://i1.sleeve.talelin.com/assets/c6b52c90-5b10-4823-baef-6c37d3d3532f.png",
+      "online": true,
+      "price": 66.00,
+      "root_category_id": 3,
+      "specs": [
+        {
+          "key": "颜色",
+          "key_id": 1,
+          "value": "青芒色",
+          "value_id": 42
+        },
+        {
+          "key": "图案",
+          "key_id": 3,
+          "value": "灌篮高手",
+          "value_id": 10
+        },
+        {
+          "key": "尺码",
+          "key_id": 4,
+          "value": "中号 M",
+          "value_id": 15
+        }
+      ],
+      "spu_id": 2,
+      "stock": 988,
+      "title": "青芒色·灌篮高手"
+    },
+    {
+      "category_id": 17,
+      "code": "2$1-42#3-11#4-16",
+      "id": 4,
+      "img": "http://i1.sleeve.talelin.com/assets/c6b52c90-5b10-4823-baef-6c37d3d3532f.png",
+      "online": true,
+      "price": 88.00,
+      "root_category_id": 3,
+      "specs": [
+        {
+          "key": "颜色",
+          "key_id": 1,
+          "value": "青芒色",
+          "value_id": 42
+        },
+        {
+          "key": "图案",
+          "key_id": 3,
+          "value": "圣斗士",
+          "value_id": 11
+        },
+        {
+          "key": "尺码",
+          "key_id": 4,
+          "value": "大号  L",
+          "value_id": 16
+        }
+      ],
+      "spu_id": 2,
+      "stock": 7,
+      "title": "青芒色·圣斗士"
+    },
+    {
+      "category_id": 17,
+      "code": "2$1-44#3-9#4-14",
+      "discount_price": 59.00,
+      "id": 5,
+      "img": "http://i1.sleeve.talelin.com/assets/09f32ac8-1af4-4424-b221-44b10bd0986e.png",
+      "online": true,
+      "price": 77.00,
+      "root_category_id": 3,
+      "specs": [
+        {
+          "key": "颜色",
+          "key_id": 1,
+          "value": "橘黄色",
+          "value_id": 44
+        },
+        {
+          "key": "图案",
+          "key_id": 3,
+          "value": "七龙珠",
+          "value_id": 9
+        },
+        {
+          "key": "尺码",
+          "key_id": 4,
+          "value": "小号 S",
+          "value_id": 14
+        }
+      ],
+      "spu_id": 2,
+      "stock": 0,
+      "title": "橘黄色·七龙珠"
+    }
+  ],
+  "spu_detail_img_list": [
+    {
+      "id": 24,
+      "img": "http://i2.sleeve.talelin.com/n4.png",
+      "index": 1,
+      "spu_id": 2
+    },
+    {
+      "id": 27,
+      "img": "http://i2.sleeve.talelin.com/n7.png",
+      "index": 2,
+      "spu_id": 2
+    },
+    {
+      "id": 25,
+      "img": "http://i2.sleeve.talelin.com/n5.png",
+      "index": 3,
+      "spu_id": 2
+    },
+    {
+      "id": 26,
+      "img": "http://i2.sleeve.talelin.com/n6.png",
+      "index": 4,
+      "spu_id": 2
+    }
+  ],
+  "spu_img_list": [
+    {
+      "id": 165,
+      "img": "http://i1.sleeve.talelin.com/assets/5605cd6c-f869-46db-afe6-755b61a0122a.png",
+      "spu_id": 2
+    },
+    {
+      "id": 166,
+      "img": "http://i1.sleeve.talelin.com/assets/ecf8d824-19d4-4db2-a5da-872ab014fecd.png",
+      "spu_id": 2
+    },
+    {
+      "id": 167,
+      "img": "http://i1.sleeve.talelin.com/assets/8451cebd-5a8d-4758-bb2a-652e026a7c00.png",
+      "spu_id": 2
+    }
+  ],
+  "subtitle": "秋日冬款，浪漫满屋",
+  "tags": "秋日冬款$浪漫满屋",
+  "title": "林间有风自营针织衫"
+}

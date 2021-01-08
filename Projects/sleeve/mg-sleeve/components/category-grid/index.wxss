@@ -1,0 +1,35 @@
+/* components/category-grid/index.wxss */
+.container {
+    width: 100%;
+    height: 320rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.img {
+    /*图片的大小*/
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.text {
+    margin-top: 6rpx;
+    font-size: 24rpx;
+    color: #333333;
+}
+
+.grid-item {
+    /*width 可以随意设置，这里主要就是为了扩大点击区域。高度不需要设置，会被内容自动撑起来。*/
+    width: 200rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inline-container {
+    width: 730rpx;
+    height: 300rpx;
+    border: 1px dashed #DCEBE6;
+}

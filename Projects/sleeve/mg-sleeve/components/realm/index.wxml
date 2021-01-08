@@ -1,0 +1,60 @@
+<wxs src="../../wxs/price.wxs" module="p"></wxs>
+
+<view class="container">
+
+    <!--商品图及其简要信息-->
+    <view class="sku-preview">
+        <!--商品图-->
+        <image src="{{previewImg}}" class="sku-img"></image>
+        <!--商品图右侧-->
+        <view class="sku-description">
+            <!--商品标题-->
+            <text class="title">{{title}}</text>
+
+            <view>
+                <!--商品价格-->
+                <view class="price-row">
+                    <l-price color="#157658" value-size="28" unit-size="20" autofix="{{true}}"
+                             value="{{p.mainPrice(price,discountPrice).price}}"></l-price>
+                    <l-price color="#999999" value-size="26" deleted="{{true}}" l-class="discount-price"
+                             wx:if="{{p.slashedPrice(price,discountPrice).display}}"
+                             value="{{p.slashedPrice(price,discountPrice).price}}"></l-price>
+                    <!--库存-->
+                    <view wx:if="{{stock && stock>=10}}" class="stock">库存：{{stock}} 件</view>
+                    <view wx:if="{{stock && stock<10 && stock !==0}}" class="stock-pinch">仅剩：{{stock}} 件</view>
+                </view>
+
+                <!--规则选择提示-->
+                <view wx:if="{{!noSpec}}" class="sku-pending">
+                    <text wx:if="{{!skuIntact}}">请选择：</text>
+                    <text wx:else>已选：</text>
+                    <text wx:if="{{!skuIntact}}">{{missingKeys}}</text>
+                    <text wx:else>{{currentValues}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="hr"></view>
+
+    <!--规格选择-->
+    <block wx:for="{{fences}}" wx:key="{{index}}">
+        <!--celltap 是 cell 组件向上抛出的事件-->
+        <s-fence x="{{index}}" bind:celltap="onCellTap" fence="{{item}}"></s-fence>
+    </block>
+
+    <!--数量控制-->
+    <view class="counter-container">
+        <text>购买数量</text>
+        <s-counter bind:lintap="onSelectCount"></s-counter>
+    </view>
+</view>
+
+        <!--加入购物车控制-->
+<view wx:if="{{!outStock}}" class="bottom-btn">
+    <text>加入购物车</text>
+</view>
+
+<view wx:else class="bottom-btn out-stock">
+    <view>暂时缺货</view>
+</view>

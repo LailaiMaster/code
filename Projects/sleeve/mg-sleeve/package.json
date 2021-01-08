@@ -1,0 +1,15 @@
+{
+  "name": "mg-sleeve",
+  "version": "1.0.0",
+  "description": "1. 预览：使用小程序原生开发工具\r 2. 开发：使用 WebStorm \r 3. 小程序插件：<https://gitee.com/zxy_c/wechat-miniprogram-plugin>",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lin-ui": "^0.9.2"
+  }
+}

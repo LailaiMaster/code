@@ -1,0 +1,18 @@
+<view class="container">
+
+    <!--自定义组件必须使用外部样式类-->
+    <l-grid l-class="inline-container">
+
+        <block wx:for="{{grid}}">
+            <!--LiUi 规定：key 和 slot 是必须设置的-->
+            <l-grid-item key="{{index}}" slot="{{index}}">
+                <view class="grid-item">
+                    <image class="img" src="{{item.img}}"></image>
+                    <text class="text">{{item.title}}</text>
+                </view>
+            </l-grid-item>
+        </block>
+
+    </l-grid>
+
+</view>
