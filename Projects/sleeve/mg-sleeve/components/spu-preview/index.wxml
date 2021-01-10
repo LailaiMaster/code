@@ -1,5 +1,3 @@
-<wxs src="../../wxs/price.wxs" module="p"></wxs>
-
 <!-- data 是固定的语法前缀，-pid 可以自定义，然后可以在 event 中获取 -->
 <view class="container" bind:tap="onItemTap" data-pid="{{data.id}}">
 

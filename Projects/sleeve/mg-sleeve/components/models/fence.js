@@ -31,6 +31,22 @@ class Fence {
         })
     }
 
+    /**将可视规格，设置给 cell*/
+    setFenceSketch(skuList) {
+        this.cells.forEach(cell => {
+            this._setCellSkuImage(cell, skuList);
+        })
+    }
+
+    _setCellSkuImage(cell, skuList) {
+        const specCode = cell.getCellCode();
+        /**如果 sku-code 匹配，则使用它的图片。*/
+        const matchSku = skuList.find(s => s.code.includes(specCode))
+        if (matchSku) {
+            cell.skuImg = matchSku.img
+        }
+    }
+
     /*------------------------没用到------------------------*/
     pushSpec(spec) {
         this.cells.push(new Cell(spec))

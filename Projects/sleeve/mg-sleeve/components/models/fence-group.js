@@ -31,6 +31,16 @@ class FenceGroup {
         this._initFencesByTranspose()
     }
 
+    /**是否为可视规格*/
+    _isSketchFence(fenceId) {
+        return this.spu.sketch_spec_id === fenceId
+    }
+
+    /**是否有有可是规格*/
+    _hasSketchFence() {
+        return this.spu.sketch_spec_id ? true : false
+    }
+
     getDefaultSku() {
         const defaultSkuId = this.spu.default_sku_id
         if (!defaultSkuId) {
@@ -65,7 +75,10 @@ class FenceGroup {
         const AT = matrix.transpose()
         AT.forEach(r => {
             const fence = new Fence(r)
-            fence.init()
+            fence.init();
+            if (this._hasSketchFence() && this._isSketchFence(fence.id)) {
+                fence.setFenceSketch(this.skuList)
+            }
             fences.push(fence)
         })
         this.fences = fences

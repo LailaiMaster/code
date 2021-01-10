@@ -1,4 +1,7 @@
 // pages/detail/detail.js
+import {ShoppingWay} from "../../core/enum";
+import {SaleExplain} from "../../models/sale-explain";
+
 const {Spu} = require("../../models/spu");
 
 Page({
@@ -6,7 +9,9 @@ Page({
     /**
      * 页面的初始数据
      */
-    data: {},
+    data: {
+        showRealm: false
+    },
 
     /**
      * 生命周期函数--监听页面加载
@@ -15,8 +20,45 @@ Page({
         const pid = options.pid
         console.log(`pid = ${pid}`)
         const spu = await Spu.getDetail(pid);
+        const explains = await SaleExplain.getFixed()
+
         this.setData({
-            spu
+            spu,
+            saleExplain: explains
+        })
+    },
+
+    /**监听加入购物车事件*/
+    onAddToCart(event) {
+        this.setData({
+            showRealm: true,
+            orderWay: ShoppingWay.CART
+        })
+    },
+
+    onBuy(event) {
+        this.setData({
+            showRealm: true,
+            orderWay: ShoppingWay.BUY
+        })
+    },
+
+    onGoToHome(event) {
+        /*switchTab 专门用于切换 tab-bar*/
+        wx.switchTab({
+            url: '/pages/home/home'
+        })
+    },
+
+    onGoToCatt(event) {
+        wx.switchTab({
+            url: '/pages/cart/cart'
+        })
+    },
+
+    onSpecChange(event) {
+        this.setData({
+            specs: event.detail
         })
     },
 

@@ -11,7 +11,8 @@ Component({
      * 组件的属性列表
      */
     properties: {
-        spu: Object
+        spu: Object,
+        orderWay: String
     },
 
     /**
@@ -41,6 +42,8 @@ Component({
             } else   /*有规格*/{
                 this.processHasSpec(spu)
             }
+            //通知外部默认的 spec
+            this.triggerSpecEvent()
         }
     },
 
@@ -147,6 +150,26 @@ Component({
             /*刷新UI*/
             this.bindTipData()
             this.bindFenceGroupData(judger.fenceGroup);
+            /*通知外部*/
+            this.triggerSpecEvent()
+        },
+
+        /**通知外部 spec 的选择发生变化*/
+        triggerSpecEvent() {
+            const noSpec = Spu.isNoSpec(this.properties.spu)
+
+            if (noSpec) {
+                this.triggerEvent("sepcchange", {
+                    noSpec: noSpec
+                })
+            }else {
+                this.triggerEvent("sepcchange", {
+                    noSpec: noSpec,
+                    skuIntact: this.data.judger.isSkuIntact(),
+                    currentValues: this.data.judger.getCurrentValues(),
+                    missingKeys: this.data.judger.getMissingKeys()
+                });
+            }
         }
     }
 

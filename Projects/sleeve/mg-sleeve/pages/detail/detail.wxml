@@ -1,3 +1,57 @@
 <!--pages/detail/detail.wxml-->
-<!--<s-realm spu="{{spu}}"></s-realm>-->
-<s-tab-bar></s-tab-bar>
+<wxs src="../../wxs/price.wxs" module="p"></wxs>
+
+<view>
+
+    <!--轮播图-->
+    <swiper class="top" autoplay indicator-dots>
+        <block wx:for="{{spu.spu_img_list}}">
+            <swiper-item>
+                <image class="top" src="{{item.img}}" mode="aspectFill"></image>
+            </swiper-item>
+        </block>
+    </swiper>
+
+    <!--商品信息-->
+    <s-spu-description spu="{{spu}}"></s-spu-description>
+
+    <!--已选规格提示-->
+    <view wx:if="{{!specs.noSpec}}" class="sku-pending" bind:tap="onAddToCart">
+        <view class="specs">
+            <text wx:if="{{!specs.skuIntact}}">请选择：</text>
+            <text wx:else>已选：</text>
+            <text wx:if="{{!specs.skuIntact}}">{{specs.missingKeys}}</text>
+            <text wx:else>{{specs.currentValues}}</text>
+        </view>
+        <view class="arrow-right">
+            <l-icon name="right" color="#157658" size="24"></l-icon>
+        </view>
+    </view>
+
+    <!--规格说明-->
+    <view class="explain">
+        <s-sale-explain texts="{{saleExplain}}"></s-sale-explain>
+    </view>
+
+    <!--详情图-->
+    <view class="detail-img-container">
+        <block wx:for="{{spu.spu_img_list}}" wx:key="{{index}}">
+            <image src="{{item.img}}" class="detail-img" mode="widthFix"></image>
+        </block>
+    </view>
+
+</view>
+
+        <!--规格选择-->
+<l-popup show="{{showRealm}}" contentAlign="bottom">
+    <s-realm bind:sepcchange="onSpecChange" spu="{{spu}}" orderWay="{{orderWay}}"></s-realm>
+</l-popup>
+
+        <!--底部操作-->
+<s-tab-bar
+        class="tabbar"
+        bind:gotohome="onGoToHome"
+        bind:togocart="onGoToCart"
+        bind:addtocart="onAddToCart"
+        bind:buy="onBuy">
+</s-tab-bar>
