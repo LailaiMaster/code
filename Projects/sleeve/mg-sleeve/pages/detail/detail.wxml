@@ -1,7 +1,7 @@
 <!--pages/detail/detail.wxml-->
 <wxs src="../../wxs/price.wxs" module="p"></wxs>
 
-<view>
+<scroll-view scroll-y  style="height:{{contentHeight}}rpx;">
 
     <!--轮播图-->
     <swiper class="top" autoplay indicator-dots>
@@ -40,7 +40,7 @@
         </block>
     </view>
 
-</view>
+</scroll-view>
 
         <!--规格选择-->
 <l-popup show="{{showRealm}}" contentAlign="bottom">

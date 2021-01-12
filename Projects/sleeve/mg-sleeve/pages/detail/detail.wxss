@@ -45,6 +45,7 @@
 }
 
 .detail-img-container {
+    /*防止被 tab-bar 盖住，但是滚动条的滑动到 margin 区域。*/
     /*margin-bottom: 200rpx;*/
 }
 

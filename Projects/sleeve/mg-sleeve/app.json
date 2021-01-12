@@ -4,7 +4,9 @@
     "pages/detail/detail",
     "pages/cart/cart",
     "pages/category/category",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/search/search",
+    "pages/spu-list/spu-list"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -56,7 +58,12 @@
     "l-icon": "/miniprogram_npm/lin-ui/icon/index",
     "l-badge": "/miniprogram_npm/lin-ui/badge/index",
     "l-popup": "/miniprogram_npm/lin-ui/popup/index",
-    "s-counter": "/components/counter/index"
+    "l-segment": "/miniprogram_npm/lin-ui/segment/index",
+    "l-segment-item": "/miniprogram_npm/lin-ui/segment-item/index",
+    "l-search-bar": "/miniprogram_npm/lin-ui/search-bar/index",
+    "l-loading": "/miniprogram_npm/lin-ui/loading/index",
+    "s-counter": "/components/counter/index",
+    "s-spu-preview-r": "/components/spu-preview-r/index"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

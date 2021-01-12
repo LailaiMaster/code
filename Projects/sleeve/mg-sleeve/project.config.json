@@ -73,6 +73,17 @@
           "pathName": "pages/detail/detail",
           "query": "pid=2",
           "scene": null
+        },
+        {
+          "name": "category",
+          "pathName": "pages/category/category",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "search",
+          "pathName": "pages/search/search",
+          "scene": null
         }
       ]
     }

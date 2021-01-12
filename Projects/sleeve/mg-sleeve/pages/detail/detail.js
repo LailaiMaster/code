@@ -1,6 +1,8 @@
 // pages/detail/detail.js
 import {ShoppingWay} from "../../core/enum";
 import {SaleExplain} from "../../models/sale-explain";
+import {px2rpx} from "../../miniprogram_npm/lin-ui/utils/util";
+import {getSystemSize, getWindowHeightRpx} from "../../utils/system";
 
 const {Spu} = require("../../models/spu");
 
@@ -13,15 +15,24 @@ Page({
         showRealm: false
     },
 
+    async setContentHeight() {
+        const h = await getWindowHeightRpx()/*rpx*/ - 100/*tab-bar*/
+        this.setData({
+            contentHeight: h
+        })
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: async function (options) {
+        //动态设置高度
+        await this.setContentHeight();
+        //加载数据
         const pid = options.pid
         console.log(`pid = ${pid}`)
         const spu = await Spu.getDetail(pid);
         const explains = await SaleExplain.getFixed()
-
         this.setData({
             spu,
             saleExplain: explains
