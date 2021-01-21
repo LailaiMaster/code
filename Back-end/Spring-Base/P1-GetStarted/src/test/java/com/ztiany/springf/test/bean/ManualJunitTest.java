@@ -24,7 +24,7 @@ public class ManualJunitTest {
     @Before
     public void init() {
         //1 创建容器对象
-        applicationContext = new ClassPathXmlApplicationContext("basic_config.xml");
+        applicationContext = new ClassPathXmlApplicationContext("bean_config.xml");
     }
 
     @Test
@@ -37,7 +37,7 @@ public class ManualJunitTest {
     @Test
     public void testBeanFactory() {
         //1 创建容器对象
-        XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("basic_config.xml"));
+        XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("bean_config_factory.xml"));
         //2 向容器"要"user对象
         User user = (User) factory.getBean("user1");
         assertNotNull(user);

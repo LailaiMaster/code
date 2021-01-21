@@ -1,0 +1,14 @@
+# application.yml 与 application.properties 都可以作为配置文件，现在更加推荐使用 yml 文件。
+# application.yml 在任何环境下都会生效。
+
+# 在这里指定那个配置生效，在打完包之后，也可以通过命令指定，比如：java -jar xxx.jar --spring.profiles.active=dev
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: none #不让 JPA 自己创建数据表。
+
+# 放 api 实现的包
+sleeve:
+  api-package: com.lin.sleeve.api

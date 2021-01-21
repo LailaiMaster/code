@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * 使用 Spring 提供的测试框架，简化Spring 单元测试
+ * 使用 Spring 提供的测试框架，简化 Spring 单元测试
  */
 //创建容器
 @RunWith(SpringJUnit4ClassRunner.class)

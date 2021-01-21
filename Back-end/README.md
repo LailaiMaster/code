@@ -2,7 +2,8 @@
 
 ## 环境说明
 
-- IDEA 2019.3。
+- 开发工具：IDEA 2019.3 及以上。
+- 构建工具：Gradle。
 - 服务器：Tomcat，低版本的需要设置 JVM 运行时字符编码，`-Dfile.encoding=UTF-8`参数。
 
 >`Dfile.encoding` 用于设置外部环境的编码，Java 的 I/O 操作也是使用此编码。
@@ -32,7 +33,7 @@
 
 3 Spring 部分
 
-1. SpringFramework-Base：Spring 核心框架示例代码。
+1. Spring-Base：Spring 核心框架示例代码。
 2. Spring-SSH：Spring 整合 Struts2, Hibernate 示例代码。
    1. Struts2
    2. Hibernate

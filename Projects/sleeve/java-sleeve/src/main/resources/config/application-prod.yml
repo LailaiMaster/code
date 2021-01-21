@@ -1,0 +1,3 @@
+# prod 文件只在 prod 环境下生效。
+server:
+  port: 8080
