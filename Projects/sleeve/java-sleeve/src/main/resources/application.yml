@@ -8,7 +8,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none #不让 JPA 自己创建数据表。
+  jackson:
+    property-naming-strategy: SNAKE_CASE # json 序列化时，字段使用下划线方式命名。
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true # json 序列化时，时间序列化为时间戳。
 
 # 放 api 实现的包
 sleeve:
   api-package: com.lin.sleeve.api
+

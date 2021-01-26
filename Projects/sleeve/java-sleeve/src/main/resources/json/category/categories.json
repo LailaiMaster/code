@@ -1,0 +1,294 @@
+{
+  "roots": [
+    {
+      "id": 37,
+      "name": "测试数据",
+      "is_root": true,
+      "img": "http://i2.sleeve.talelin.com/u2.png",
+      "parent_id": null,
+      "index": null
+    },
+    {
+      "id": 3,
+      "name": "包包",
+      "is_root": true,
+      "img": "http://i2.sleeve.talelin.com/u3.png",
+      "parent_id": null,
+      "index": 1
+    },
+    {
+      "id": 24,
+      "name": "工艺",
+      "is_root": true,
+      "img": "http://i2.sleeve.talelin.com/u3.png",
+      "parent_id": null,
+      "index": 1
+    },
+    {
+      "id": 2,
+      "name": "服装",
+      "is_root": true,
+      "img": "http://i2.sleeve.talelin.com/u3.png",
+      "parent_id": null,
+      "index": 2
+    },
+    {
+      "id": 1,
+      "name": "鞋",
+      "is_root": true,
+      "img": "http://i2.sleeve.talelin.com/u2.png",
+      "parent_id": null,
+      "index": 3
+    },
+    {
+      "id": 5,
+      "name": "饰品",
+      "is_root": true,
+      "img": "http://i2.sleeve.talelin.com/u2.png",
+      "parent_id": null,
+      "index": 4
+    },
+    {
+      "id": 4,
+      "name": "居家",
+      "is_root": true,
+      "img": "http://i2.sleeve.talelin.com/u2.png",
+      "parent_id": null,
+      "index": 5
+    }
+  ],
+  "subs": [
+    {
+      "id": 6,
+      "name": "平底鞋",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u4.png",
+      "parent_id": 1,
+      "index": null
+    },
+    {
+      "id": 7,
+      "name": "凉鞋",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u5.png",
+      "parent_id": 1,
+      "index": null
+    },
+    {
+      "id": 8,
+      "name": "拖鞋",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u6.png",
+      "parent_id": 1,
+      "index": null
+    },
+    {
+      "id": 9,
+      "name": "运动鞋",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u4.png",
+      "parent_id": 1,
+      "index": null
+    },
+    {
+      "id": 10,
+      "name": "高跟鞋",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u5.png",
+      "parent_id": 1,
+      "index": null
+    },
+    {
+      "id": 11,
+      "name": "衬衫",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u5.png",
+      "parent_id": 2,
+      "index": null
+    },
+    {
+      "id": 12,
+      "name": "T恤",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u4.png",
+      "parent_id": 2,
+      "index": null
+    },
+    {
+      "id": 13,
+      "name": "牛仔裤",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u5.png",
+      "parent_id": 2,
+      "index": null
+    },
+    {
+      "id": 14,
+      "name": "针织衫",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u6.png",
+      "parent_id": 2,
+      "index": null
+    },
+    {
+      "id": 15,
+      "name": "连衣裙",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u6.png",
+      "parent_id": 2,
+      "index": null
+    },
+    {
+      "id": 16,
+      "name": "风衣",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u5.png",
+      "parent_id": 2,
+      "index": null
+    },
+    {
+      "id": 17,
+      "name": "手包",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u6.png",
+      "parent_id": 3,
+      "index": null
+    },
+    {
+      "id": 18,
+      "name": "旅行包",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u4.png",
+      "parent_id": 3,
+      "index": null
+    },
+    {
+      "id": 19,
+      "name": "单肩包",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u5.png",
+      "parent_id": 3,
+      "index": null
+    },
+    {
+      "id": 20,
+      "name": "收纳",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u4.png",
+      "parent_id": 4,
+      "index": null
+    },
+    {
+      "id": 21,
+      "name": "毛巾",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u5.png",
+      "parent_id": 4,
+      "index": null
+    },
+    {
+      "id": 22,
+      "name": "四件套",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u6.png",
+      "parent_id": 4,
+      "index": null
+    },
+    {
+      "id": 23,
+      "name": "台灯",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u4.png",
+      "parent_id": 4,
+      "index": null
+    },
+    {
+      "id": 25,
+      "name": "玻璃杯",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u6.png",
+      "parent_id": 27,
+      "index": null
+    },
+    {
+      "id": 26,
+      "name": "桌布",
+      "is_root": false,
+      "img": null,
+      "parent_id": 27,
+      "index": null
+    },
+    {
+      "id": 28,
+      "name": "盘和碗",
+      "is_root": false,
+      "img": null,
+      "parent_id": 27,
+      "index": null
+    },
+    {
+      "id": 30,
+      "name": "笔电",
+      "is_root": false,
+      "img": null,
+      "parent_id": 29,
+      "index": null
+    },
+    {
+      "id": 31,
+      "name": "手机",
+      "is_root": false,
+      "img": null,
+      "parent_id": 29,
+      "index": null
+    },
+    {
+      "id": 32,
+      "name": "文具",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u6.png",
+      "parent_id": 24,
+      "index": null
+    },
+    {
+      "id": 34,
+      "name": "香水",
+      "is_root": false,
+      "img": null,
+      "parent_id": 33,
+      "index": null
+    },
+    {
+      "id": 36,
+      "name": "酷玩",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u5.png",
+      "parent_id": 5,
+      "index": null
+    },
+    {
+      "id": 38,
+      "name": "测试数据",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u5.png",
+      "parent_id": 37,
+      "index": null
+    },
+    {
+      "id": 39,
+      "name": "束带",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u4.png",
+      "parent_id": 5,
+      "index": null
+    },
+    {
+      "id": 35,
+      "name": "家具",
+      "is_root": false,
+      "img": "http://i2.sleeve.talelin.com/u6.png",
+      "parent_id": 4,
+      "index": 9
+    }
+  ]
+}

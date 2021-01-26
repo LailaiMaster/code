@@ -5,6 +5,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### secret
+
+src/main/resources/config/third-secret.properties
+
 ### STS ###
 .apt_generated
 .classpath

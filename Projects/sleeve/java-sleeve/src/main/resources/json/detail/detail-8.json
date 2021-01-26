@@ -1,0 +1,108 @@
+{
+  "id": 26,
+  "title": "SemiConer柔质沙发",
+  "subtitle": "窝在沙发上，一杯红酒配电影",
+  "category_id": 35,
+  "root_category_id": 4,
+  "price": "4799",
+  "img": "http://i2.sleeve.talelin.com/3.png",
+  "for_theme_img": "",
+  "description": null,
+  "discount_price": "4200",
+  "tags": "",
+  "is_test": true,
+  "online": true,
+  "sku_list": [
+    {
+      "id": 38,
+      "price": 4799.00,
+      "discount_price": 4299.00,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/3.png",
+      "title": "SemiConer柔质沙发（长款）",
+      "spu_id": 26,
+      "category_id": 35,
+      "root_category_id": 4,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 27,
+          "value": "金色"
+        },
+        {
+          "key_id": 7,
+          "key": "双色沙发尺寸（非标）",
+          "value_id": 33,
+          "value": "2米 x 1米"
+        }
+      ],
+      "code": "26$1-27#7-33",
+      "stock": 0
+    },
+    {
+      "id": 39,
+      "price": 4799.00,
+      "discount_price": null,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/3.png",
+      "title": "SemiConer柔质沙发 （L型）",
+      "spu_id": 26,
+      "category_id": 35,
+      "root_category_id": 4,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 27,
+          "value": "金色"
+        },
+        {
+          "key_id": 7,
+          "key": "双色沙发尺寸（非标）",
+          "value_id": 34,
+          "value": "L型 2米 + 0.8米"
+        }
+      ],
+      "code": "26$1-27#7-34",
+      "stock": 0
+    },
+    {
+      "id": 40,
+      "price": 4799.00,
+      "discount_price": 4299.00,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/3.png",
+      "title": "SemiConer柔质沙发（短款）",
+      "spu_id": 26,
+      "category_id": 35,
+      "root_category_id": 4,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 27,
+          "value": "金色"
+        },
+        {
+          "key_id": 7,
+          "key": "双色沙发尺寸（非标）",
+          "value_id": 32,
+          "value": "1.5米 x 1米"
+        }
+      ],
+      "code": "26$1-27#7-32",
+      "stock": 0
+    }
+  ],
+  "spu_img_list": [
+    {
+      "id": 150,
+      "img": "http://i2.sleeve.talelin.com/3.png",
+      "spu_id": 26
+    }
+  ],
+  "spu_detail_img_list": [],
+  "sketch_spec_id": 1,
+  "default_sku_id": null
+}

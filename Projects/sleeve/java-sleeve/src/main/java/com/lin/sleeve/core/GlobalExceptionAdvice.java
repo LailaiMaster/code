@@ -20,6 +20,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 
+import static com.lin.sleeve.exception.ExceptionCodes.ARGUMENTS_ERROR;
+import static com.lin.sleeve.exception.ExceptionCodes.SERVER_ERROR;
+
 /**
  * @author Ztiany
  * Email ztiany3@gmail.com
@@ -30,9 +33,6 @@ public class GlobalExceptionAdvice {
 
     @Autowired
     private ExceptionCodeConfiguration mExceptionCodeConfiguration;
-
-    private static final int SERVER_ERROR = 9999;
-    private static final int ARGUMENTS_ERROR = 10001;
 
     /**
      * 未知错误的处理入口

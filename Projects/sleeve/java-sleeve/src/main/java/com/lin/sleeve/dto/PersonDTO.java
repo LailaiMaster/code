@@ -1,7 +1,7 @@
 package com.lin.sleeve.dto;
 
-import com.lin.sleeve.validators.ConfirmPassword;
-import com.lin.sleeve.validators.PasswordEqual;
+import com.lin.sleeve.dto.validators.ConfirmPassword;
+import com.lin.sleeve.dto.validators.PasswordEqual;
 
 import org.hibernate.validator.constraints.Length;
 

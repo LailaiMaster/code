@@ -1,6 +1,6 @@
 package com.lin.sleeve.repository;
 
-import com.lin.sleeve.model.test.Banner;
+import com.lin.sleeve.model.Banner;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

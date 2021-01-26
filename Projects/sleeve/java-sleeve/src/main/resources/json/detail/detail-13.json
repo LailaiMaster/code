@@ -1,0 +1,41 @@
+{
+  "id": 11,
+  "title": "飞行员墨镜",
+  "subtitle": "戴起来像小李子",
+  "category_id": 36,
+  "root_category_id": 5,
+  "price": "77.00",
+  "img": "http://i2.sleeve.talelin.com/n2.png",
+  "for_theme_img": "",
+  "description": null,
+  "discount_price": null,
+  "tags": null,
+  "is_test": true,
+  "online": true,
+  "sku_list": [
+    {
+      "id": 14,
+      "price": 77.00,
+      "discount_price": null,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/n2.png",
+      "title": "飞行员墨镜（阳光橙）",
+      "spu_id": 11,
+      "category_id": 36,
+      "root_category_id": 5,
+      "specs": [],
+      "code": null,
+      "stock": 320
+    }
+  ],
+  "spu_img_list": [
+    {
+      "id": 11,
+      "img": "http://i2.sleeve.talelin.com/n2.png",
+      "spu_id": 11
+    }
+  ],
+  "spu_detail_img_list": [],
+  "sketch_spec_id": null,
+  "default_sku_id": null
+}

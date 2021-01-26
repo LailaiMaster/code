@@ -1,0 +1,108 @@
+{
+  "id": 24,
+  "title": "秋冬新款驼色大衣",
+  "subtitle": "2020新款，暖暖过秋冬",
+  "category_id": 16,
+  "root_category_id": 2,
+  "price": "2999",
+  "img": "http://i2.sleeve.talelin.com/n3.png",
+  "for_theme_img": "http://i1.sleeve.talelin.com/assets/b8e510a1-8340-43c2-a4b0-0e56a40256f9.png",
+  "description": null,
+  "discount_price": "2699",
+  "tags": "经典单色",
+  "is_test": true,
+  "online": true,
+  "sku_list": [
+    {
+      "id": 33,
+      "price": 2799.00,
+      "discount_price": 1799.00,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/n3.png",
+      "title": "秋冬新款驼色大衣",
+      "spu_id": 24,
+      "category_id": 16,
+      "root_category_id": 2,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 31,
+          "value": "驼色"
+        },
+        {
+          "key_id": 4,
+          "key": "尺码",
+          "value_id": 14,
+          "value": "小号 S"
+        }
+      ],
+      "code": "24$1-31#4-14",
+      "stock": 66
+    },
+    {
+      "id": 34,
+      "price": 2699.00,
+      "discount_price": 1799.00,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/3.png",
+      "title": "秋冬新款驼色大衣（驼色 M号）",
+      "spu_id": 24,
+      "category_id": 16,
+      "root_category_id": 2,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 31,
+          "value": "驼色"
+        },
+        {
+          "key_id": 4,
+          "key": "尺码",
+          "value_id": 15,
+          "value": "中号 M"
+        }
+      ],
+      "code": "24$1-31#4-15",
+      "stock": 49
+    },
+    {
+      "id": 35,
+      "price": 2999.00,
+      "discount_price": 1699.00,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/3.png",
+      "title": "秋冬新款驼色大衣 （L号）",
+      "spu_id": 24,
+      "category_id": 16,
+      "root_category_id": 2,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 31,
+          "value": "驼色"
+        },
+        {
+          "key_id": 4,
+          "key": "尺码",
+          "value_id": 16,
+          "value": "大号  L"
+        }
+      ],
+      "code": "24$1-31#4-16",
+      "stock": 40
+    }
+  ],
+  "spu_img_list": [
+    {
+      "id": 172,
+      "img": "http://i2.sleeve.talelin.com/n3.png",
+      "spu_id": 24
+    }
+  ],
+  "spu_detail_img_list": [],
+  "sketch_spec_id": 1,
+  "default_sku_id": null
+}

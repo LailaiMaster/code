@@ -6,7 +6,8 @@
     "pages/category/category",
     "pages/my/my",
     "pages/search/search",
-    "pages/spu-list/spu-list"
+    "pages/spu-list/spu-list",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",

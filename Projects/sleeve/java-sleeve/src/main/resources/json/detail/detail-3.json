@@ -1,0 +1,86 @@
+{
+  "id": 3,
+  "title": "抹茶小橡皮",
+  "subtitle": "小作文写错了，用它擦一擦",
+  "category_id": 32,
+  "root_category_id": 24,
+  "price": "29.99",
+  "img": "http://i2.sleeve.talelin.com/m17.png",
+  "for_theme_img": "https://gitee.com/lrelia7/sleeve-static/raw/master/theme/spu2.png",
+  "description": null,
+  "discount_price": "17.00",
+  "tags": "一飞推荐",
+  "is_test": false,
+  "online": true,
+  "sku_list": [
+    {
+      "id": 45,
+      "price": 22.00,
+      "discount_price": 17.00,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/m17.png",
+      "title": "抹茶小橡皮 （一盒30个）",
+      "spu_id": 3,
+      "category_id": 32,
+      "root_category_id": 24,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 40,
+          "value": "抹茶绿"
+        },
+        {
+          "key_id": 6,
+          "key": "数量",
+          "value_id": 28,
+          "value": "一盒30个"
+        }
+      ],
+      "code": "3$1-40#6-28",
+      "stock": 101
+    },
+    {
+      "id": 46,
+      "price": 22.00,
+      "discount_price": 20.00,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/m17.png",
+      "title": "抹茶小橡皮（一盒50个）",
+      "spu_id": 3,
+      "category_id": 32,
+      "root_category_id": 24,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 40,
+          "value": "抹茶绿"
+        },
+        {
+          "key_id": 6,
+          "key": "数量",
+          "value_id": 29,
+          "value": "一盒50个"
+        }
+      ],
+      "code": "3$1-40#6-29",
+      "stock": 0
+    }
+  ],
+  "spu_img_list": [
+    {
+      "id": 107,
+      "img": "http://i2.sleeve.talelin.com/m17.png",
+      "spu_id": 3
+    },
+    {
+      "id": 108,
+      "img": "http://i2.sleeve.talelin.com/m18.png",
+      "spu_id": 3
+    }
+  ],
+  "spu_detail_img_list": [],
+  "sketch_spec_id": 1,
+  "default_sku_id": null
+}

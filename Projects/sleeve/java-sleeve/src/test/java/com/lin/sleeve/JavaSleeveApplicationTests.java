@@ -8,6 +8,7 @@ class JavaSleeveApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

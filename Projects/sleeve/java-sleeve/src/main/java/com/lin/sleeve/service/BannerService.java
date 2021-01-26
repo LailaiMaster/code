@@ -1,6 +1,6 @@
 package com.lin.sleeve.service;
 
-import com.lin.sleeve.model.test.Banner;
+import com.lin.sleeve.model.Banner;
 
 /**
  * @author Ztiany

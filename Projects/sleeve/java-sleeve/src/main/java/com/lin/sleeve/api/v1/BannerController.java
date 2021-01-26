@@ -1,7 +1,10 @@
 package com.lin.sleeve.api.v1;
 
+import com.lin.sleeve.core.interceptors.ScopeLevel;
 import com.lin.sleeve.dto.PersonDTO;
-import com.lin.sleeve.model.test.Banner;
+import com.lin.sleeve.exception.ExceptionCodes;
+import com.lin.sleeve.exception.http.NotFoundException;
+import com.lin.sleeve.model.Banner;
 import com.lin.sleeve.service.BannerService;
 
 import org.hibernate.validator.constraints.Range;
@@ -31,16 +34,22 @@ import javax.validation.constraints.NotBlank;
 public class BannerController {
 
     @Autowired
-    private BannerService mBannerService;
+    private BannerService bannerService;
 
-    @GetMapping("name/{name}")
+    @GetMapping("/name/{name}")
+    @ScopeLevel()
     public Banner getByName(@PathVariable @NotBlank String name) {
-        return mBannerService.getByName(name);
+        Banner banner = bannerService.getByName(name);
+        if (banner == null) {
+            throw new NotFoundException(ExceptionCodes.BANNER_NOT_FOUND);
+        }
+        return banner;
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // 测试代码
     ///////////////////////////////////////////////////////////////////////////
+
     /**
      * 如果 "/test/{id}" 中的 id 与参数名 id 不一致，则需要在 PathVariable 中指定参数名为 id。
      */

@@ -1,5 +1,7 @@
 package com.lin.sleeve.model;
 
+import org.hibernate.annotations.Where;
+
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,14 +25,16 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Where(clause = "delete_time is null")//对所有查询都加上一个条件，应用场景：逻辑删除的数据不应该被查询出来。
 public class Banner extends BaseEntity{
 
     @Id
     private Long id;
 
+    private String title;
     private String name;
     private String description;
-    private String title;
+
     private String img;
 
     @OneToMany(fetch = FetchType.LAZY)

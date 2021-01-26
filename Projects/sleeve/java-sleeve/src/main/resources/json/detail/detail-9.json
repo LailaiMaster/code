@@ -1,0 +1,91 @@
+{
+  "id": 25,
+  "title": "复古双色沙发",
+  "subtitle": "双色可选，经典青黄两色",
+  "category_id": 35,
+  "root_category_id": 4,
+  "price": "3999",
+  "img": "http://i2.sleeve.talelin.com/h3.png",
+  "for_theme_img": "",
+  "description": null,
+  "discount_price": null,
+  "tags": "复刻经典$双色可选",
+  "is_test": true,
+  "online": true,
+  "sku_list": [
+    {
+      "id": 36,
+      "price": 3999.00,
+      "discount_price": null,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/h4.png",
+      "title": "复古双色沙发（藏青色）",
+      "spu_id": 25,
+      "category_id": 35,
+      "root_category_id": null,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 2,
+          "value": "藏青色"
+        },
+        {
+          "key_id": 7,
+          "key": "双色沙发尺寸（非标）",
+          "value_id": 32,
+          "value": "1.5米 x 1米"
+        }
+      ],
+      "code": "25$1-2#7-32",
+      "stock": 0
+    },
+    {
+      "id": 37,
+      "price": 3999.00,
+      "discount_price": null,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/h3.png",
+      "title": "复古双色沙发 (米黄色）",
+      "spu_id": 25,
+      "category_id": 35,
+      "root_category_id": null,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 35,
+          "value": "米黄色"
+        },
+        {
+          "key_id": 7,
+          "key": "双色沙发尺寸（非标）",
+          "value_id": 33,
+          "value": "2米 x 1米"
+        }
+      ],
+      "code": "25$1-35#7-33",
+      "stock": 44
+    }
+  ],
+  "spu_img_list": [
+    {
+      "id": 88,
+      "img": "http://i2.sleeve.talelin.com/h3.png",
+      "spu_id": 25
+    },
+    {
+      "id": 89,
+      "img": "http://i2.sleeve.talelin.com/h2.png",
+      "spu_id": 25
+    },
+    {
+      "id": 90,
+      "img": "http://i2.sleeve.talelin.com/h4.png",
+      "spu_id": 25
+    }
+  ],
+  "spu_detail_img_list": [],
+  "sketch_spec_id": 1,
+  "default_sku_id": null
+}

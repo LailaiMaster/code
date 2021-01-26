@@ -1,0 +1,15 @@
+<!--pages/test/test.wxml-->
+<view>
+    <view>
+        <l-button shape="square" l-class="btn" bind:lintap="onGetToken">获取Token</l-button>
+    </view>
+
+    <view>
+        <l-button shape="square" l-class="btn" bind:lintap="onTestMethod">测试的带权限的接口Token</l-button>
+    </view>
+
+    <view>
+        <l-button shape="square" l-class="btn" bind:lintap="onValidateToken">验证Token</l-button>
+    </view>
+
+</view>

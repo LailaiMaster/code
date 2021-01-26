@@ -1,0 +1,46 @@
+{
+  "id": 10,
+  "title": "碳素墨水",
+  "subtitle": "虽然我们早已不再使用钢笔书写，但钢笔在纸上划过的笔触永远是键盘无法替代的。一只钢笔+一瓶墨水在一个安静的午后，写写内心的故事。",
+  "category_id": 32,
+  "root_category_id": 24,
+  "price": "80.00",
+  "img": "http://i2.sleeve.talelin.com/m24.png",
+  "for_theme_img": "",
+  "description": null,
+  "discount_price": "69.00",
+  "tags": "",
+  "is_test": true,
+  "online": true,
+  "sku_list": [
+    {
+      "id": 16,
+      "price": 72.00,
+      "discount_price": 68.00,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/m25.png",
+      "title": "碳素墨水",
+      "spu_id": 10,
+      "category_id": 32,
+      "root_category_id": 24,
+      "specs": [],
+      "code": null,
+      "stock": 0
+    }
+  ],
+  "spu_img_list": [
+    {
+      "id": 161,
+      "img": "http://i2.sleeve.talelin.com/m24.png",
+      "spu_id": 10
+    },
+    {
+      "id": 191,
+      "img": "http://i2.sleeve.talelin.com/m25.png",
+      "spu_id": 10
+    }
+  ],
+  "spu_detail_img_list": [],
+  "sketch_spec_id": null,
+  "default_sku_id": null
+}

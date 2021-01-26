@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "fixed": true,
+    "text": "发货地：上海",
+    "spu_id": null,
+    "index": 1,
+    "replace_id": null
+  },
+  {
+    "id": 2,
+    "fixed": true,
+    "text": "物流：顺丰",
+    "spu_id": null,
+    "index": 2,
+    "replace_id": null
+  },
+  {
+    "id": 3,
+    "fixed": true,
+    "text": "发货时间：七个工作日",
+    "spu_id": null,
+    "index": 3,
+    "replace_id": null
+  },
+  {
+    "id": 4,
+    "fixed": true,
+    "text": "售后：不支持7天无理由退货",
+    "spu_id": null,
+    "index": 4,
+    "replace_id": null
+  }
+]

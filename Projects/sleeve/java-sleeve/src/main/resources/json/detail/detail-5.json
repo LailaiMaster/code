@@ -1,0 +1,95 @@
+{
+  "id": 14,
+  "title": "Ins 复古小夹子（Mini)",
+  "subtitle": "静静的，享受时光的流逝",
+  "category_id": 32,
+  "root_category_id": 24,
+  "price": "19.9",
+  "img": "http://i2.sleeve.talelin.com/m23.png",
+  "for_theme_img": null,
+  "description": null,
+  "discount_price": null,
+  "tags": "三色可选",
+  "is_test": true,
+  "online": true,
+  "sku_list": [
+    {
+      "id": 20,
+      "price": 19.90,
+      "discount_price": null,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/m22.png",
+      "title": "Decend Mini小夹子  （橙色）",
+      "spu_id": 14,
+      "category_id": 20,
+      "root_category_id": 4,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 27,
+          "value": "橙色"
+        }
+      ],
+      "code": "14$1-27",
+      "stock": 66
+    },
+    {
+      "id": 21,
+      "price": 19.90,
+      "discount_price": null,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/m22.png",
+      "title": "Decend Mini小夹子  （红色）",
+      "spu_id": 14,
+      "category_id": 20,
+      "root_category_id": 4,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 26,
+          "value": "红色"
+        }
+      ],
+      "code": "14$1-26",
+      "stock": 58
+    },
+    {
+      "id": 22,
+      "price": 19.90,
+      "discount_price": null,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/m23.png",
+      "title": "Decend Mini小夹子   （金色）",
+      "spu_id": 14,
+      "category_id": 20,
+      "root_category_id": 4,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 19,
+          "value": "金色"
+        }
+      ],
+      "code": "14$1-19",
+      "stock": 35
+    }
+  ],
+  "spu_img_list": [
+    {
+      "id": 19,
+      "img": "http://i2.sleeve.talelin.com/m23.png",
+      "spu_id": 14
+    },
+    {
+      "id": 20,
+      "img": "http://i2.sleeve.talelin.com/m22.png",
+      "spu_id": 14
+    }
+  ],
+  "spu_detail_img_list": [],
+  "sketch_spec_id": null,
+  "default_sku_id": null
+}

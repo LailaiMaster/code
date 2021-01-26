@@ -1,0 +1,118 @@
+{
+  "id": 23,
+  "title": "双色牛仔裤",
+  "subtitle": "秋冬新款，做一个Cool Boy",
+  "category_id": 15,
+  "root_category_id": 2,
+  "price": "1399",
+  "img": "http://i2.sleeve.talelin.com/n11.png",
+  "for_theme_img": "http://i1.sleeve.talelin.com/assets/702f2ce9-5729-4aa4-aeb3-921513327747.png",
+  "description": null,
+  "discount_price": null,
+  "tags": "",
+  "is_test": true,
+  "online": true,
+  "sku_list": [
+    {
+      "id": 30,
+      "price": 1399.00,
+      "discount_price": null,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/n12.png",
+      "title": "双色百褶裙（棕色）",
+      "spu_id": 23,
+      "category_id": 15,
+      "root_category_id": 2,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 24,
+          "value": "棕色"
+        },
+        {
+          "key_id": 4,
+          "key": "尺码",
+          "value_id": 14,
+          "value": "小号 S"
+        }
+      ],
+      "code": "23$1-24#4-14",
+      "stock": 0
+    },
+    {
+      "id": 31,
+      "price": 1399.00,
+      "discount_price": null,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/n14.png",
+      "title": "双色百褶裙（鹅暖青）",
+      "spu_id": 23,
+      "category_id": 15,
+      "root_category_id": 2,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 30,
+          "value": "鹅暖青"
+        },
+        {
+          "key_id": 4,
+          "key": "尺码",
+          "value_id": 15,
+          "value": "中号 M"
+        }
+      ],
+      "code": "23$1-30#4-15",
+      "stock": 0
+    },
+    {
+      "id": 32,
+      "price": 1399.00,
+      "discount_price": null,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/n13.png",
+      "title": "双色百褶裙（鹅暖青 小号）",
+      "spu_id": 23,
+      "category_id": 15,
+      "root_category_id": 2,
+      "specs": [
+        {
+          "key_id": 1,
+          "key": "颜色",
+          "value_id": 30,
+          "value": "鹅暖青"
+        },
+        {
+          "key_id": 4,
+          "key": "尺码",
+          "value_id": 14,
+          "value": "小号 S"
+        }
+      ],
+      "code": "23$1-30#4-14",
+      "stock": 0
+    }
+  ],
+  "spu_img_list": [
+    {
+      "id": 186,
+      "img": "http://i2.sleeve.talelin.com/n13.png",
+      "spu_id": 23
+    },
+    {
+      "id": 187,
+      "img": "http://i2.sleeve.talelin.com/n12.png",
+      "spu_id": 23
+    },
+    {
+      "id": 189,
+      "img": "http://i2.sleeve.talelin.com/n11.png",
+      "spu_id": 23
+    }
+  ],
+  "spu_detail_img_list": [],
+  "sketch_spec_id": 1,
+  "default_sku_id": null
+}

@@ -1,0 +1,41 @@
+{
+  "id": 12,
+  "title": "林间有风测试商品",
+  "subtitle": "测试商品，可购买体验完整支付和订单流程",
+  "category_id": 38,
+  "root_category_id": 37,
+  "price": "0.2",
+  "img": "http://i2.sleeve.talelin.com/x1.png",
+  "for_theme_img": "",
+  "description": null,
+  "discount_price": null,
+  "tags": "测试数据$可支付",
+  "is_test": false,
+  "online": true,
+  "sku_list": [
+    {
+      "id": 15,
+      "price": 0.20,
+      "discount_price": null,
+      "online": true,
+      "img": "http://i2.sleeve.talelin.com/x1.png",
+      "title": "林白的测试数据",
+      "spu_id": 12,
+      "category_id": 38,
+      "root_category_id": 37,
+      "specs": [],
+      "code": "12$",
+      "stock": 839
+    }
+  ],
+  "spu_img_list": [
+    {
+      "id": 124,
+      "img": "http://i2.sleeve.talelin.com/x1.png",
+      "spu_id": 12
+    }
+  ],
+  "spu_detail_img_list": [],
+  "sketch_spec_id": null,
+  "default_sku_id": null
+}
