@@ -40,10 +40,11 @@
                     |-值类型: p:属性名="值"
                     |-对象类型: p:属性名-ref="bean名称"
      -->
-    <bean name="user7" class="com.ztiany.springf.test.bean.domain.User" p:name="jack" p:age="20"
+    <bean name="user7" class="com.ztiany.springf.test.bean.domain.User"
+          p:name="jack"
+          p:age="20"
           p:car-ref="car">
     </bean>
-
 
     <!-- spel注入: spring Expression Language spring 表达式语言 -->
     <bean name="user8" class="com.ztiany.springf.test.bean.domain.User">

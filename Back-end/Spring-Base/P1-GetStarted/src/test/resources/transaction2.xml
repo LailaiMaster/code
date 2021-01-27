@@ -30,14 +30,12 @@
     </bean>
 
     <!-- 事务核心管理器，封装了所有事务操作. 依赖于连接池 -->
-    <bean name="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <!-- 事务模板对象 -->
-    <bean name="transactionTemplate"
-          class="org.springframework.transaction.support.TransactionTemplate">
+    <bean name="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
 
@@ -60,35 +58,23 @@
                         - read-only：是否只读
                         - save*：表示以save开头的方法都应用这个事务
              -->
-            <tx:method name="save*" isolation="REPEATABLE_READ" propagation="REQUIRED"
-                       read-only="false"/>
-            <tx:method name="persist*" isolation="REPEATABLE_READ" propagation="REQUIRED"
-                       read-only="false"/>
-            <tx:method name="update*" isolation="REPEATABLE_READ" propagation="REQUIRED"
-                       read-only="false"/>
-            <tx:method name="modify*" isolation="REPEATABLE_READ" propagation="REQUIRED"
-                       read-only="false"/>
-            <tx:method name="delete*" isolation="REPEATABLE_READ" propagation="REQUIRED"
-                       read-only="false"/>
-            <tx:method name="remove*" isolation="REPEATABLE_READ" propagation="REQUIRED"
-                       read-only="false"/>
-            <tx:method name="get*" isolation="REPEATABLE_READ" propagation="REQUIRED"
-                       read-only="true"/>
-            <tx:method name="find*" isolation="REPEATABLE_READ" propagation="REQUIRED"
-                       read-only="true"/>
+            <tx:method name="save*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="persist*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="update*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="modify*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="delete*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="remove*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="get*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="find*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true"/>
             <!--当前方法-->
-            <tx:method name="transfer" isolation="REPEATABLE_READ" propagation="REQUIRED"
-                       read-only="false"/>
+            <tx:method name="transfer" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
         </tx:attributes>
     </tx:advice>
 
     <!-- 配置织入事务通知 -->
     <aop:config>
-
         <!-- 配置切点表达式 -->
-        <aop:pointcut expression="execution(* com.ztiany.springf.test.transaction.AccountServiceImpl2.*(..))"
-                      id="txPc"/>
-
+        <aop:pointcut expression="execution(* com.ztiany.springf.test.transaction.AccountServiceImpl2.*(..))" id="txPc"/>
         <!-- 配置切面 : 通知+切点
                 - advice-ref：通知的名称
                 - pointcut-ref：切点的名称

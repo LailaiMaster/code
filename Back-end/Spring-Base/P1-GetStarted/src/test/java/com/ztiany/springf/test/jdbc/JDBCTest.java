@@ -25,7 +25,7 @@ public class JDBCTest {
         //准备连接池
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
         dataSource.setDriverClass("com.mysql.jdbc.Driver");
-        dataSource.setJdbcUrl("jdbc:mysql:///sqlbase");
+        dataSource.setJdbcUrl("jdbc:mysql:///spring4_learning?useSSL=false&serverTimezone=Asia/Shanghai");
         dataSource.setUser("root");
         dataSource.setPassword("201314");
 
@@ -34,7 +34,7 @@ public class JDBCTest {
         jdbcTemplate.setDataSource(dataSource);
 
         //2 书写sql,并执行
-        String sql = "INSERT INTO p1_get_started_user VALUES(NULL,'jordan') ";
+        String sql = "INSERT INTO p1_get_started_user VALUES(NULL,'zz') ";
         jdbcTemplate.update(sql);
     }
 

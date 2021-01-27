@@ -28,25 +28,25 @@ employee 与 department 形成一对多关系，employee 增加外键引用 depa
 ### 3.1 完成分页操作
 
 ```java
-    @RequestMapping("/emps")
-    public String list(@RequestParam(value = "pageNo", required = false, defaultValue = "1") String pageNoStr, Map<String, Object> map) {
-        /*这里用字符串接收 pageNumber，防止解析异常。*/
-        int pageNo = 1;
+@RequestMapping("/emps")
+public String list(@RequestParam(value = "pageNo", required = false, defaultValue = "1") String pageNoStr, Map<String, Object> map) {
+    /*这里用字符串接收 pageNumber，防止解析异常。*/
+    int pageNo = 1;
 
-        try {
-            //对 pageNo 的校验
-            pageNo = Integer.parseInt(pageNoStr);
-            if (pageNo < 1) {
-                pageNo = 1;
-            }
-        } catch (Exception ignore) {
+    try {
+        //对 pageNo 的校验
+        pageNo = Integer.parseInt(pageNoStr);
+        if (pageNo < 1) {
+            pageNo = 1;
         }
-
-        Page<Employee> page = employeeService.getPage(pageNo, 5);
-        map.put("page", page);
-
-        return "emp/list";
+    } catch (Exception ignore) {
     }
+
+    Page<Employee> page = employeeService.getPage(pageNo, 5);
+    map.put("page", page);
+
+    return "emp/list";
+}
 ```
 
 Dao 层：
@@ -72,23 +72,23 @@ Controller 层：
 操作步骤：点击超链接 addNewEmployee，执行 get 请求，没有任何参数，跳转到添加 employee 的界面。
 
 ```java
-    @RequestMapping(value = "/emp", method = RequestMethod.GET)
-    public String input(Map<String, Object> map) {
-        map.put("departments", departmentService.getAll());
-        map.put("employee", new Employee());
-        return "emp/input";
-    }
+@RequestMapping(value = "/emp", method = RequestMethod.GET)
+public String input(Map<String, Object> map) {
+    map.put("departments", departmentService.getAll());
+    map.put("employee", new Employee());
+    return "emp/input";
+}
 
-    @ResponseBody
-    @RequestMapping(value = "/ajaxValidateLastName", method = RequestMethod.POST)
-    public String validateLastName(@RequestParam(value = "lastName", required = true) String lastName) {
-        Employee employee = employeeService.getByLastName(lastName);
-        if (employee == null) {
-            return "0";
-        } else {
-            return "1";
-        }
+@ResponseBody
+@RequestMapping(value = "/ajaxValidateLastName", method = RequestMethod.POST)
+public String validateLastName(@RequestParam(value = "lastName", required = true) String lastName) {
+    Employee employee = employeeService.getByLastName(lastName);
+    if (employee == null) {
+        return "0";
+    } else {
+        return "1";
     }
+}
 ```
 
 **1 添加操作：显示添加页面 & 使用 JPA 二级缓存**：
@@ -122,30 +122,30 @@ Controller 层：
 ### 3.3 完成修改操作
 
 ```java
-    @ModelAttribute
-    public void getEmployee(@RequestParam(value = "id", required = false) Integer id, Map<String, Object> map) {
-        if (id != null) {
-            Employee employee = employeeService.get(id);
-            //这里如果不置空，则会导致崩溃，因为更新时，不允许修改 employee 关联的 Department（外键）id。
-            //Hibernate 持久化对象的 主键id 是不允许被修改的。
-            employee.setDepartment(null);
-            map.put("employee", employee);
-        }
-    }
-
-    @RequestMapping(value = "/emp/{id}", method = RequestMethod.PUT)
-    public String update(Employee employee) {
-        employeeService.save(employee);
-        return "redirect:/emps";
-    }
-
-    @RequestMapping(value = "/emp/{id}", method = RequestMethod.GET)
-    public String input(@PathVariable("id") Integer id, Map<String, Object> map) {
+@ModelAttribute
+public void getEmployee(@RequestParam(value = "id", required = false) Integer id, Map<String, Object> map) {
+    if (id != null) {
         Employee employee = employeeService.get(id);
+        //这里如果不置空，则会导致崩溃，因为更新时，不允许修改 employee 关联的 Department（外键）id。
+        //Hibernate 持久化对象的 主键id 是不允许被修改的。
+        employee.setDepartment(null);
         map.put("employee", employee);
-        map.put("departments", departmentService.getAll());
-        return "emp/input";
     }
+}
+
+@RequestMapping(value = "/emp/{id}", method = RequestMethod.PUT)
+public String update(Employee employee) {
+    employeeService.save(employee);
+    return "redirect:/emps";
+}
+
+@RequestMapping(value = "/emp/{id}", method = RequestMethod.GET)
+public String input(@PathVariable("id") Integer id, Map<String, Object> map) {
+    Employee employee = employeeService.get(id);
+    map.put("employee", employee);
+    map.put("departments", departmentService.getAll());
+    return "emp/input";
+}
 ```
 
 **1 操作界面表单回显（显示旧数据供用户进行修改）**：
@@ -185,11 +185,11 @@ Controller 层：
 ### 3.4 完成删除操作
 
 ```java
-    @RequestMapping(value = "/emp/{id}", method = RequestMethod.DELETE)
-    public String delete(@PathVariable("id") Integer id) {
-        employeeService.delete(id);
-        return "redirect:/emps";
-    }
+@RequestMapping(value = "/emp/{id}", method = RequestMethod.DELETE)
+public String delete(@PathVariable("id") Integer id) {
+    employeeService.delete(id);
+    return "redirect:/emps";
+}
 ```
 
 1. URL：`emp/{id}、method：DELETE`

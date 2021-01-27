@@ -19,4 +19,5 @@ public class AccountServiceImpl2 implements AccountService {
     public void setAccountDao(AccountDao accountDao) {
         mAccountDao = accountDao;
     }
+
 }

@@ -15,16 +15,17 @@
 
 
     <!-- 准备工作: 导入aop(约束)命名空间 -->
+
     <!-- 1.配置目标对象 -->
     <bean name="service" class="com.ztiany.springf.test.aop.AOPServiceImpl"/>
+
     <!-- 2.配置通知对象 -->
     <bean name="advice" class="com.ztiany.springf.test.aop.Advice"/>
+
     <!-- 3.配置将通知织入目标对象 -->
     <aop:config>
-
         <!-- 切入点-->
-        <aop:pointcut id="pc"
-                      expression="execution(* com.ztiany.springf.test.aop.AOPServiceImpl.*(..))"/>
+        <aop:pointcut id="pc" expression="execution(* com.ztiany.springf.test.aop.AOPServiceImpl.*(..))"/>
 
         <aop:aspect ref="advice">
 

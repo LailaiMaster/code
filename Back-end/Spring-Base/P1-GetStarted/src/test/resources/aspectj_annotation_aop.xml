@@ -16,8 +16,10 @@
     <!-- 准备工作: 导入aop(约束)命名空间 -->
     <!-- 1.配置目标对象 -->
     <bean name="service" class="com.ztiany.springf.test.aop.AOPServiceImpl"/>
+
     <!-- 2.配置通知对象 -->
     <bean name="advice" class="com.ztiany.springf.test.aop.AnnotationAdvice"/>
+
     <!-- 3.开启使用注解完成织入 -->
     <aop:aspectj-autoproxy/>
 
