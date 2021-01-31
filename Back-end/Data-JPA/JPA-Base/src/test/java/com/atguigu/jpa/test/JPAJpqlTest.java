@@ -42,7 +42,7 @@ public class JPAJpqlTest {
         entityManagerFactory.close();
     }
 
-    //可以使用 JPQL 完成 UPDATE 和 DELETE 操作.
+    //可以使用 JPQL 完成 UPDATE 和 DELETE 操作。
     @Test
     public void testExecuteUpdate() {
         String jpql = "UPDATE CUSTOMER_TWO_WAY_MANY_TO_ONE c SET c.lastName = ?1 WHERE c.id = ?2";
@@ -71,7 +71,7 @@ public class JPAJpqlTest {
     }
 
     /*
-     * JPQL 的关联查询同 HQL 的关联查询.
+     * JPQL 的关联查询同 HQL 的关联查询。
      */
     @Test
     public void testLeftOuterJoinFetch() {
@@ -80,12 +80,10 @@ public class JPAJpqlTest {
         //List resultList = entityManager.createQuery(jpql1).setParameter(1, 51).getResultList();
         //System.out.println(resultList);
         //[[Ljava.lang.Object;@66f0548d, [Ljava.lang.Object;@2e6f610d]
-
         String jpql2 = "FROM CUSTOMER_TWO_WAY_MANY_TO_ONE c LEFT OUTER JOIN FETCH c.orders WHERE c.id = ?1";
         List<Object[]> result = entityManager.createQuery(jpql2).setParameter(1, 51).getResultList();
         System.out.println(result);
     }
-
 
     //查询 order 数量大于 2 的那些 Customer
     @Test
@@ -114,20 +112,18 @@ public class JPAJpqlTest {
         System.out.println(customers.size());
     }
 
-    //使用 hibernate 的查询缓存，前提是配置文件启用了缓存。
+    //使用 hibernate 的查询缓存，前提是配置文件启用了缓存。【注意区分查询缓存与二级缓存】
     @Test
     public void testQueryCache() {
         String jpql = "FROM CUSTOMER_TWO_WAY_MANY_TO_ONE c WHERE c.age > ?1";
-        Query query = entityManager.createQuery(jpql)
-                .setHint(QueryHints.HINT_CACHEABLE, true);//使用缓存
+        Query query = entityManager.createQuery(jpql).setHint(QueryHints.HINT_CACHEABLE, true);//使用缓存
 
         //占位符的索引是从 1 开始
         query.setParameter(1, 16);
         List<Customer> customers = query.getResultList();
         System.out.println(customers.size());
 
-        query = entityManager.createQuery(jpql)
-                .setHint(QueryHints.HINT_CACHEABLE, true);//使用缓存
+        query = entityManager.createQuery(jpql).setHint(QueryHints.HINT_CACHEABLE, true);//使用缓存
 
         //占位符的索引是从 1 开始
         query.setParameter(1, 16);

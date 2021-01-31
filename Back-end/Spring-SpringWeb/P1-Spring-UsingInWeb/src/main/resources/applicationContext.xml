@@ -4,8 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="person" class="com.atguigu.spring.struts2.beans.Person">
-        <property name="username" value="Spring Using Web Way"/>
-    </bean>
+    <bean id="aController" class="com.atguigu.spring.mock.controller.AController"/>
+
+    <bean id="bController" class="com.atguigu.spring.mock.controller.BController"/>
 
 </beans>

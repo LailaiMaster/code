@@ -20,14 +20,15 @@
     </bean>
 
     <!--
-        default-servlet-handler 将在 SpringMVC 上下文中定义一个 DefaultServletHttpRequestHandler,
-        它会对进入 DispatcherServlet 的请求进行筛查, 如果发现是没有经过映射的请求, 就将该请求交由 WEB 应用服务器默认的
-        Servlet 处理. 如果不是静态资源的请求，才由 DispatcherServlet 继续处理
+    default-servlet-handler 将在 SpringMVC 上下文中定义一个 DefaultServletHttpRequestHandler，它会对进入 DispatcherServlet 的请求进行筛查。
+    如果发现是没有经过映射的请求, 就将该请求交由 WEB 应用服务器默认的 Servlet 处理，如果不是静态资源的请求，才由 DispatcherServlet 继续处理。
 
-        一般 WEB 应用服务器默认的 Servlet 的名称都是 default，若所使用的 WEB 服务器的默认 Servlet 名称不是 default，则需要通过 default-servlet-name 属性显式指定
+    一般 WEB 应用服务器默认的 Servlet 的名称都是 default，若所使用的 WEB 服务器的默认 Servlet 名称不是 default，则需要通过 default-servlet-name 属性显式指定。
     -->
     <mvc:default-servlet-handler/>
-    <!--    使用下面的conversionService  -->
+
+    <!-- 使用下面的conversionService -->
+    <!-- 会将自定义的ConversionService注册到Spring MVC 的上下文中 -->
     <mvc:annotation-driven conversion-service="conversionService"/>
 
     <!-- 配置 ConversionService ，用于进行数据类型转换和格式化-->
@@ -35,8 +36,7 @@
       org.springframework.context.support.ConversionServiceFactoryBean 用于进行数据类型转换
       org.springframework.format.support.FormattingConversionServiceFactoryBean 用于进行数据类型转换和格式化
       -->
-    <bean id="conversionService"
-          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
                 <!-- 对应：com.atguigu.springmvc.converters.EmployeeConverter -->
@@ -46,8 +46,7 @@
     </bean>
 
     <!-- 配置国际化资源文件 -->
-    <bean id="messageSource"
-          class="org.springframework.context.support.ResourceBundleMessageSource">
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <!--
             i18n对应properties文件名
                 i18n.properties 默认资源
@@ -85,8 +84,7 @@
     </mvc:interceptors>
 
     <!-- 配置 MultipartResolver，文件上传-->
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="UTF-8"/>
         <property name="maxUploadSize" value="1024000"/>
     </bean>

@@ -13,7 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-
 @Table(name = "JPA_CUSTOMERS_BASE")
 @Entity(name = "CUSTOMER_BASE")
 public class Customer {

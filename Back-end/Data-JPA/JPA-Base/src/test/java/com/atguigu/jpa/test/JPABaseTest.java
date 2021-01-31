@@ -21,6 +21,7 @@ public class JPABaseTest {
 
     @Before
     public void init() {
+        //Persistence.createEntityManagerFactory("jpa-base"); 默认就会加载 resource/META_IN/persistence.xml 配置文件
         entityManagerFactory = Persistence.createEntityManagerFactory("jpa-base");
         entityManager = entityManagerFactory.createEntityManager();
         transaction = entityManager.getTransaction();
@@ -34,8 +35,12 @@ public class JPABaseTest {
         entityManagerFactory.close();
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // refresh and flush
+    ///////////////////////////////////////////////////////////////////////////
+
     /*
-     * 同 hibernate 中 Session 的 refresh 方法.
+     * 同 hibernate 中 Session 的 refresh 方法。
      */
     @Test
     public void testRefresh() {
@@ -55,12 +60,16 @@ public class JPABaseTest {
         entityManager.flush();
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // merge
+    ///////////////////////////////////////////////////////////////////////////
+
     /*
-    merge总的来说:类似于 hibernate Session 的 saveOrUpdate 方法。
+    merge 总的来说：类似于 hibernate Session 的 saveOrUpdate 方法。
         若传入的是一个游离对象， 即传入的对象有 OID：
             1. 若在 EntityManager 缓存中有对应的对象
             2. JPA 会把游离对象的属性复制到查询到 EntityManager 缓存中的对象中
-            3. EntityManager 缓存中的对象执行 UPDATE.
+            3. EntityManager 缓存中的对象执行 UPDATE。
  */
     @Test
     public void testMerge4() {
@@ -81,11 +90,11 @@ public class JPABaseTest {
     }
 
     /*
-        merge总的来说:类似于 hibernate Session 的 saveOrUpdate 方法。
+        merge 总的来说:类似于 hibernate Session 的 saveOrUpdate 方法。
             若传入的是一个游离对象，即传入的对象有 OID：
                 1. 若在 EntityManager 缓存中没有该对象，但在数据库中有对应的记录
                 2. JPA 会查询对应的记录，然后返回该记录对应的对象，再然后会把游离对象的属性复制到查询到的对象中
-                3. 对查询到的对象执行 update 操作.
+                3. 对查询到的对象执行 update 操作。
      */
     @Test
     public void testMerge3() {
@@ -102,11 +111,11 @@ public class JPABaseTest {
     }
 
     /*
-    merge总的来说:类似于 hibernate Session 的 saveOrUpdate 方法。
+    merge 总的来说：类似于 hibernate Session 的 saveOrUpdate 方法。
         若传入的是一个游离对象，即传入的对象有 OID：
             1. 若在 EntityManager 缓存中没有该对象，若在数据库中也没有对应的记录
             2. JPA 会创建一个新的对象， 然后把当前游离对象的属性复制到新创建的对象中
-            3. 对新创建的对象执行 insert 操作.
+            3. 对新创建的对象执行 insert 操作。
      */
     @Test
     public void testMerge2() {
@@ -124,9 +133,8 @@ public class JPABaseTest {
     }
 
     /*
-     merge总的来说:类似于 hibernate Session 的 saveOrUpdate 方法。
-            若传入的是一个临时对象：
-                会创建一个新的对象, 把临时对象的属性复制到新的对象中, 然后对新的对象执行持久化操作，所以新的对象中有 id，但以前的临时对象中没有 id.
+     merge总的来说：类似于 hibernate Session 的 saveOrUpdate 方法。
+            若传入的是一个临时对象：会创建一个新的对象，把临时对象的属性复制到新的对象中，然后对新的对象执行持久化操作，所以新的对象中有 id，但以前的临时对象中没有 id。
     */
     @Test
     public void testMerge1() {
@@ -144,8 +152,12 @@ public class JPABaseTest {
         System.out.println("customer2#id:" + customer2.getId());//插入成功
     }
 
-    //类似于 hibernate 中 Session 的 delete 方法. 把对象对应的记录从数据库中移除
-    //但注意:：该方法只能移除持久化对象. 而 hibernate 的 delete 方法实际上还可以移除游离对象.
+    ///////////////////////////////////////////////////////////////////////////
+    // remove
+    ///////////////////////////////////////////////////////////////////////////
+
+    //类似于 hibernate 中 Session 的 delete 方法：把对象对应的记录从数据库中移除
+    //但注意：该方法只能移除持久化对象，而 hibernate 的 delete 方法实际上还可以移除游离对象。
     @Test
     public void testRemove() {
         //无法删除游离对象
@@ -158,8 +170,12 @@ public class JPABaseTest {
         entityManager.remove(customer);
     }
 
-    //类似于 hibernate 的 save 方法. 使对象由临时状态变为持久化状态.
-    //和 hibernate 的 save 方法的不同之处: 若对象有 id, 则不能执行 insert 操作, 而会抛出异常.
+    ///////////////////////////////////////////////////////////////////////////
+    // save
+    ///////////////////////////////////////////////////////////////////////////
+
+    //类似于 hibernate 的 save 方法，使对象由临时状态变为持久化状态。
+    //和 hibernate 的 save 方法的不同之处：若对象有 id，则不能执行 insert 操作，而会抛出异常。
     @Test
     public void testPersistence() {
         Customer customer = new Customer();
@@ -173,7 +189,11 @@ public class JPABaseTest {
         System.out.println(customer.getId());
     }
 
-    //类似于 hibernate 中 Session 的 load 方法
+    ///////////////////////////////////////////////////////////////////////////
+    // find
+    ///////////////////////////////////////////////////////////////////////////
+
+    //类似于 hibernate 中 Session 的 load 方法。
     @Test
     public void testGetReference() {
         //返回的其实是一个代理
@@ -187,7 +207,7 @@ public class JPABaseTest {
         System.out.println(customer);
     }
 
-    //类似于 hibernate 中 Session 的 get 方法.
+    //类似于 hibernate 中 Session 的 get 方法。
     @Test
     public void testFind() {
         Customer customer = entityManager.find(Customer.class, 1);

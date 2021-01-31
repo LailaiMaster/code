@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<a href="TestServlet">TestServlet</a>
+<a href="CoreServlet">CoreServlet</a>
 </body>
 
 </html>

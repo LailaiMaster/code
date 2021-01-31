@@ -1,10 +1,12 @@
-package com.atguigu.spring.struts2.servlets;
+package com.atguigu.spring.mock.servlets;
 
-import com.atguigu.spring.struts2.beans.Person;
+import com.atguigu.spring.mock.controller.Controller;
 
 import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,7 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class TestServlet
  */
-public class TestServlet extends HttpServlet {
+public class CoreServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -26,8 +29,22 @@ public class TestServlet extends HttpServlet {
         ServletContext servletContext = getServletContext();
         ApplicationContext ctx = (ApplicationContext) servletContext.getAttribute("ApplicationContext");
         //2. 从 IOC 容器中得到需要的 bean
-        Person person = ctx.getBean(Person.class);
-        person.hello();
+        Map<String, Controller> beansOfType = ctx.getBeansOfType(Controller.class);
+        String uri = request.getRequestURI().replace(request.getContextPath(),"");
+        Controller target = null;
+        for (Controller controller : beansOfType.values()) {
+            if (uri.equals(controller.url())) {
+                target = controller;
+                break;
+            }
+        }
+        //3. 调用组件，处理请求
+        if (target != null) {
+            target.handleRequest(request, response);
+        }else {
+            PrintWriter writer = response.getWriter();
+            writer.write("not found");
+        }
     }
 
 }

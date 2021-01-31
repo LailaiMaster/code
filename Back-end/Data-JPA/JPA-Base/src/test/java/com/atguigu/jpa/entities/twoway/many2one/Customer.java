@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @NamedQuery(name = "testNamedQuery", query = "From CUSTOMER_TWO_WAY_MANY_TO_ONE c where c.id = ?1")
-@Cacheable(value = true)
+@Cacheable()
 @Table(name = "JPA_CUSTOMERS_TWO_WAY_MANY_TO_ONE")
 @Entity(name = "CUSTOMER_TWO_WAY_MANY_TO_ONE")
 public class Customer {

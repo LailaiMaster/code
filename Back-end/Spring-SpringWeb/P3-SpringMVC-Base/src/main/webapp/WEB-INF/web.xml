@@ -6,7 +6,7 @@
 
     <!--
     浏览器form 表单只支持GET 与 POST 请求，而DELETE、PUT 等method 并不支持，Spring3.0 添加了一个过滤器，可以将这些请求转换为标准的http 方法，
-    使得支持GET、POST、PUT 与DELETE 请求。
+    使得支持GET、POST、PUT 与 DELETE 请求。
 
     配置 org.springframework.web.filter.HiddenHttpMethodFilter: 可以把 POST 请求转为 DELETE 或 POST 请求
     -->

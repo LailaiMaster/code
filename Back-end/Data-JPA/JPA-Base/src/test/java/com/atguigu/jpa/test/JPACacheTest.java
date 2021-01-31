@@ -40,10 +40,10 @@ public class JPACacheTest {
     @Test
     public void testSecondLevelCache(){
         //只会执行一条语句，因为配置了二级缓存，如果没有配置二级缓存，将触发两次查询。
+        //二级缓存的作用在于跨事务查询。
         Customer customer1 = entityManager.find(Customer.class, 16);
         transaction.commit();
         entityManager.close();
-
         entityManager = entityManagerFactory.createEntityManager();
         transaction = entityManager.getTransaction();
         transaction.begin();

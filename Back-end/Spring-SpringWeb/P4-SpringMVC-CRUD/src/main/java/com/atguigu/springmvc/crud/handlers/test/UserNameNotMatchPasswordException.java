@@ -1,4 +1,4 @@
-package com.atguigu.springmvc.test;
+package com.atguigu.springmvc.crud.handlers.test;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

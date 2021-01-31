@@ -10,28 +10,35 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-    <!--
-    问题：
-        1. 需要进行 Spring 整合 SpringMVC 吗 ? 是否需要再加入 Spring 的 IOC 容器 ?
-        2. 是否需要在 web.xml 文件中配置启动 Spring IOC 容器的 ContextLoaderListener ?
+ <!--
 
-    解析：
+问题：
 
-        1. 需要：通常情况下，类似于数据源，事务，整合其他框架都是放在 Spring 的配置文件中(而不是放在 SpringMVC 的配置文件中)。
-            实际上放入 Spring 配置文件对应的 IOC 容器中的还有 Service 和 Dao.
+1. 需要进行 Spring 整合 SpringMVC 吗 ? 是否需要再加入 Spring 的 IOC 容器 ?
+2. 是否需要在 web.xml 文件中配置启动 Spring IOC 容器的 ContextLoaderListener ?
 
-        2. 不需要: 都放在 SpringMVC 的配置文件中，也可以分多个 Spring 的配置文件,。然后使用 import 节点导入其他的配置文件
-    -->
+解析：
 
-    <!--
-        问题: 若 Spring 的 IOC 容器和 SpringMVC 的 IOC 容器扫描的包有重合的部分, 就会导致有的 bean 会被创建 2 次.
+1. 需要：通常情况下，类似于数据源、事务以及整合其他框架都是放在 Spring 的配置文件中(而不是放在 SpringMVC 的配置文件中)。实际上放入 Spring 配置文件对应的 IOC 容器中的还有 Service 和 Dao。
+2. 不需要: 都放在 SpringMVC 的配置文件中，也可以分多个 Spring 的配置文件，然后使用 import 节点导入其他的配置文件。
 
-        解决:
-            1. 使 Spring 的 IOC 容器扫描的包和 SpringMVC 的 IOC 容器扫描的包没有重合的部分。（不容易做到，开放式一般根据模块划分，同一个包下有 Handler、Service、Dao 等）
-            2. 使用 exclude-filter 和 include-filter 子节点来规定只能扫描的注解。
+问题:
 
-        注意： SpringMVC 的 IOC 容器中的 bean 可以来引用 Spring IOC 容器中的 bean，反之则不行. Spring IOC 容器中的 bean 却不能来引用 SpringMVC IOC 容器中的 bean!
-    -->
+1. 若 Spring 的 IOC 容器和 SpringMVC 的 IOC 容器扫描的包有重合的部分，就会导致有的 bean 会被创建 2 次.
+
+解析：Spring 的 IOC 容器不应该扫描 SpringMVC 中的 bean，对应的 SpringMVC 的 IOC 容器不应该扫描 Spring 中的 bean。
+
+1. 方案1：使 Spring 的 IOC 容器扫描的包和 SpringMVC 的 IOC 容器扫描的包没有重合的部分。（不容易做到，开放式一般根据模块划分，同一个包下有 Handler、Service、Dao 等）
+2. 方案2：使用 exclude-filter 和 include-filter 子节点来规定只能扫描的注解。
+
+在 Spring MVC 配置文件中引用业务层的 Bean：
+
+1. 多个 Spring IOC 容器之间可以设置为父子关系，以实现良好的解耦。
+2. Spring MVC WEB 层容器可作为“业务层” Spring 容器的子容器，即 WEB 层容器可以引用业务层容器的 Bean，而业务层容器却访问不到 WEB 层容器的 Bean。
+
+即 SpringMVC 的 IOC 容器中的 bean 可以来引用 Spring IOC 容器中的 bean；反之则不行。Spring IOC 容器中的 bean 却不能来引用 SpringMVC IOC 容器中的 bean。
+
+ -->
 
     <context:component-scan base-package="com.atguigu.springmvc" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>

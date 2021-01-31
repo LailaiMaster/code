@@ -16,12 +16,17 @@
 <a href="springmvc/testViewAndViewResolver">Test ViewAndViewResolver</a>
 <br><br>
 
-<!--
-    模拟修改操作
-    1. 原始数据为: 1, Tom, 123456,tom@atguigu.com,12
-    2. 密码不能被修改.
-    3. 表单回显, 模拟操作直接在表单填写对应的属性值
--->
+<a href="springmvc/testModelAttributeUsingMap">Test ModelAttribute UsingMap</a>
+<br><br>
+
+<p>
+    testModelAttribute：模拟修改操作。
+</p>
+<ol>
+    <li> 原始数据为: 1, Tom, 123456,tom@atguigu.com,12</li>
+    <li> 密码不能被修改 </li>
+    <li> 表单回显, 模拟操作直接在表单填写对应的属性值 </li>
+</ol>
 <form action="springmvc/testModelAttribute" method="Post">
     <input type="hidden" name="id" value="1"/>
     username: <input type="text" name="username" value="Tom"/>
@@ -35,6 +40,9 @@
 <br><br>
 
 <a href="springmvc/testSessionAttributes">Test SessionAttributes</a>
+<br><br>
+
+<a href="springmvc/testMapWithParams?a=3&b=4">Test Map With Params</a>
 <br><br>
 
 <a href="springmvc/testMap">Test Map</a>
@@ -73,12 +81,14 @@
 <br><br>
 
 <form action="springmvc/testRest/1" method="post">
+    <!--使用约定的隐藏域来指定方法-->
     <input type="hidden" name="_method" value="PUT"/>
     <input type="submit" value="TestRest PUT"/>
 </form>
 <br><br>
 
 <form action="springmvc/testRest/1" method="post">
+    <!--使用约定的隐藏域来指定方法-->
     <input type="hidden" name="_method" value="DELETE"/>
     <input type="submit" value="TestRest DELETE"/>
 </form>

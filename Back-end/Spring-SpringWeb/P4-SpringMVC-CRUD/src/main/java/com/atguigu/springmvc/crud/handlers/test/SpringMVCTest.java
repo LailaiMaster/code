@@ -1,4 +1,4 @@
-package com.atguigu.springmvc.test;
+package com.atguigu.springmvc.crud.handlers.test;
 
 import com.atguigu.springmvc.crud.dao.EmployeeDao;
 import com.atguigu.springmvc.crud.entities.Employee;
@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,6 +37,10 @@ public class SpringMVCTest {
     @Autowired
     private ResourceBundleMessageSource messageSource;
 
+    ///////////////////////////////////////////////////////////////////////////
+    // 异常处理
+    ///////////////////////////////////////////////////////////////////////////
+
     @RequestMapping("/testSimpleMappingExceptionResolver")
     public String testSimpleMappingExceptionResolver(@RequestParam("i") int i) {
         String[] vals = new String[10];
@@ -51,19 +57,22 @@ public class SpringMVCTest {
         return "success";
     }
 
-    /*被ResponseStatus标注，定义返回的响应码和说明。*/
-    @ResponseStatus(reason = "测试", value = HttpStatus.NOT_FOUND)
-    @RequestMapping("/testResponseStatusExceptionResolver")
-    public String testResponseStatusExceptionResolver(@RequestParam("i") int i) {
-        System.out.println("calling testResponseStatusExceptionResolver...");
-
+    @RequestMapping("/testResponseStatusExceptionResolver1")
+    public String testResponseStatusExceptionResolver1(@RequestParam("i") int i) {
+        System.out.println("calling testResponseStatusExceptionResolver1...");
         if (i == 13) {
             throw new UserNameNotMatchPasswordException();
         }
-
         return "success";
     }
 
+    /*被ResponseStatus标注，定义返回的响应码和说明。*/
+    @ResponseStatus(reason = "测试", value = HttpStatus.NOT_FOUND)
+    @RequestMapping("/testResponseStatusExceptionResolver2")
+    public String testResponseStatusExceptionResolver2() {
+        System.out.println("calling testResponseStatusExceptionResolver2...");
+        return "success";
+    }
 
     /*
      * 1. 在 @ExceptionHandler 方法的入参中可以加入 Exception 类型的参数， 该参数即对应发生的异常对象。
@@ -71,29 +80,34 @@ public class SpringMVCTest {
      * 3. @ExceptionHandler 方法标记的异常有优先级的问题，找匹配度高的。
      * 4. @ControllerAdvice: 如果在当前 Handler 中找不到 @ExceptionHandler 方法来出来当前方法出现的异常，则将去 @ControllerAdvice 标记的类中查找 @ExceptionHandler 标记的方法来处理异常。
      */
+
     /*注销下面两个方法，则找 ControllerAdvice 的异常处理器。*/
 
-    /*@ExceptionHandler({ArithmeticException.class})
-    public ModelAndView handleArithmeticException(Exception ex){
+    @ExceptionHandler({ArithmeticException.class})
+    public ModelAndView handleArithmeticException(Exception ex) {
         System.out.println("出异常了: " + ex);
         ModelAndView mv = new ModelAndView("error");
         mv.addObject("exception", ex);
         return mv;
-    }*/
+    }
 
-    /*@ExceptionHandler({RuntimeException.class})
-        public ModelAndView handleArithmeticException2(Exception ex){
-            System.out.println("[出异常了]: " + ex);
-            ModelAndView mv = new ModelAndView("error");
-            mv.addObject("exception", ex);
-            return mv;
-       }*/
+    @ExceptionHandler({RuntimeException.class})
+    public ModelAndView handleArithmeticException2(Exception ex) {
+        System.out.println("[出异常了]: " + ex);
+        ModelAndView mv = new ModelAndView("error");
+        mv.addObject("exception", ex);
+        return mv;
+    }
 
     @RequestMapping("/testExceptionHandlerExceptionResolver")
     public String testExceptionHandlerExceptionResolver(@RequestParam("i") int i) {
         System.out.println("result: " + (10 / i));
         return "success";
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // 文件上传
+    ///////////////////////////////////////////////////////////////////////////
 
     @RequestMapping("/testFileUpload")
     public String testFileUpload(@RequestParam("desc") String desc, @RequestParam("file") MultipartFile file) throws IOException {
@@ -103,13 +117,21 @@ public class SpringMVCTest {
         return "success";
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // 国际化
+    ///////////////////////////////////////////////////////////////////////////
+
     @RequestMapping("/i18n")
     public String testI18n(Locale locale) {
-        //获取国家化资源
+        //获取国际化资源
         String val = messageSource.getMessage("i18n.user", null, locale);
         System.out.println(val);
         return "i18n";
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // HttpMessageConverter
+    ///////////////////////////////////////////////////////////////////////////
 
     /*测试文件下载*/
     @RequestMapping("/testResponseEntity")
@@ -125,7 +147,7 @@ public class SpringMVCTest {
         headers.add("Content-Disposition", "attachment;filename=abc.txt");
         HttpStatus statusCode = HttpStatus.OK;
 
-        return new ResponseEntity<byte[]>(body, headers, statusCode);
+        return new ResponseEntity<>(body, headers, statusCode);
     }
 
     /*测试将流转变为 String*/
@@ -141,6 +163,10 @@ public class SpringMVCTest {
     public Collection<Employee> testJson() {
         return employeeDao.getAll();
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Conversion Service
+    ///////////////////////////////////////////////////////////////////////////
 
     @RequestMapping("/testConversionServiceConverter")
     public String testConverter(@RequestParam("employee") Employee employee) {

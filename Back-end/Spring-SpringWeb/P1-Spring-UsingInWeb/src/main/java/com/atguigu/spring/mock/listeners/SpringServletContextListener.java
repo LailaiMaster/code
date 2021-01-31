@@ -1,4 +1,4 @@
-package com.atguigu.spring.struts2.listeners;
+package com.atguigu.spring.mock.listeners;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -10,19 +10,19 @@
     </context-param>
 
     <listener>
-        <listener-class>com.atguigu.spring.struts2.listeners.SpringServletContextListener
-        </listener-class>
+        <listener-class>com.atguigu.spring.mock.listeners.SpringServletContextListener</listener-class>
     </listener>
 
     <servlet>
-        <display-name>TestServlet</display-name>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>com.atguigu.spring.struts2.servlets.TestServlet</servlet-class>
+        <display-name>CoreServlet</display-name>
+        <servlet-name>CoreServlet</servlet-name>
+        <servlet-class>com.atguigu.spring.mock.servlets.CoreServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/TestServlet</url-pattern>
+        <servlet-name>CoreServlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
 </web-app>
