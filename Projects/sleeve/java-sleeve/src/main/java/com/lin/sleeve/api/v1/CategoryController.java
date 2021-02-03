@@ -43,7 +43,7 @@ public class CategoryController {
     public   List<GridCategory> getAllGrid() {
         List<GridCategory> gridCategoryList = gridCategoryService.getAll();
         if (gridCategoryList.isEmpty()) {
-            throw new NotFoundException(ExceptionCodes.GRID_NOT_FOUND);
+            throw new NotFoundException(ExceptionCodes.C_30009);
         }
         return gridCategoryList;
     }

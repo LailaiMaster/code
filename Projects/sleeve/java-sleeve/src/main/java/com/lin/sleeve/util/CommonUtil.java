@@ -2,6 +2,8 @@ package com.lin.sleeve.util;
 
 import com.lin.sleeve.bo.PagerCounter;
 
+import java.util.Date;
+
 /**
  * @author Ztiany
  * Email ztiany3@gmail.com
@@ -15,6 +17,13 @@ public class CommonUtil {
         pagerCounter.setCount(count);
         pagerCounter.setPage(pageNum);
         return pagerCounter;
+    }
+
+    public static boolean isInTimeLine(Date date, Date start, Date end) {
+        long dateTime = date.getTime();
+        long startTime = start.getTime();
+        long endTime = end.getTime();
+        return dateTime >= startTime && dateTime < endTime;
     }
 
 }

@@ -23,7 +23,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Where(clause = "delete_time is null and online = 1")//对所有查询都加上一个条件，应用场景：逻辑删除的数据不应该被查询出来。
+//对所有查询都加上一个条件，应用场景：逻辑删除的数据不应该被查询出来。
+@Where(clause = "delete_time is null and online = 1")
 public class Spu extends BaseEntity {
 
     @Id

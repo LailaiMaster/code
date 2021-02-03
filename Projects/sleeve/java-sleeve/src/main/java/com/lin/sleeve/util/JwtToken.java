@@ -28,6 +28,9 @@ public class JwtToken {
     private static String JWT_KEY;
     private static Integer EXPIRED_TIME;
 
+    public static final String UID_KEY = "uid";
+    public static final String SCOPE_KEY = "scope";
+
     /**
      * 用户的 scope，用于控制权限。
      */
@@ -77,8 +80,8 @@ public class JwtToken {
         Algorithm algorithm = Algorithm.HMAC256(JWT_KEY);
         Map<String, Date> stringDateMap = calculateExpiredIssues();
         return JWT.create()
-                .withClaim("uid", uid)
-                .withClaim("scope", scope)
+                .withClaim(UID_KEY, uid)
+                .withClaim(SCOPE_KEY, scope)
                 .withExpiresAt(stringDateMap.get("expiredTime"))
                 .withIssuedAt(stringDateMap.get("now"))
                 .sign(algorithm);

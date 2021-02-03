@@ -4,9 +4,12 @@
 
 ## 1 环境
 
-1. 预览：使用小程序原生开发工具。
-2. 开发：使用 WebStorm 。
-3. 小程序插件：<https://gitee.com/zxy_c/wechat-miniprogram-plugin>。
+IDE：
+
+- 注册小程序：尽量注册企业资质的小程序，因为个人资质的小程序无法申请支付功能。
+- 下载微信小程序 IDE，选择稳定版版。
+- 创建小程序项目，选择 Javascript 语言（TS 便于维护，JS 开发速度快）。
+- 使用 WebStorm 开发，使用原生开发工具预览。推荐安装小程序插件：<https://gitee.com/zxy_c/wechat-miniprogram-plugin>。
 
 小程序原生开发工具设置：
 
@@ -17,7 +20,7 @@
 项目文件说明：
 
 - components：存放所有的小程序组件。
-    - category-grid：首页商品宫格组件。
+  - category-grid：首页商品宫格组件。
 - config：项目整体配置。
 - miniprogram_npm：编译之后的第三方组件。
 - model：数据模型层，用于从网络获取数据。

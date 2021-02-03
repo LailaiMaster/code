@@ -1,6 +1,5 @@
 package com.lin.sleeve.api.v1;
 
-import com.lin.sleeve.core.interceptors.ScopeLevel;
 import com.lin.sleeve.dto.PersonDTO;
 import com.lin.sleeve.exception.ExceptionCodes;
 import com.lin.sleeve.exception.http.NotFoundException;
@@ -37,11 +36,10 @@ public class BannerController {
     private BannerService bannerService;
 
     @GetMapping("/name/{name}")
-    @ScopeLevel()
     public Banner getByName(@PathVariable @NotBlank String name) {
         Banner banner = bannerService.getByName(name);
         if (banner == null) {
-            throw new NotFoundException(ExceptionCodes.BANNER_NOT_FOUND);
+            throw new NotFoundException(ExceptionCodes.C_30005);
         }
         return banner;
     }

@@ -2,6 +2,8 @@ package com.lin.sleeve.model;
 
 import com.lin.sleeve.util.SpecListAndJson;
 
+import org.hibernate.annotations.Where;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -22,6 +24,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+//对所有查询都加上一个条件，应用场景：逻辑删除的数据不应该被查询出来。
+@Where(clause = "delete_time is null")
 public class Sku extends BaseEntity {
 
     @Id

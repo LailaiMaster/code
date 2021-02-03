@@ -20,8 +20,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 
-import static com.lin.sleeve.exception.ExceptionCodes.ARGUMENTS_ERROR;
-import static com.lin.sleeve.exception.ExceptionCodes.SERVER_ERROR;
+import static com.lin.sleeve.exception.ExceptionCodes.C_10001;
+import static com.lin.sleeve.exception.ExceptionCodes.C_9999;
 
 /**
  * @author Ztiany
@@ -42,7 +42,7 @@ public class GlobalExceptionAdvice {
     public UnifyResponse handleException(HttpServletRequest request, Exception exception) {
         System.out.println("------------------------------------------------handleException------------------------------------------------>");
         exception.printStackTrace();
-        return new UnifyResponse(SERVER_ERROR, mExceptionCodeConfiguration.getMessage(SERVER_ERROR), request.getMethod() + " " + request.getRequestURI());
+        return new UnifyResponse(C_9999, mExceptionCodeConfiguration.getMessage(C_9999), request.getMethod() + " " + request.getRequestURI());
     }
 
     /**
@@ -72,7 +72,7 @@ public class GlobalExceptionAdvice {
     public UnifyResponse handleArgumentsException(HttpServletRequest request, MethodArgumentNotValidException exception) {
         System.out.println("------------------------------------------------handleArgumentsException------------------------------------------------>");
         String message = this.formatAllErrorMessages(exception.getBindingResult().getAllErrors());
-        return new UnifyResponse(ARGUMENTS_ERROR, message, request.getMethod() + " " + request.getRequestURI());
+        return new UnifyResponse(C_10001, message, request.getMethod() + " " + request.getRequestURI());
     }
 
     /**
@@ -83,7 +83,7 @@ public class GlobalExceptionAdvice {
     @ResponseBody
     public UnifyResponse handleConstraintViolationException(HttpServletRequest request, ConstraintViolationException exception) {
         System.out.println("------------------------------------------------handleConstraintViolationException------------------------------------------------>");
-        return new UnifyResponse(ARGUMENTS_ERROR, exception.getMessage(), request.getMethod() + " " + request.getRequestURI());
+        return new UnifyResponse(C_10001, exception.getMessage(), request.getMethod() + " " + request.getRequestURI());
     }
 
     private String formatAllErrorMessages(List<ObjectError> allErrors) {

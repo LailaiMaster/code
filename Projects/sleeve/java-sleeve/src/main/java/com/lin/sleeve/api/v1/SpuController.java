@@ -4,7 +4,6 @@ import com.lin.sleeve.bo.PagerCounter;
 import com.lin.sleeve.exception.ExceptionCodes;
 import com.lin.sleeve.exception.http.NotFoundException;
 import com.lin.sleeve.model.Spu;
-import com.lin.sleeve.repository.SkuRepository;
 import com.lin.sleeve.service.SpuService;
 import com.lin.sleeve.util.CommonUtil;
 import com.lin.sleeve.vo.PagingDozer;
@@ -35,18 +34,20 @@ public class SpuController {
     @Autowired
     private SpuService spuService;
 
-    @Autowired
-    private SkuRepository skuRepository;
-
     @GetMapping("/id/{id}/detail")
     public Spu getDetail(@PathVariable("id") @Positive Long id) {
         Spu spu = spuService.getSpu(id);
         if (spu == null) {
-            throw new NotFoundException(ExceptionCodes.PRODUCT_NOT_FOUND);
+            throw new NotFoundException(ExceptionCodes.C_30003);
         }
         return spu;
     }
 
+    /*
+    分页的两种模式：
+            方式1： pageNumber + pageSize
+            方式2： start + count【用于移动端】
+     */
     @GetMapping("/latest")
     public PagingDozer<Spu, SpuSimplifyVO> getLatestSpuList(
             @RequestParam(name = "start", defaultValue = "0") Integer start,/*从第 start 条数据开始*/
@@ -55,7 +56,7 @@ public class SpuController {
         PagerCounter pagerCounter = CommonUtil.convertToPageParameter(start, count);
         Page<Spu> page = spuService.getLatestSpuList(pagerCounter.getPage(), pagerCounter.getCount());
         if (page == null) {
-            throw new NotFoundException(ExceptionCodes.PRODUCT_NOT_FOUND);
+            throw new NotFoundException(ExceptionCodes.C_30003);
         }
         return new PagingDozer<>(page, SpuSimplifyVO.class);
     }
@@ -70,7 +71,7 @@ public class SpuController {
         PagerCounter pagerCounter = CommonUtil.convertToPageParameter(start, count);
         Page<Spu> page = spuService.getSpuListByCategoryId(id, isRoot, pagerCounter.getPage(), pagerCounter.getCount());
         if (page == null) {
-            throw new NotFoundException(ExceptionCodes.PRODUCT_NOT_FOUND);
+            throw new NotFoundException(ExceptionCodes.C_30003);
         }
         return new PagingDozer<>(page, SpuSimplifyVO.class);
     }
@@ -83,7 +84,7 @@ public class SpuController {
     public SpuSimplifyVO getSimplifyVO(@PathVariable("id") @Positive Long id) {
         Spu spu = spuService.getSpu(id);
         if (spu == null) {
-            throw new NotFoundException(ExceptionCodes.PRODUCT_NOT_FOUND);
+            throw new NotFoundException(ExceptionCodes.C_30003);
         }
         SpuSimplifyVO target = new SpuSimplifyVO();
         BeanUtils.copyProperties(spu, target);

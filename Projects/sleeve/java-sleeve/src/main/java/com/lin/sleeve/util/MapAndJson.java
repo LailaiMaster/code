@@ -33,7 +33,7 @@ public class MapAndJson implements AttributeConverter<Map<String, Object>, Strin
             return objectMapper.writeValueAsString(attribute);
         } catch (JsonProcessingException e) {
             e.printStackTrace();//记录日志
-            throw new ServerErrorException(ExceptionCodes.SERVER_ERROR);
+            throw new ServerErrorException(ExceptionCodes.C_9999);
         }
     }
 
@@ -47,7 +47,7 @@ public class MapAndJson implements AttributeConverter<Map<String, Object>, Strin
             return objectMapper.readValue(dbData, HashMap.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new ServerErrorException(ExceptionCodes.SERVER_ERROR);
+            throw new ServerErrorException(ExceptionCodes.C_9999);
         }
     }
 

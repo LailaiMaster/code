@@ -10,7 +10,7 @@ class Categories {
             url: `category/all`
         })
         this.roots = data.roots
-        this.subs = data.subs
+        this.subs = data.subs     
     }
 
     getRoots() {

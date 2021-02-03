@@ -58,7 +58,7 @@ Page({
         const grid = await Category.getHomeLocationC()
         const activityD = await Activity.getHomeLocationD()
         const bannerG = await Banner.getHomeLocationG()
-
+        
         //设置数据
         this.setData({
             themeA,

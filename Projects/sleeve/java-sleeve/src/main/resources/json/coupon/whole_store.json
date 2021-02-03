@@ -1,0 +1,28 @@
+[
+  {
+    "id": 3,
+    "title": "无门槛减0.1券",
+    "start_time": 1564956702000,
+    "end_time": 1943647908000,
+    "description": null,
+    "full_money": null,
+    "minus": 0.10,
+    "rate": null,
+    "type": 3,
+    "remark": "全场无门槛立减",
+    "whole_store": true
+  },
+  {
+    "id": 11,
+    "title": "满100打9.9折",
+    "start_time": 1566935395000,
+    "end_time": 1914090599000,
+    "description": null,
+    "full_money": 100.00,
+    "minus": null,
+    "rate": 0.99,
+    "type": 2,
+    "remark": "全场通用券",
+    "whole_store": true
+  }
+]

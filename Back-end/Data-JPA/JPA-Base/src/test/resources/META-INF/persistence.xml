@@ -47,12 +47,12 @@
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="201314"/>
 
-            <!-- 配置 JPA 实现产品的基本属性. 配置 hibernate 的基本属性 -->
+            <!-- 配置 JPA 实现产品的基本属性，因为使用的是 Hibernate 的实现，所以配置 hibernate 的基本属性 -->
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
 
-            <!-- 二级缓存相关【这里的配置就是 Hibernate 中缓存的配置】 -->
+            <!-- 二级缓存相关【这里的配置也是 Hibernate 中缓存的配置】 -->
             <property name="hibernate.cache.use_second_level_cache" value="true"/><!--启动二级缓存-->
             <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/><!--二级缓存提供商-->
             <property name="hibernate.cache.use_query_cache" value="true"/><!--启动查询缓存-->

@@ -45,7 +45,7 @@ public class TokenController {
                 break;
             }
             default:
-                throw new NotFoundException(ExceptionCodes.LOGIN_TYPE_NOT_FOUND);
+                throw new NotFoundException(ExceptionCodes.C_10003);
         }
         return map;
     }

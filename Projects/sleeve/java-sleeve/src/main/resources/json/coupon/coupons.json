@@ -1,0 +1,54 @@
+[
+  {
+    "id": 3,
+    "title": "无门槛减0.1券",
+    "start_time": 1564956702000,
+    "end_time": 1943647908000,
+    "description": null,
+    "full_money": null,
+    "minus": 0.10,
+    "rate": null,
+    "type": 3,
+    "remark": "全场无门槛立减",
+    "whole_store": true
+  },
+  {
+    "id": 4,
+    "title": "满500减100券",
+    "start_time": 1564956702000,
+    "end_time": 1912111908000,
+    "description": null,
+    "full_money": 500.00,
+    "minus": 100.00,
+    "rate": null,
+    "type": 1,
+    "remark": "限服装、居家、文具等商品",
+    "whole_store": false
+  },
+  {
+    "id": 7,
+    "title": "满1000减230券",
+    "start_time": 1564956648000,
+    "end_time": 1898892677000,
+    "description": null,
+    "full_money": 1000.00,
+    "minus": 230.00,
+    "rate": null,
+    "type": 1,
+    "remark": "限服装、家具、文具等商品",
+    "whole_store": false
+  },
+  {
+    "id": 11,
+    "title": "满100打9.9折",
+    "start_time": 1566935395000,
+    "end_time": 1914090599000,
+    "description": null,
+    "full_money": 100.00,
+    "minus": null,
+    "rate": 0.99,
+    "type": 2,
+    "remark": "全场通用券",
+    "whole_store": true
+  }
+]

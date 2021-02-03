@@ -33,7 +33,7 @@ public class GenericAndJson {
             return GenericAndJson.objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             e.printStackTrace();//记录日志
-            throw new ServerErrorException(ExceptionCodes.SERVER_ERROR);
+            throw new ServerErrorException(ExceptionCodes.C_9999);
         }
     }
 
@@ -45,7 +45,7 @@ public class GenericAndJson {
             return objectMapper.readValue(json, clazz);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new ServerErrorException(ExceptionCodes.SERVER_ERROR);
+            throw new ServerErrorException(ExceptionCodes.C_9999);
         }
     }
 
@@ -57,7 +57,7 @@ public class GenericAndJson {
             return objectMapper.readValue(json, tTypeReference);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new ServerErrorException(ExceptionCodes.SERVER_ERROR);
+            throw new ServerErrorException(ExceptionCodes.C_9999);
         }
     }
 
@@ -74,7 +74,7 @@ public class GenericAndJson {
             });
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new ServerErrorException(ExceptionCodes.SERVER_ERROR);
+            throw new ServerErrorException(ExceptionCodes.C_9999);
         }
     }
 

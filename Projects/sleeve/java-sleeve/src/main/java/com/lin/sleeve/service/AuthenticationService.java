@@ -63,7 +63,7 @@ public class AuthenticationService {
     private String registerUser(Map<String, Object> session) {
         String openId = (String) session.get("openid");
         if (StringUtils.isEmpty(openId)) {
-            throw new ParameterException(ExceptionCodes.PARAMETER_ERROR);
+            throw new ParameterException(ExceptionCodes.C_20004);
         }
         Optional<User> optionalUser = userRepository.findByOpenid(openId);
         User user;
