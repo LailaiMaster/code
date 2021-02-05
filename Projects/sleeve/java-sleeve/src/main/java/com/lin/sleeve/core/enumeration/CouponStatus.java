@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 public enum CouponStatus {
 
     AVAILABLE(1, "可用"),
-    USED(1, "已使用"),
-    EXPIRED(1, "过期");
+    USED(2, "已使用"),
+    EXPIRED(3, "过期");
 
     private Integer status;
     private String description;

@@ -16,4 +16,4 @@ spring:
 # 放 api 实现的包
 sleeve:
   api-package: com.lin.sleeve.api
-
+  year-codes: A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z

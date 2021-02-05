@@ -2,6 +2,7 @@ package com.lin.sleeve.util;
 
 import com.lin.sleeve.bo.PagerCounter;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -24,6 +25,11 @@ public class CommonUtil {
         long startTime = start.getTime();
         long endTime = end.getTime();
         return dateTime >= startTime && dateTime < endTime;
+    }
+
+    public static Calendar addSomeSeconds(Calendar calendar, int seconds) {
+        calendar.add(Calendar.SECOND, seconds);
+        return calendar;
     }
 
 }

@@ -36,6 +36,9 @@ public class CouponController {
     @Autowired
     private CouponService couponService;
 
+    /**
+     * 某个品类下可用的优惠券。
+     */
     @GetMapping("/by/category/{cid}")
     public List<CouponPureVO> getCouponListByCategory(@PathVariable("cid") Long cid) {
         List<Coupon> coupons = couponService.getByCategory(cid);
@@ -45,6 +48,9 @@ public class CouponController {
         return CouponPureVO.getList(coupons);
     }
 
+    /**
+     * 所有全场券。
+     */
     @GetMapping("/whole_store")
     public List<CouponPureVO> getWholeStore() {
         List<Coupon> coupons = couponService.getWholeStoreCoupons();
@@ -54,6 +60,9 @@ public class CouponController {
         return CouponPureVO.getList(coupons);
     }
 
+    /**
+     * 领取优惠券。
+     */
     @ScopeLevel
     @PostMapping("/collect/{id}")
     public void collectCoupon(@PathVariable("id") Long id) {
@@ -62,6 +71,9 @@ public class CouponController {
         UnifyResponse.creatingSucceed(ExceptionCodes.C_OK);
     }
 
+    /**
+     * 用户的特定状态的优惠券列表。
+     */
     @ScopeLevel
     @GetMapping("/myself/by/status/{status}")
     public List<CouponPureVO> getMyCouponByStatus(@PathVariable("status") Integer status) {
@@ -87,6 +99,9 @@ public class CouponController {
         return CouponPureVO.getList(couponList);
     }
 
+    /**
+     * 用户的所有优惠券列表。
+     */
     @ScopeLevel()
     @GetMapping("/myself/available/with_category")
     public List<CouponCategoryVO> getUserCouponWithCategory() {

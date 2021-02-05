@@ -1,14 +1,18 @@
 package com.lin.sleeve.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lin.sleeve.util.SpecListAndJson;
 
 import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Getter;
@@ -29,6 +33,7 @@ import lombok.ToString;
 public class Sku extends BaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private BigDecimal price;
@@ -50,5 +55,15 @@ public class Sku extends BaseEntity {
 
     @Convert(converter = SpecListAndJson.class)
     private List<Spec> specs;
+
+    @JsonIgnore
+    public BigDecimal getActualPrice() {
+        return discountPrice != null ? discountPrice : price;
+    }
+
+    @JsonIgnore
+    public List<String> getSpecValueList() {
+        return getSpecs().stream().map(Spec::getValue).collect(Collectors.toList());
+    }
 
 }

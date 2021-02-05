@@ -52,6 +52,7 @@ public class ExceptionCodes {
      * COUPON_NOT_FOUND
      */
     public static final int C_40003 = 40003;
+    public static final int C_40004 = 40004;
     /**
      * ACTIVITY_EXPIRED
      */
@@ -60,9 +61,23 @@ public class ExceptionCodes {
      * COUPON_ALREADY_COLLECTED
      */
     public static final int C_40006 = 40006;
+    public static final int C_40007 = 40007;
+    public static final int C_40008 = 40008;
     /**
      * ACTIVITY_FOR_COUPON_NOT_FOUND
      */
     public static final int C_40010 = 40010;
+    public static final int C_40012 = 40012;
+    public static final int C_40009 = 40009;
+    public static final int C_50001 = 50001;
+    public static final int C_50002 = 50002;
+    public static final int C_50003 = 50003;
+    public static final int C_50004 = 50004;
+    public static final int C_50005 = 50005;
+    public static final int C_50006 = 50006;
+    public static final int C_50007 = 50007;
+    public static final int C_50008 = 50008;
+    public static final int C_50009 = 50009;
+    public static final int C_50011 = 50011;
 
 }
