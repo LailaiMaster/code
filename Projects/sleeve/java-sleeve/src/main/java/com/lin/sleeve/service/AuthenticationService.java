@@ -51,10 +51,10 @@ public class AuthenticationService {
         String wxResponse = template.getForObject(url, String.class);
         System.out.println("wxResponse = " + wxResponse);
         Map<String, Object> map = new HashMap<>();
-        //todo：接口调用错误
         try {
             map = objectMapper.readValue(wxResponse, Map.class);
         } catch (JsonProcessingException e) {
+            //todo：接口调用错误处理
             e.printStackTrace();
         }
         return registerUser(map);

@@ -28,6 +28,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -35,6 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -64,6 +66,9 @@ public class OrderService {
 
     @Autowired
     private IMoneyDiscount moneyDiscount;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Value("${sleeve.order.max-sku-limit}")
     private Integer maxSkuLimit;
@@ -129,9 +134,20 @@ public class OrderService {
         if (orderDTO.getCouponId() != null) {
             writeOffCoupon(orderDTO.getCouponId(), uid, order.getId());
         }
-        //加入延迟消息队列
-        //todo
+        //加入延迟消息队列，规定时间内没有支付的，就自动取消订单。
+        sendToRedis(orderDTO.getCouponId(), uid, order.getId());
         return order.getId();
+    }
+
+    private void sendToRedis(Long oid, Long uid, Long couponId) {
+        String redisKey = OrderUtil.makeRedisKey(oid, uid, couponId);
+        try {
+            stringRedisTemplate.opsForValue().set(redisKey, "1", this.payTimeLimit, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            //如果这里发生错误，说明是网络错误/Redis 故障等，软件无法自我修复。
+            //所以这里适合做强预警，比如发送短信给运维人员。
+        }
     }
 
     private void writeOffCoupon(Long couponId, Long uid, Long orderId) {
@@ -171,6 +187,12 @@ public class OrderService {
     public Optional<Order> getOrderDetail(Long oid) {
         Long uid = LocalUser.getUser().getId();
         return orderRepository.findFirstByUserIdAndId(uid, oid);
+    }
+
+    public void updateOrderPrepayId(Long orderId, String prepayId) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new ParameterException(ExceptionCodes.C_10007));
+        order.setPrepayId(prepayId);
+        orderRepository.save(order);
     }
 
 }

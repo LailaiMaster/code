@@ -50,13 +50,11 @@ public class JwtToken {
     @Value("${sleeve.security.jwt-key}")
     public void setJwtKey(String jwtKey) {
         JwtToken.JWT_KEY = jwtKey;
-        System.out.println("jwtKey = " + jwtKey);
     }
 
     @Value("${sleeve.security.token-expired-in}")
     public void setExpiredTime(Integer expiredTime) {
         JwtToken.EXPIRED_TIME = expiredTime;
-        System.out.println("expiredTime = " + expiredTime);
     }
 
     /**

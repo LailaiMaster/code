@@ -1,6 +1,9 @@
 package com.lin.sleeve.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lin.sleeve.core.enumeration.OrderStatus;
 import com.lin.sleeve.dto.OrderAddressDTO;
+import com.lin.sleeve.util.CommonUtil;
 import com.lin.sleeve.util.OrderAddressAndJson;
 import com.lin.sleeve.util.OrderSkuAndJson;
 
@@ -67,5 +70,17 @@ public class Order extends BaseEntity {
 
     @Convert(converter = OrderAddressAndJson.class)
     private OrderAddressDTO snapAddress;
+
+    @JsonIgnore
+    public Boolean needCancel() {
+        if (!OrderStatus.UNPAID.equals(getStatusEnum())) {
+            return true;
+        }
+        return CommonUtil.isOutOfDate(getExpiredTime());
+    }
+
+    public OrderStatus getStatusEnum() {
+        return OrderStatus.toType(status);
+    }
 
 }

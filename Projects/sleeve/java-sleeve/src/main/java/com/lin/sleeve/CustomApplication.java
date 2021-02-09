@@ -49,7 +49,6 @@ public class CustomApplication {
 
     }
 
-
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
     @Documented

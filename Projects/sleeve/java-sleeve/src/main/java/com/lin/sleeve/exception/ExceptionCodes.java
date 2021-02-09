@@ -28,6 +28,7 @@ public class ExceptionCodes {
      * UN_AUTHORIZED_ERROR
      */
     public static final int C_10005 = 10005;
+    public static final int C_10007 = 10007;
     /**
      * PARAMETER_ERROR
      */
@@ -78,6 +79,7 @@ public class ExceptionCodes {
     public static final int C_50007 = 50007;
     public static final int C_50008 = 50008;
     public static final int C_50009 = 50009;
+    public static final int C_50010 = 50010;
     public static final int C_50011 = 50011;
 
 }

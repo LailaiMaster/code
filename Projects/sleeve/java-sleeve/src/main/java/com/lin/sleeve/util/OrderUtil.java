@@ -1,10 +1,15 @@
 package com.lin.sleeve.util;
 
+import com.lin.sleeve.bo.OrderMessageBO;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Ztiany
@@ -14,13 +19,26 @@ import java.util.Calendar;
 @Component
 public class OrderUtil {
 
-
-
     // A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z
     // A 代表 2021 年
     // B 代表 2022 年
     // 以此类推，这样做是为了减少数据库中字段的长度，从而利于查询性能。
     private static String[] yearCodes;
+
+    public static String makeRedisKey(Long oid, Long uid, Long couponId) {
+        if (couponId == null) {
+            couponId = -1L;
+        }
+        return oid + "###" + uid + "###" + couponId;
+    }
+
+    public static OrderMessageBO getIdsFromRedisKey(String redisKey) {
+        List<Long> collect = Stream.of(redisKey.split("###"))
+                .map(Long::parseLong)
+                .collect(Collectors.toList());
+
+        return new OrderMessageBO(collect.get(0), collect.get(1), collect.get(2));
+    }
 
     @Value("${sleeve.year-codes}")
     public void setYearCodes(String yearCodes) {
