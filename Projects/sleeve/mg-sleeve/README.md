@@ -20,7 +20,6 @@ IDE：
 项目文件说明：
 
 - components：存放所有的小程序组件。
-  - category-grid：首页商品宫格组件。
 - config：项目整体配置。
 - miniprogram_npm：编译之后的第三方组件。
 - model：数据模型层，用于从网络获取数据。

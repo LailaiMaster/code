@@ -3,6 +3,8 @@ import {ShoppingWay} from "../../core/enum";
 import {SaleExplain} from "../../models/sale-explain";
 import {px2rpx} from "../../miniprogram_npm/lin-ui/utils/util";
 import {getSystemSize, getWindowHeightRpx} from "../../utils/system";
+import {Cart} from "../../models/cart";
+import {CartItem} from "../../models/cart-item";
 
 const {Spu} = require("../../models/spu");
 
@@ -28,15 +30,18 @@ Page({
     onLoad: async function (options) {
         //动态设置高度
         await this.setContentHeight();
-        //加载数据
+
+        //加载详情数据
         const pid = options.pid
-        console.log(`pid = ${pid}`)
         const spu = await Spu.getDetail(pid);
         const explains = await SaleExplain.getFixed()
         this.setData({
             spu,
             saleExplain: explains
         })
+
+        /*购物车数量*/
+        this.updateCartItemCount();
     },
 
     /**监听加入购物车事件*/
@@ -61,7 +66,7 @@ Page({
         })
     },
 
-    onGoToCatt(event) {
+    onGoToCart(event) {
         wx.switchTab({
             url: '/pages/cart/cart'
         })
@@ -71,6 +76,26 @@ Page({
         this.setData({
             specs: event.detail
         })
+    },
+
+    onShopping(event) {
+        const chosenSku = event.detail.sku;
+        const skuCount = event.detail.skuCount;
+        if (event.detail.orderWay === ShoppingWay.CART) {
+            const cart = new Cart();
+            const cartItem = new CartItem(chosenSku, skuCount);
+            cart.addItem(cartItem);
+            this.updateCartItemCount();
+        }
+    },
+
+    updateCartItemCount() {
+        const cart = new Cart();
+        let cartItemCount = cart.getCartItemCount();
+        this.setData({
+            cartItemCount,
+            showRealm: false,
+        });
     },
 
     /**

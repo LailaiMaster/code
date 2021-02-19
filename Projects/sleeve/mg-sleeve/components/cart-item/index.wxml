@@ -1,0 +1,81 @@
+<wxs src="../../wxs/price.wxs" module="p"></wxs>
+<wxs src="../../wxs/stock.wxs" module="s"></wxs>
+
+        <!-- l-slide-view 用于实现侧滑删除-->
+<l-slide-view wx:if="{{cartItem}}" height="220" width="750" slide-width="200">
+
+    <!--商品部分-->
+    <view slot="left" class="container">
+
+        <!--勾选框-->
+        <view class="checkbox">
+            <s-checkbox bind:check="checkedItem" checked="{{cartItem.checked}}"></s-checkbox>
+        </view>
+
+        <!--整体商品信息-->
+        <view class="sku-container">
+
+            <!--图片-->
+            <view class="image-container">
+                <view wx:if="{{!online}}" class="image-sold-out">
+                    <text>下 架</text>
+                </view>
+                <view wx:elif="{{soldOut}}" class="image-sold-out">
+                    <text>售 罄</text>
+                </view>
+                <view wx:elif="{{s.shortage(cartItem.sku.stock)}}" class="image-stock-pinch">
+                    <text>仅剩{{cartItem.sku.stock}}件</text>
+                </view>
+                <image mode="aspectFit" class="left" src="{{cartItem.sku.img}}"></image>
+            </view>
+
+            <!--图片右侧商品信息-->
+            <view class="right {{soldOut?'disabled':''}}">
+
+                <!--商品描述信息-->
+                <view class="description-container">
+
+                    <!--标题-->
+                    <view class="title-container">
+                        <l-tag wx:if="{{discount}}" l-class="discount-tag" size="mini" bg-color="#c93756" shape="circle"
+                               type="reading" height="24">打折
+                        </l-tag>
+                        <text class="title">{{cartItem.sku.title}}
+                        </text>
+                    </view>
+
+                    <!--商品规格-->
+                    <view wx:if="{{specStr}}" class="spec">
+                        <text>{{specStr}}</text>
+                    </view>
+                </view>
+
+                <!--价格与数量-->
+                <view class="price-container">
+                    <l-price
+                            color="#157658"
+                            count-size="28"
+                            value="{{p.mainPrice(cartItem.sku.price,cartItem.sku.discount_price).price}}">
+                    </l-price>
+                    <s-counter
+                            bind:linout="onOutNumber"
+                            max="{{stock}}"
+                            bind:lintap="onSelectCount"
+                            count="{{skuCount}}">
+                    </s-counter>
+                </view>
+
+            </view>
+
+            <view wx:if="{{soldOut || !online}}" class="sold-out"></view>
+
+        </view>
+
+    </view>
+
+    <!--侧滑部分-->
+    <view bind:tap="onDelete" slot="right" class="slide">
+        <text>删除</text>
+    </view>
+
+</l-slide-view>

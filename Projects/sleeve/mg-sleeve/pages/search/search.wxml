@@ -28,7 +28,7 @@
             </view>
             <!--历史搜索 tags-->
             <view class="history-tags">
-                <block wx:for="{{historyTags}}" wx:key="{{index}}">
+                <block wx:for="{{historyTags}}" wx:key="index">
                     <l-tag l-class="tag" name="{{item}}" bind:lintap="onSearch">
                         {{item}}
                     </l-tag>
@@ -44,7 +44,7 @@
                 <view class="history-text"></view>
             </view>
             <view class="history-tags">
-                <block wx:for="{{hotTags}}" wx:key="{{index}}">
+                <block wx:for="{{hotTags}}" wx:key="index">
                     <l-tag l-class="tag" name="{{item.title}}" l-select-class="tag-selected"
                            select="{{item.highlight}}" bind:lintap="onSearch">
                         {{item.title}}
@@ -56,9 +56,19 @@
 
     <!--搜索结果-->
     <view wx:else>
-        <block wx:for="{{items}}">
-            <s-spu-preview-r data="{{item}}"></s-spu-preview-r>
-        </block>
+          <l-loadmore
+                show
+                end-text="- end -"
+                type="{{loadingType}}"
+                loading-text="努力加载中...">
+
+            <view slot="content" hidden="{{!search}}" class="spu-bottom">
+                <block wx:for="{{items}}">
+                    <s-spu-preview-r data="{{item}}"></s-spu-preview-r>
+                </block>
+            </view>
+
+        </l-loadmore>
     </view>
 
     <l-loading></l-loading>

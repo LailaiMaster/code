@@ -40,7 +40,7 @@
         <view class="hr"></view>
 
         <!--规格选择-->
-        <block wx:for="{{fences}}" wx:key="{{index}}">
+        <block wx:for="{{fences}}" wx:key="index">
             <!--celltap 是 cell 组件向上抛出的事件-->
             <s-fence x="{{index}}" bind:celltap="onCellTap" fence="{{item}}"></s-fence>
         </block>
@@ -55,7 +55,7 @@
 </scroll-view>
 
 <!--加入购物车控制-->
-<view wx:if="{{!outStock}}" class="bottom-btn">
+<view wx:if="{{!outStock}}" class="bottom-btn" bind:tap="onBuyOrCart">
     <text wx:if="{{orderWay === 'cart'}}">加入购物车</text>
     <text wx:else>立即购买</text>
 </view>

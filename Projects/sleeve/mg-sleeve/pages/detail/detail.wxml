@@ -1,7 +1,7 @@
 <!--pages/detail/detail.wxml-->
 <wxs src="../../wxs/price.wxs" module="p"></wxs>
 
-<scroll-view scroll-y  style="height:{{contentHeight}}rpx;">
+<scroll-view scroll-y style="height:{{contentHeight}}rpx;">
 
     <!--轮播图-->
     <swiper class="top" autoplay indicator-dots>
@@ -35,7 +35,7 @@
 
     <!--详情图-->
     <view class="detail-img-container">
-        <block wx:for="{{spu.spu_img_list}}" wx:key="{{index}}">
+        <block wx:for="{{spu.spu_img_list}}" wx:key="index">
             <image src="{{item.img}}" class="detail-img" mode="widthFix"></image>
         </block>
     </view>
@@ -44,14 +44,16 @@
 
         <!--规格选择-->
 <l-popup show="{{showRealm}}" contentAlign="bottom">
-    <s-realm bind:sepcchange="onSpecChange" spu="{{spu}}" orderWay="{{orderWay}}"></s-realm>
+    <s-realm bind:shopping="onShopping" bind:sepcchange="onSpecChange" spu="{{spu}}" orderWay="{{orderWay}}"></s-realm>
 </l-popup>
 
         <!--底部操作-->
 <s-tab-bar
         class="tabbar"
+        cartItemCount="{{cartItemCount}}"
         bind:gotohome="onGoToHome"
-        bind:togocart="onGoToCart"
+        bind:gotocart="onGoToCart"
         bind:addtocart="onAddToCart"
         bind:buy="onBuy">
+
 </s-tab-bar>

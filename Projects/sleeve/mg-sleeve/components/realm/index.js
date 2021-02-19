@@ -122,10 +122,18 @@ Component({
             });
         },
 
+        noSpec() {
+            const spu = this.properties.spu;
+            return Spu.isNoSpec(spu);
+        },
+
         /**数量操作*/
         onSelectCount(event) {
             this.data.currentSkuCount = event.detail.count
-            if (this.data.judger.isSkuIntact()) {
+            if (this.noSpec()) {//没有规格
+                this.setStockStatus(this.getNoSpecSku().stock, this.data.currentSkuCount);
+            } else if (this.data.judger.isSkuIntact()) {//有规格
+                //确定了完整的sku才去控制数量
                 const sku = this.data.judger.getDeterminateSku()
                 this.setStockStatus(sku.stock, this.data.currentSkuCount)
             }
@@ -162,7 +170,7 @@ Component({
                 this.triggerEvent("sepcchange", {
                     noSpec: noSpec
                 })
-            }else {
+            } else {
                 this.triggerEvent("sepcchange", {
                     noSpec: noSpec,
                     skuIntact: this.data.judger.isSkuIntact(),
@@ -170,6 +178,46 @@ Component({
                     missingKeys: this.data.judger.getMissingKeys()
                 });
             }
+        },
+
+        /*购买或者加入购物车*/
+        onBuyOrCart(event) {
+            if (Spu.isNoSpec(this.properties.spu)) {
+                this.shoppingNoSpec();
+            } else {
+                this.shoppingVarious();
+            }
+        },
+
+        shoppingVarious() {
+            const intact = this.data.judger.isSkuIntact();
+            if (!intact) {
+                const missKeys = this.data.judger.getMissingKeys();
+                wx.showToast({
+                    icon: "none",
+                    title: `请选择:${missKeys.join(",")}`,
+                    duration: 3000,
+                });
+                return;
+            }
+            this._triggerShoppingEvent(this.data.judger.getDeterminateSku());
+        },
+
+        getNoSpecSku() {
+            return this.properties.spu.sku_list[0];
+        },
+
+        shoppingNoSpec() {
+            this._triggerShoppingEvent(this.getNoSpecSku());
+        },
+
+        _triggerShoppingEvent(sku) {
+            this.triggerEvent('shopping', {
+                orderWay: this.properties.orderWay,
+                spuId: this.properties.spu.id,
+                sku,
+                skuCount: this.data.currentSkuCount,
+            })
         }
     }
 

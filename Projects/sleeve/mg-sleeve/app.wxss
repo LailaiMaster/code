@@ -3,7 +3,7 @@ page {
     background-color: #F5F5F5;
 }
 
-/*在线 icons*/
+/*v在线 icons，参考：<https://www.iconfont.cn/> */
 @font-face {
     font-family: 'sleeve';
     src: url('//at.alicdn.com/t/font_1341806_suqt0twhe5.eot');
@@ -17,10 +17,62 @@ page {
 /*定义一个样式，使用引入的【在线 icons】，l-icon 使用自定义的 home icon 时，就要指定应用 sleeve 样式，以便在 sleeve 寻找对应的 icon */
 .sleeve {
     font-family: sleeve !important;
-    color:#157658 !important;
+    color: #157658 !important;
 }
 
-/*lin-ui-icon 组件，l-icon 前缀是固定的，home 是自定义的。【@font-face 中的内容是根据选择的 icons 生成的】*/
+/*lin-ui-icon 组件，l-icon 前缀是固定的，home 是自定义 icon 的名称，然后在 l-icon 中引用名为 home 的 icon 时，还要应用 sleeve 样式。【@font-face 中的内容是根据选择的 icons 生成的】*/
 .l-icon-home:before {
     content: "\e7e5"
+}
+
+.l-icon-radio:before {
+    content: "\e632";
+}
+
+.l-icon-check:before {
+    content: "\e666";
+}
+
+.l-icon-address1:before {
+    content: "\e60f";
+}
+
+.l-icon-about:before {
+    content: "\e60c";
+}
+
+.l-icon-unpaid:before {
+    content: "\e6fb";
+}
+
+.l-icon-paid:before {
+    content: "\e614";
+}
+
+.l-icon-delivered:before {
+    content: "\e636";
+}
+
+.l-icon-over:before {
+    content: "\e612";
+}
+
+.l-icon-coupon:before {
+    content: "\e601";
+}
+
+.l-icon-order1:before {
+    content: "\e604";
+}
+
+.l-icon-address2:before {
+    content: "\e641";
+}
+
+.l-icon-sunny1:before {
+    content: "\e6f4";
+}
+
+.l-icon-flower:before {
+    content: "\e602";
 }

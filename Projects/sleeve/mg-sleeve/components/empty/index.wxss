@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 600rpx;
+  color: #333333;
+}
+
+.img {
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 40rpx;
+}
+
+.text {
+  margin-bottom: 50rpx;
+}
+
+.btn {
+  border-radius: 2rpx !important;
+  background-color: #157658 !important;
+}

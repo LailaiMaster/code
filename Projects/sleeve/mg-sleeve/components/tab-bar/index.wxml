@@ -9,7 +9,7 @@
         </view>
 
         <view bind:tap="onGoToCart">
-            <l-badge value="3">
+            <l-badge show="{{cartItemCount !==0}}" value="{{cartItemCount}}">
                 <!--购物车的 icon 大一点，微调一下-->
                 <l-icon name="cart" size="44" color="#157658"></l-icon>
             </l-badge>

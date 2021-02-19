@@ -48,6 +48,7 @@ class Judger {
         })
     }
 
+    /**是否确定了完整的sku*/
     isSkuIntact() {
         return this.skuPending.isIntact()
     }

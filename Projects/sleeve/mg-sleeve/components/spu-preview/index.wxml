@@ -12,7 +12,7 @@
 
         <!--标签-->
         <view class="tags">
-            <block wx:for="{{tags}}" wx:key="{{index}}">
+            <block wx:for="{{tags}}" wx:key="index">
                 <l-tag type="reading" size="super-mini" l-class="l-tag">{{item}}</l-tag>
             </block>
         </view>
