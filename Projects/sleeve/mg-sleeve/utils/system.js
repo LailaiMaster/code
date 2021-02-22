@@ -1,3 +1,5 @@
+/**获取系统信息封装*/
+
 import {promisic} from "./util";
 import {px2rpx} from "../miniprogram_npm/lin-ui/utils/util";
 

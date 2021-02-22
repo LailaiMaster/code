@@ -63,6 +63,7 @@ public class Sku extends BaseEntity {
 
     @JsonIgnore
     public List<String> getSpecValueList() {
+        System.out.println("getSpecs = " + getSpecs().get(0).getClass());
         return getSpecs().stream().map(Spec::getValue).collect(Collectors.toList());
     }
 

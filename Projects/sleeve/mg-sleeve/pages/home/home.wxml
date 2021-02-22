@@ -24,7 +24,7 @@
         <s-category-grid grid="{{grid}}"></s-category-grid>
 
         <!--活动-->
-        <image src="{{activityD.entrance_img}}" class="activity"></image>
+        <image data-aname="a-2" bind:tap="onGoToCoupons" src="{{activityD.entrance_img}}" class="activity"></image>
 
         <!--横向滑动商品：【下面 spu-list 是因为小程序 wxml 不支持驼峰，所以驼峰属性要写为 - 连接的形式】-->
         <s-spu-scroll

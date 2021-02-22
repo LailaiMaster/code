@@ -1,6 +1,7 @@
 // pages/cart/cart.js
 import {Cart} from "../../models/cart";
 import {Calculator} from "../../models/calculator";
+import {ShoppingWay} from "../../core/enum";
 
 const cart = new Cart();
 
@@ -21,17 +22,12 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: async function (options) {
-        const items = await cart.getAllSkuFromServer().items;
-        this.setData({
-            cartItems: items
-        });
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+        const newCartData = await cart.getAllSkuFromServer()
+        if (newCartData) {
+            this.setData({
+                cartItems: newCartData.items
+            });
+        }
     },
 
     /**
@@ -84,6 +80,15 @@ Page({
 
     },
 
+    onSettle(event) {
+        if (this.data.totalSkuCount <= 0) {
+            return
+        }
+        wx.navigateTo({
+            url: `/pages/order/order?way=${ShoppingWay.CART}`
+        })
+    },
+
     onCountFloat(event) {
         //价格
         this.refreshCartData()
@@ -92,6 +97,9 @@ Page({
     onCheckAll(event) {
         const checked = event.detail.checked;
         cart.checkAll(checked);
+
+        console.log(this.data.cartItems)
+
         this.setData({
             cartItems: this.data.cartItems
         })
@@ -126,38 +134,4 @@ Page({
         })
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    }
 })

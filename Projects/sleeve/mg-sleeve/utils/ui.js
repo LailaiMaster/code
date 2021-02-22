@@ -1,4 +1,3 @@
-
 const showToast = function (title) {
     wx.showToast({
         icon: "none",

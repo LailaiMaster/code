@@ -77,8 +77,9 @@ public class OrderService {
     private Integer payTimeLimit;
 
     public OrderChecker isOK(Long uid, OrderDTO orderDTO) {
+        System.out.println("orderDTO = " + orderDTO);
         //总价不能小于等于 0 校验
-        if (orderDTO.getFinalTotalPrice().compareTo(new BigDecimal("0")) <= 0) {
+        if (orderDTO == null || orderDTO.getFinalTotalPrice().compareTo(new BigDecimal("0")) <= 0) {
             throw new ParameterException(ExceptionCodes.C_50011);
         }
 
@@ -180,7 +181,7 @@ public class OrderService {
         if (status == OrderStatus.All.value()) {
             return orderRepository.findAllByUserId(uid, pageable);
         } else {
-            return orderRepository.findAllByUserIdAndStatus(uid, OrderStatus.UNPAID.value(), pageable);
+            return orderRepository.findAllByUserIdAndStatus(uid, status, pageable);
         }
     }
 

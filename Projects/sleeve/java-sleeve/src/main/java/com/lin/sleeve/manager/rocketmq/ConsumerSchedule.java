@@ -9,6 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 /**
+ * Rocket 消息队列配置【项目中并没有实际使用】。
+ *
  * @author Ztiany
  * Email ztiany3@gmail.com
  * Date 2021/2/9 14:57
@@ -37,10 +39,10 @@ public class ConsumerSchedule implements CommandLineRunner {
         consumer.start();
     }
 
-    /*作用类似于：@PostConstruct*/
+    /**作用类似于：@PostConstruct*/
     @Override
     public void run(String... args) throws Exception {
-        messageListener();
+        //messageListener();
     }
 
 }

@@ -7,7 +7,9 @@ const config = {
     //原地址
     // apiBaseUrl: 'http://se.7yue.pro/v1/'
     //临时地址
-    apiBaseUrl: 'http://se.talelin.com/v1/'
+    //apiBaseUrl: 'http://se.talelin.com/v1/'
+    //本地地址
+    apiBaseUrl: 'http://localhost:8081/v1/'
 };
 
 export {

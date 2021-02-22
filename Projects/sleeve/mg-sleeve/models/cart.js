@@ -20,6 +20,25 @@ class Cart {
         return this;
     }
 
+    removeCheckedItems() {
+        const cartData = this._getCartData()
+        for (let i = 0; i < cartData.items.length; i++) {
+            if (cartData.items[i].checked) {
+                cartData.items.splice(i, 1)
+            }
+        }
+        this._refreshStorage()
+    }
+
+    getSkuCountBySkuId(skuId) {
+        const cartData = this._getCartData()
+        const item = cartData.items.find(item => item.skuId === skuId)
+        if (!item) {
+            console.error('在订单里寻找CartItem时不应当出现找不到的情况')
+        }
+        return item.count
+    }
+
     replaceItemCount(skuId, newCount) {
         const item = this.findEqualItem(skuId);
         if (!item) {
@@ -34,6 +53,12 @@ class Cart {
             item.count = Cart.SKU_MAX_COUNT;
         }
         this._refreshStorage()
+    }
+
+    getCheckedSkuIds() {
+        return this.getCheckedItems().map(item => {
+            return item.sku.id
+        })
     }
 
     getCheckedItems() {
@@ -129,7 +154,7 @@ class Cart {
     removeItem(skuId) {
         const oldItemIndex = this._findEqualItemIndex(skuId);
         const cartData = this._getCartData();
-        //splice 即remove
+        //splice 即 remove
         cartData.items.splice(oldItemIndex, 1);
         this._refreshStorage();
     }

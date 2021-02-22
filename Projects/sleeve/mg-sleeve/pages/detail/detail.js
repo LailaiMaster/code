@@ -1,10 +1,11 @@
 // pages/detail/detail.js
-import {ShoppingWay} from "../../core/enum";
+import {CouponCenterType, ShoppingWay} from "../../core/enum";
 import {SaleExplain} from "../../models/sale-explain";
 import {px2rpx} from "../../miniprogram_npm/lin-ui/utils/util";
 import {getSystemSize, getWindowHeightRpx} from "../../utils/system";
 import {Cart} from "../../models/cart";
 import {CartItem} from "../../models/cart-item";
+import {Coupon} from "../../models/coupon";
 
 const {Spu} = require("../../models/spu");
 
@@ -18,6 +19,7 @@ Page({
     },
 
     async setContentHeight() {
+        /*动态设置高度，防止和底部 bar 重叠。*/
         const h = await getWindowHeightRpx()/*rpx*/ - 100/*tab-bar*/
         this.setData({
             contentHeight: h
@@ -35,9 +37,12 @@ Page({
         const pid = options.pid
         const spu = await Spu.getDetail(pid);
         const explains = await SaleExplain.getFixed()
+        const coupons = await Coupon.getTop2CouponsByCategory(spu.category_id)
+
         this.setData({
             spu,
-            saleExplain: explains
+            saleExplain: explains,
+            coupons
         })
 
         /*购物车数量*/
@@ -81,12 +86,30 @@ Page({
     onShopping(event) {
         const chosenSku = event.detail.sku;
         const skuCount = event.detail.skuCount;
+
+        //加入购物车
         if (event.detail.orderWay === ShoppingWay.CART) {
             const cart = new Cart();
             const cartItem = new CartItem(chosenSku, skuCount);
             cart.addItem(cartItem);
             this.updateCartItemCount();
         }
+
+        //立即购买
+        if (event.detail.orderWay === ShoppingWay.BUY) {
+            const url = `/pages/order/order?sku_id=${chosenSku.id}&count=${skuCount}&way=${ShoppingWay.BUY}`
+            wx.navigateTo({
+                url: url
+            })
+        }
+
+    },
+
+    onGoToCouponCenter(event) {
+        const cid = this.data.spu.category_id
+        wx.navigateTo({
+            url: `/pages/coupon/coupon?cid=${cid}&type=${CouponCenterType.SPU_CATEGORY}`
+        })
     },
 
     updateCartItemCount() {

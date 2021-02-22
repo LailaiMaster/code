@@ -13,7 +13,7 @@ const formatNumber = n => {
     return n[1] ? n : '0' + n
 }
 
-/**将 wx 的回调风格转换为 promise 风格。*/
+/**将 wx 的回调风格转换为 promise 风格【低版本的 wx 不支持 promise 风格，大概 2.9.x 后开始支持】。*/
 const promisic = function (func) {
     //采用的代理模式
     return function (params = {}) {

@@ -1,0 +1,7 @@
+function currentCheck(currentIndex, index) {
+    return currentIndex === index && checked;
+}
+
+module.exports = {
+    currentCheck: currentCheck
+}

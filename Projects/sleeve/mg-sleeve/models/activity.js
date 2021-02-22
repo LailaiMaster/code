@@ -12,6 +12,12 @@ class Activity {
         })
     }
 
+    static async getActivityWithCoupon(activityName) {
+        return Http.request({
+            url: `activity/name/${activityName}/with_coupon`
+        })
+    }
+
 }
 
 export {

@@ -23,7 +23,7 @@ dependencies {
     /*spring-boot 会自动管理版本，所以不指定 lib 的版本也可以*/
     implementation 'org.springframework.boot:spring-boot-starter-web'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    testImplementation 'org.springframework.boot:spring-boot-st|arter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     //lombok
     compileOnly 'org.projectlombok:lombok'

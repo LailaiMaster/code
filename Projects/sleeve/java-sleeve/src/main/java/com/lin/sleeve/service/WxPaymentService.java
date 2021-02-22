@@ -79,6 +79,7 @@ public class WxPaymentService {
      * 判断调用微信下单接口是否成功。
      */
     private String unifiedOrderSuccess(Map<String, String> wxOrder) {
+        System.out.println("unifiedOrderSuccess result: " + wxOrder);
         if (!wxOrder.get("return_code").equals("SUCCESS") || !wxOrder.get("result_code").equals("SUCCESS")) {
             throw new ParameterException(ExceptionCodes.C_10007);
         }
@@ -121,15 +122,21 @@ public class WxPaymentService {
     private Map<String, String> makePreOrderParams(BigDecimal serverFinalPrice, String orderNo, HttpServletRequest request) {
         String payCallbackUrl = this.payCallbackHost + this.payCallbackPath;
         Map<String, String> data = new HashMap<>();
+
         data.put("body", "Sleeve");
         data.put("out_trade_no", orderNo);
         data.put("device_info", "Sleeve");
         data.put("fee_type", "CNY");
         data.put("trade_type", "JSAPI");
+
         data.put("total_fee", CommonUtil.yuanToFenPlainString(serverFinalPrice));
         data.put("openid", LocalUser.getUser().getOpenid());
         data.put("spbill_create_ip", HttpRequestProxy.getRemoteRealIp(request));
+
         data.put("notify_url", payCallbackUrl);
+
+        System.out.println("makePreOrderParams =" + data);
+
         return data;
     }
 

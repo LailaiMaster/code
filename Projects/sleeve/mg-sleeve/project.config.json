@@ -91,6 +91,24 @@
           "pathName": "pages/test/test",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "coupon",
+          "pathName": "pages/coupon/coupon",
+          "query": "name=a-2&type=activity",
+          "scene": null
+        },
+        {
+          "name": "order",
+          "pathName": "pages/order/order",
+          "query": "name=a-2&type=activity",
+          "scene": null
+        },
+        {
+          "name": "pay-success",
+          "pathName": "pages/pay-success/pay-success",
+          "query": "oid=272",
+          "scene": null
         }
       ]
     }

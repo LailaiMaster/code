@@ -7,7 +7,11 @@
     "pages/my/my",
     "pages/search/search",
     "pages/spu-list/spu-list",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/order/order",
+    "pages/coupon/coupon",
+    "pages/pay-success/pay-success",
+    "pages/my-order/my-order"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -65,9 +69,18 @@
     "l-search-bar": "/miniprogram_npm/lin-ui/search-bar/index",
     "l-slide-view": "/miniprogram_npm/lin-ui/slide-view/index",
     "l-loading": "/miniprogram_npm/lin-ui/loading/index",
+    "l-avatar": "/miniprogram_npm/lin-ui/avatar/index",
+    "l-dialog": "/miniprogram_npm/lin-ui/dialog/index",
+    "l-list": "/miniprogram_npm/lin-ui/list/index",
+    "l-status-show": "/miniprogram_npm/lin-ui/status-show/index",
     "s-counter": "/components/counter/index",
     "s-spu-preview-r": "/components/spu-preview-r/index",
-    "s-checkbox": "/components/checkbox/index"
+    "s-checkbox": "/components/checkbox/index",
+    "s-order-sku-item": "/components/order-sku-item/index",
+    "s-address": "/components/address/index",
+    "s-coupon-mini": "/components/coupon-mini/index",
+    "s-coupon": "/components/coupon/index",
+    "s-coupon-picker": "/components/coupon-picker/index"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

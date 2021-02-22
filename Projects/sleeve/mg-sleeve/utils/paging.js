@@ -1,5 +1,4 @@
 /**分页封装*/
-import boolean from "../miniprogram_npm/lin-ui/common/async-validator/validator/boolean";
 
 const {Http} = require("./http");
 

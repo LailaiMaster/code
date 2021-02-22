@@ -6,6 +6,9 @@ import com.lin.sleeve.exception.http.ServerErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
@@ -32,14 +35,21 @@ public class SuperGenericAndJson<T> implements AttributeConverter<T, String> {
 
     @Override
     public T convertToEntityAttribute(String s) {
-        System.out.println("convertToEntityAttribute run by " + this.getClass());
+        Type targetType = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        System.out.println("convertToEntityAttribute run by " + this.getClass() + "target type = " + targetType);
+
         try {
             if (s == null) {
                 return null;
             }
 
             T t = mapper.readValue(s, new TypeReference<T>() {
+                @Override
+                public Type getType() {
+                    return targetType;
+                }
             });
+
             return t;
         } catch (Exception e) {
             e.printStackTrace();

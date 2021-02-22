@@ -1,10 +1,9 @@
-// pages/home/home.js
-
 import {Theme} from "../../models/theme";
 import {Banner} from "../../models/banner";
 import {Category} from "../../models/category";
 import {Activity} from "../../models/activity";
 import {SpuPaging} from "../../models/spu-paging";
+import {CouponCenterType} from "../../core/enum";
 
 Page({
 
@@ -58,7 +57,7 @@ Page({
         const grid = await Category.getHomeLocationC()
         const activityD = await Activity.getHomeLocationD()
         const bannerG = await Banner.getHomeLocationG()
-        
+
         //设置数据
         this.setData({
             themeA,
@@ -70,6 +69,13 @@ Page({
             themeF,
             bannerG,
             themeH
+        })
+    },
+
+    onGoToCoupons(event) {
+        const name = event.currentTarget.dataset.aname
+        wx.navigateTo({
+            url: `/pages/coupon/coupon?name=${name}&type=${CouponCenterType.ACTIVITY}`
         })
     },
 
