@@ -14,10 +14,8 @@ http://www.imooc.com/u/5980627/articles
 
 http://coding.imooc.com/class/149.html
 
-
 ## 课程专属的QQ学习群
 
 Web端"进入课程"，页面右侧会看到QQ群号，验证信息是：购买课程对应的订单号
 
 进群可以额外获得学习一些【课外知识】及【面试知识】
-

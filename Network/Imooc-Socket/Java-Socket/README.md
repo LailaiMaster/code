@@ -8,7 +8,7 @@
 - l3：upd API 示例
 - l4：tcp API 示例
 - l5：tcp udp 配合示例
-- l6：建议聊天室
+- l6：聊天室
 
 ## 2、 **l7**：NIO 改写服务器
 
@@ -26,7 +26,7 @@
 ## 3、**l8**：复现粘包，消息不完整的问题
 
 - l8-q1：模拟同一个消息反复收到消息到达回调，修改类
-  - IoSelectorProvider：注释了 selectionKey.interestOps(selectionKey.readyOps() & ~keyOps); 
+  - IoSelectorProvider：注释了 selectionKey.interestOps(selectionKey.readyOps() & ~keyOps);
   - SocketChannelAdapter：mHandleInputCallback 中延迟处理消息
 - l8-q2：模拟消息粘包的问题，修改类
   - TCPClient：客户端连续发送四条消息，服务器将其当作一条消息处理。

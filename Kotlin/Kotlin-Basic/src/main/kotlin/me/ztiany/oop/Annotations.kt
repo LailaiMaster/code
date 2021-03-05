@@ -23,4 +23,3 @@ package me.ztiany.oop
  *
  * */
 private annotation class Ann(val abc: Int)
-

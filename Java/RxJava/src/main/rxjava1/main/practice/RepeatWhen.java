@@ -1,6 +1,6 @@
 package main.practice;
 
-import main.utils.RxLock;
+import utils.RxLock;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;

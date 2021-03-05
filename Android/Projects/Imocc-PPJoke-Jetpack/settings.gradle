@@ -1,2 +1,0 @@
-rootProject.name = 'ppjoke'
-include ':app', ':libnavannotation', ':libnavcompiler', ':libnetwork', ':libcommon'

@@ -33,7 +33,7 @@ repositories {
 sourceSets {
     main {
         java {
-            srcDirs("src/main/rxjava1", "src/main/rxjava2", "src/main/rxjava3")
+            srcDirs("src/main/base", "src/main/rxjava1", "src/main/rxjava2", "src/main/rxjava3")
         }
     }
 }

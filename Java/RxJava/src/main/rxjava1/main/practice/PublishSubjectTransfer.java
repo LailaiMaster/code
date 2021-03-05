@@ -1,6 +1,6 @@
 package main.practice;
 
-import main.utils.Pair;
+import utils.Pair;
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;

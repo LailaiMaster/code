@@ -1,5 +1,8 @@
 package rx;
 
+/**
+ * 演示 RxJava 线程切换原理
+ */
 public class UseCustomObservable {
 
     public static void main(String[] args) {

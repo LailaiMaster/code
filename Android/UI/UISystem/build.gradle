@@ -1,11 +1,7 @@
-apply from: 'libs.gradle'
-
 buildscript {
+    apply from: 'libs.gradle'
 
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/central/' }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
@@ -20,16 +16,12 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
-
 }
 
 subprojects {
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/central/' }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url 'https://maven.aliyun.com/repository/central' }
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven { url "https://maven.aliyun.com/repository/google" }
