@@ -49,6 +49,13 @@ buildscript {
     classpath "com.mobidevelop.robovm:robovm-gradle-plugin:${versions.robovm}"
   }
   repositories {
+    maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    maven { url 'https://maven.aliyun.com/repository/public' }
+    maven { url 'https://maven.aliyun.com/repository/jcenter' }
+    maven { url "https://maven.aliyun.com/repository/google" }
+    maven { url 'https://dl.google.com/dl/android/maven2/' }
+    maven { url 'https://jitpack.io' }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
     mavenCentral()
     google()
     jcenter()
@@ -58,6 +65,13 @@ buildscript {
 
 subprojects {
   repositories {
+    maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    maven { url 'https://maven.aliyun.com/repository/public' }
+    maven { url 'https://maven.aliyun.com/repository/jcenter' }
+    maven { url "https://maven.aliyun.com/repository/google" }
+    maven { url 'https://dl.google.com/dl/android/maven2/' }
+    maven { url 'https://jitpack.io' }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
     mavenCentral()
     google()
     jcenter()

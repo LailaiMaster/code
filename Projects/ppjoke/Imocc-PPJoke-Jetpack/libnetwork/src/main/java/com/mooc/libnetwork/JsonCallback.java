@@ -1,6 +1,7 @@
 package com.mooc.libnetwork;
 
 public abstract class JsonCallback<T> {
+
     public void onSuccess(ApiResponse<T> response) {
 
     }
@@ -12,4 +13,5 @@ public abstract class JsonCallback<T> {
     public void onCacheSuccess(ApiResponse<T> response) {
 
     }
+
 }

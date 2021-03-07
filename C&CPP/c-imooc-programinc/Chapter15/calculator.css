@@ -1,0 +1,57 @@
+button {
+    border: solid 0.5px #2f2e2d;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+    background-image: none;
+    font-size: 22px;
+    font-weight: lighter;
+    color:#ececec;
+}
+
+.control-button {
+    background-color: #fc9e2b;
+}
+
+.control-button:hover {
+    background-color: darkorange;
+}
+
+.control-button:active {
+    background-color: #ee6600;
+}
+
+.number-button {
+    background-color: #606261;
+}
+
+.number-button:hover {
+    background-color: #5e5e5e;
+}
+
+.number-button:active {
+    background-color: #5a5a5a;
+}
+
+.functional-button {
+    background-color: #424441;
+}
+
+.functional-button:hover {
+    background-color: #404040;
+}
+
+.functional-button:active {
+    background-color: #3e3e3e;
+}
+
+.text-input {
+    background-image: none;
+    background-color: #313131;
+    font-weight: normal;
+    color: white;
+    font-size: 36px;
+    box-shadow: none;
+    text-shadow: none;
+    padding: 0 10px;
+}

@@ -66,19 +66,24 @@ public class FeedCommentAdapter extends AbsPagedListAdapter<Comment, FeedComment
     }
 
     public void deleteAndRefreshList(Comment item) {
-        MutableItemKeyedDataSource<Integer, Comment> dataSource = new MutableItemKeyedDataSource<Integer, Comment>((ItemKeyedDataSource) getCurrentList().getDataSource()) {
+        ItemKeyedDataSource source = (ItemKeyedDataSource) getCurrentList().getDataSource();
+
+        MutableItemKeyedDataSource<Integer, Comment> dataSource = new MutableItemKeyedDataSource<Integer, Comment>(source) {
             @NonNull
             @Override
             public Integer getKey(@NonNull Comment item) {
                 return item.id;
             }
         };
+
         PagedList<Comment> currentList = getCurrentList();
+
         for (Comment comment : currentList) {
             if (comment != item) {
                 dataSource.data.add(comment);
             }
         }
+
         PagedList<Comment> pagedList = dataSource.buildNewPagedList(getCurrentList().getConfig());
         submitList(pagedList);
     }

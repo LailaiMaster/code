@@ -1,0 +1,7 @@
+[requires]
+libcurl/7.72.0
+sqlite3/3.32.3
+tinycthreadpool/1.0@bennyhuo/testing
+
+[generators]
+cmake

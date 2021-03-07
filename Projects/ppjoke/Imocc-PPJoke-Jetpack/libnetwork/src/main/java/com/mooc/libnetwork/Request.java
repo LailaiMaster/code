@@ -4,12 +4,6 @@ import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.IntDef;
-import androidx.annotation.NonNull;
-import androidx.arch.core.executor.ArchTaskExecutor;
-
-//import com.mooc.libnetwork.cache.CacheManager;
-
 import com.mooc.libnetwork.cache.CacheManager;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,11 +18,17 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.arch.core.executor.ArchTaskExecutor;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+//import com.mooc.libnetwork.cache.CacheManager;
+
 public abstract class Request<T, R extends Request> implements Cloneable {
+
     protected String mUrl;
     protected HashMap<String, String> headers = new HashMap<>();
     protected HashMap<String, Object> params = new HashMap<>();
@@ -249,4 +249,5 @@ public abstract class Request<T, R extends Request> implements Cloneable {
     public Request clone() throws CloneNotSupportedException {
         return (Request<T, R>) super.clone();
     }
+
 }

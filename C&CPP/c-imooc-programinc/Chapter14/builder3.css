@@ -1,0 +1,18 @@
+button {
+    background: none;
+    border: solid 0.5px #2f2d2d;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+    font-size: 22px;
+    font-weight: lighter;
+    color: black;
+}
+
+#ok_button {
+    background-color: greenyellow;
+}
+
+.cancel-button-class {
+    background-color: red;
+}

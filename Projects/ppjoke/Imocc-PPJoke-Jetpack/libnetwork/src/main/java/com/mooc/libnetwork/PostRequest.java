@@ -5,6 +5,7 @@ import java.util.Map;
 import okhttp3.FormBody;
 
 public class PostRequest<T> extends Request<T, PostRequest> {
+
     public PostRequest(String url) {
         super(url);
     }
@@ -19,4 +20,5 @@ public class PostRequest<T> extends Request<T, PostRequest> {
         okhttp3.Request request = builder.url(mUrl).post(bodyBuilder.build()).build();
         return request;
     }
+
 }

@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatEditText;
  * dispatchKeyEventPreIme 复写这个方案 可以在对话框弹框中 ，监听backPress事件。以销毁对话框
  */
 public class PPEditTextView extends AppCompatEditText {
+
     private onBackKeyEvent keyEvent;
 
     public PPEditTextView(Context context) {
@@ -43,4 +44,5 @@ public class PPEditTextView extends AppCompatEditText {
     public interface onBackKeyEvent {
         boolean onKeyEvent();
     }
+
 }

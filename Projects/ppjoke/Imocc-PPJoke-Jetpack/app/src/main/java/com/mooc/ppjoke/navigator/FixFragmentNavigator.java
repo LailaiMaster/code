@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import java.lang.reflect.Field;
+import java.util.ArrayDeque;
+import java.util.Map;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,15 +20,12 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigator;
 import androidx.navigation.fragment.FragmentNavigator;
 
-import java.lang.reflect.Field;
-import java.util.ArrayDeque;
-import java.util.Map;
-
 /**
  * 定制的Fragment导航器，替换ft.replace(mContainerId, frag);为 hide()/show()
  */
 @Navigator.Name("fixfragment")
 public class FixFragmentNavigator extends FragmentNavigator {
+
     private static final String TAG = "FixFragmentNavigator";
     private Context mContext;
     private FragmentManager mManager;
@@ -41,11 +42,11 @@ public class FixFragmentNavigator extends FragmentNavigator {
     @Override
     public NavDestination navigate(@NonNull Destination destination, @Nullable Bundle args, @Nullable NavOptions navOptions, @Nullable Navigator.Extras navigatorExtras) {
         if (mManager.isStateSaved()) {
-            Log.i(TAG, "Ignoring navigate() call: FragmentManager has already"
-                    + " saved its state");
+            Log.i(TAG, "Ignoring navigate() call: FragmentManager has already" + " saved its state");
             return null;
         }
         String className = destination.getClassName();
+
         if (className.charAt(0) == '.') {
             className = mContext.getPackageName() + className;
         }
@@ -67,6 +68,7 @@ public class FixFragmentNavigator extends FragmentNavigator {
         }
 
         Fragment fragment = mManager.getPrimaryNavigationFragment();
+
         if (fragment != null) {
             ft.hide(fragment);
         }
@@ -87,6 +89,7 @@ public class FixFragmentNavigator extends FragmentNavigator {
 
         final @IdRes int destId = destination.getId();
         ArrayDeque<Integer> mBackStack = null;
+
         try {
             Field field = FragmentNavigator.class.getDeclaredField("mBackStack");
             field.setAccessible(true);
@@ -98,6 +101,7 @@ public class FixFragmentNavigator extends FragmentNavigator {
         }
 
         final boolean initialNavigation = mBackStack.isEmpty();
+
         // TODO Build first class singleTop behavior for fragments
         final boolean isSingleTopReplacement = navOptions != null && !initialNavigation
                 && navOptions.shouldLaunchSingleTop()
@@ -143,5 +147,6 @@ public class FixFragmentNavigator extends FragmentNavigator {
     private String generateBackStackName(int backStackindex, int destid) {
         return backStackindex + "-" + destid;
     }
+
 }
 

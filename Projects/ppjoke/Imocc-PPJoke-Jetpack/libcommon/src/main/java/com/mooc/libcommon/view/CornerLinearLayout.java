@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 public class CornerLinearLayout extends LinearLayout {
+
     public CornerLinearLayout(Context context) {
         this(context, null);
     }
@@ -21,7 +22,7 @@ public class CornerLinearLayout extends LinearLayout {
 
     public CornerLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-
         ViewHelper.setViewOutline(this, attrs, defStyleAttr, defStyleRes);
     }
+
 }

@@ -1,0 +1,5 @@
+[requires]
+libcurl/7.71.0
+
+[generators]
+cmake

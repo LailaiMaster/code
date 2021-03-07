@@ -1,0 +1,9 @@
+*.exe
+*.pptx
+cmake-build-*
+*.o
+*.a
+*.dll
+*.dylib
+.idea
+*.iml

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class WindowInsetsFrameLayout extends FrameLayout {
+
     public WindowInsetsFrameLayout(@NonNull Context context) {
         super(context);
     }
@@ -43,4 +44,5 @@ public class WindowInsetsFrameLayout extends FrameLayout {
         }
         return windowInsets;
     }
+
 }

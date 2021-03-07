@@ -12,9 +12,6 @@ import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
@@ -26,10 +23,14 @@ import com.mooc.ppjoke.exoplayer.IPlayTarget;
 import com.mooc.ppjoke.exoplayer.PageListPlay;
 import com.mooc.ppjoke.exoplayer.PageListPlayManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 /**
  * 列表视频播放专用
  */
 public class ListPlayerView extends FrameLayout implements IPlayTarget, PlayerControlView.VisibilityListener, Player.EventListener {
+
     public View bufferView;
     public PPImageView cover, blur;
     protected ImageView playBtn;

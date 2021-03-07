@@ -1,0 +1,16 @@
+window {
+    padding: 15px;
+    border: #ee6600;
+}
+
+button {
+    font-size: 14px;
+    font-weight: bold;
+
+    text-shadow: none;
+    box-shadow: none;
+}
+
+label {
+    font-weight: bold;
+}

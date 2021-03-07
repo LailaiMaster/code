@@ -21,6 +21,7 @@ import java.util.List;
  * @param <Value>
  */
 public abstract class MutableItemKeyedDataSource<Key, Value> extends ItemKeyedDataSource<Key, Value> {
+
     private ItemKeyedDataSource mDataSource;
 
     public List<Value> data = new ArrayList<>();
@@ -30,12 +31,10 @@ public abstract class MutableItemKeyedDataSource<Key, Value> extends ItemKeyedDa
                 .setFetchExecutor(ArchTaskExecutor.getIOThreadExecutor())
                 .setNotifyExecutor(ArchTaskExecutor.getMainThreadExecutor())
                 .build();
-
         return pagedList;
     }
 
     public MutableItemKeyedDataSource(ItemKeyedDataSource dataSource) {
-
         mDataSource = dataSource;
     }
 
@@ -48,7 +47,7 @@ public abstract class MutableItemKeyedDataSource<Key, Value> extends ItemKeyedDa
     public void loadAfter(@NonNull LoadParams<Key> params, @NonNull LoadCallback<Value> callback) {
         if (mDataSource != null) {
             //一旦 和当前DataSource关联的PagedList被提交到PagedListAdapter。那么ViewModel中创建的DataSource 就不会再被调用了
-            //我们需要在分页的时候 代理一下 原来的DataSource，迫使其继续工作
+            //我们需要在分页的时候代理一下 原来的DataSource，迫使其继续工作
             mDataSource.loadAfter(params, callback);
         }
     }
@@ -61,4 +60,5 @@ public abstract class MutableItemKeyedDataSource<Key, Value> extends ItemKeyedDa
     @NonNull
     @Override
     public abstract Key getKey(@NonNull Value item);
+
 }
