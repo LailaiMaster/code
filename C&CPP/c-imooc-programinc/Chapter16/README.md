@@ -1,73 +1,15 @@
-# 综合案例：跨平台下载软件
+# 慕课网《[C 语言体系化精讲](https://coding.imooc.com/class/463.html) 》 第十六章-跨平台的下载工具
 
-## 环境配置
+本章程序仅支持 Windows + Mingw 环境【因为如果使用 msvc 的话，就要自己编译 gtk】。
 
-1. 配置 MinGW（仅 Windows 用户需要） 
+使用 conan 下载 sqlite3 然后用 mingw 编译时，失败了，遇到如下问题：
 
-由于本节需要使用 Conan 管理依赖，因此需要让 Conan 知道编译器的配置。我们需要在 
-
-```
-<你的用户目录>/.conan/profiles/
-```
-
-这个路径下创建一个新文件，例如命名为 mingw64，添加以下内容：
-
-```
-MSYS2_ROOT=C:\msys64
-MINGW64_ROOT=C:\msys64\mingw64
-
-[settings]
-os_build=Windows
-os=Windows
-arch=x86_64
-arch_build=x86_64
-compiler=gcc
-compiler.version=9.2
-compiler.exception=seh
-compiler.libcxx=libstdc++11
-compiler.threads=posix
-build_type=Release
-
-[env]
-MSYS_ROOT=$MSYS2_ROOT\bin
-MSYS_BIN=$MSYS2_ROOT\usr\bin
-CONAN_CMAKE_GENERATOR="MinGW Makefiles"
-CXX=$MINGW64_ROOT\bin\g++.exe
-CC=$MINGW64_ROOT\bin\gcc.exe
-CONAN_BASH_PATH=$MSYS2_ROOT\usr\bin\bash.exe
-PATH=[$MSYS2_ROOT\usr\bin, $MINGW64_ROOT\bin]
-```
-
-注意 `MSYS2_ROOT` 和 `MINGW64_ROOT` 需要替换成你自己实际的安装路径。如果你安装时选择的是默认的路径，那么应该就不用修改。
-
-
-2. 添加 bennyhuo 的 Conan 仓库。
-
-由于本章用到了 `tinycthreadpool/1.0@bennyhuo/testing` 这个依赖，这个库是我专门为了课程讲解基于 [tinycthread](https://github.com/tinycthread/tinycthread) 和 [threadpool](https://github.com/mbrossard/threadpool) 定制而来的，定制之后的版本支持 Windows、macOS、Linux 等系统。
-
-这个依赖通过 Conan 发布到了我个人的 Conan 仓库：https://api.bintray.com/conan/bennyhuo/conan-bennyhuo，因此大家需要在安装依赖之前添加这个仓库，执行下面的命令即可：
-
-``` 
-conan remote add bennyhuo https://api.bintray.com/conan/bennyhuo/conan-bennyhuo
-```
-
-安装成功后可以通过以下命令查看：
-
-``` 
-> conan remote list
-conan-center: https://conan.bintray.com [Verify SSL: True]
-bincrafters: https://api.bintray.com/conan/bincrafters/public-conan [Verify SSL: True]
-bennyhuo: https://api.bintray.com/conan/bennyhuo/conan-bennyhuo [Verify SSL: True]
-```
-
-3. 安装 Conan 依赖。前面的步骤配置好之后，通过 Conan 命令安装依赖，安装方法我们在前面介绍 Conan 时已经讲过，这里稍微需要注意的是：Windows 上安装时需要指定 profile，增加参数 `--profile=mingw64`；安装时如果提示没有现成的包，可以增加参数 `--build=missing` 来解决。
-4. curl 从 7.72 开始加入 zstd 编码模块，windows 上 mingw 不会自动引入这个依赖，通过 msys 安装：
-```
-pacman -S mingw-w64-x86_64-zstd
-```
-安装后通过 pkg-config 确认：
-
-```
-$pkg-config --list-all | grep zstd
-libzstd               zstd - fast lossless compression algorithm library
+```shell
+sqlite3/3.32.3: ERROR: Package '5511a12d7f2fe4fae97b5d00f4d1a52147d3cdf5' build failed
+sqlite3/3.32.3: WARN: Build folder D:\dev_data\.conan\data\sqlite3\3.32.3\_\_\build\5511a12d7f2fe4fae97b5d00f4d1a52147d3cdf5
+ERROR: sqlite3/3.32.3: Error in build() method, line 117
+        cmake = self._configure_cmake()
+while calling '_configure_cmake', line 113
+        self._cmake.configure()
+        ConanException: Error 1 while executing cd D:\dev_data\.conan\data\sqlite3\3.32.3\_\_\build\5511a12d7f2fe4fae97b5d00f4d1a52147d3cdf5 && cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE="Release" -DCONAN_IN_LOCAL_CACHE="ON" -DCONAN_COMPILER="gcc" -DCONAN_COMPILER_VERSION="9.2" -DCONAN_CXX_FLAGS="-m64" -DCONAN_SHARED_LINKER_FLAGS="-m64" -DCONAN_C_FLAGS="-m64" -DBUILD_SHARED_LIBS="OFF" -DCMAKE_INSTALL_PREFIX="D:\dev_data\.conan\data\sqlite3\3.32.3\_\_\package\5511a12d7f2fe4fae97b5d00f4d1a52147d3cdf5" -DCMAKE_INSTALL_BINDIR="bin" -DCMAKE_INSTALL_SBINDIR="bin" -DCMAKE_INSTALL_LIBEXECDIR="bin" -DCMAKE_INSTALL_LIBDIR="lib" -DCMAKE_INSTALL_INCLUDEDIR="include" -DCMAKE_INSTALL_OLDINCLUDEDIR="include" -DCMAKE_INSTALL_DATAROOTDIR="share" -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY="ON" -DCONAN_EXPORTED="1" -DSQLITE3_BUILD_EXECUTABLE="True" -DTHREADSAFE="1" -DENABLE_COLUMN_METADATA="True" -DENABLE_DBSTAT_VTAB="False" -DENABLE_EXPLAIN_COMMENTS="False" -DENABLE_FTS3="False" -DENABLE_FTS3_PARENTHESIS="False" -DENABLE_FTS4="False" -DENABLE_FTS5="False" -DENABLE_JSON1="False" -DENABLE_PREUPDATE_HOOK="False" -DENABLE_SOUNDEX="False" -DENABLE_RTREE="True" -DENABLE_UNLOCK_NOTIFY="True" -DENABLE_DEFAULT_SECURE_DELETE="False" -DUSE_ALLOCA="False" -DOMIT_LOAD_EXTENSION="False" -DHAVE_FDATASYNC="True" -DHAVE_GMTIME_R="True" -DHAVE_LOCALTIME_R="False" -DHAVE_POSIX_FALLOCATE="False" -DHAVE_STRERROR_R="True" -DHAVE_USLEEP="True" -DDISABLE_GETHOSTUUID="False" -DMAX_BLOB_SIZE="1000000000" -Wno-dev D:\dev_data\.conan\data\sqlite3\3.32.3\_\_\build\5511a12d7f2fe4fae97b5d00f4d1a52147d3cdf5
 ```

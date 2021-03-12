@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-UiContext *ui_context;
+static UiContext *ui_context;
 
 static void DisplayTextToBuffer(char *text) {
   sprintf(ui_context->text_displayer, text);
@@ -12,18 +12,22 @@ static void DisplayTextToBuffer(char *text) {
 static void UnitTestMain() {
   FILE *case_file = fopen("cases.txt", "r");
   if (case_file) {
+
     char key;
     char output_result[MAX_CHAR + 1];
+
     while (fscanf(case_file, " %c,%s", &key, output_result) != EOF) {
       if (HandleInput(ui_context->context, key)) {
-        if (strcmp(output_result, ui_context->text_displayer) == 0) {
+
+        if (strcmp(output_result, ui_context->text_displayer) == 0) {//输入输出校验
           printf("Input [%c]: Output: %s, OK\n", key, output_result);
         } else {
           printf("Input [%c]: Output: %s, Expect: %s, ERROR\n", key, ui_context->text_displayer, output_result);
-          exit(-1);
+          //exit(-1);
         }
+
       }
-    }
+    }//loop end
 
     fclose(case_file);
   } else {

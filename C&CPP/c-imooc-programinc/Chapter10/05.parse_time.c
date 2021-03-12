@@ -1,71 +1,51 @@
+//for opening strptime
 #define _XOPEN_SOURCE
 
 #include <io_utils.h>
 #include <time_utils.h>
 #include <time.h>
+#include <stdbool.h>
 
+//=============== 解析时间【字符串-->日历时间】 ===============
 int main() {
-  long_time_t current_time_in_ms = TimeInMillisecond();
-  int current_time_millisecond = current_time_in_ms % 1000;
-  time_t current_time;
-  time(&current_time);
-  PRINT_LLONG(current_time);
+    //C 语言并没有标准的函数来解析时间，不过在 unix 广泛应用的 posix 标准提供了 strptime 函数，要使用这个函数，必须声明  _XOPEN_SOURCE 宏。【WSL2】
+    char *time = "2020-11-10 90:80:32.123";
+    struct tm parsed_time;
+    int millisecond = 0;
 
-  struct tm *calendar_time = localtime(&current_time);
-  PRINT_INT(calendar_time->tm_year);
-  PRINT_INT(calendar_time->tm_mon);
-  PRINT_INT(calendar_time->tm_mday);
-  PRINT_INT(calendar_time->tm_hour);
-  PRINT_INT(calendar_time->tm_min);
-  PRINT_INT(calendar_time->tm_sec);
+    bool useUnix = true;
 
-  puts(asctime(calendar_time));
-  puts(ctime(&current_time));
+    if (useUnix) {//unix
+        char *unparsed_string = strptime(time, "%F %T", &parsed_time);
+        if (unparsed_string) {//如果还有毫秒
+            PRINTLNF("unparsed time %s", unparsed_string);
+            sscanf(unparsed_string, ".%3d", &millisecond);//解析毫秒
+        }
+    } else {// msvc【没有函数支持，用 sscanf 模拟】
+        sscanf(time, "%4d-%2d-%2d %2d:%2d:%2d.%3d",
+               &parsed_time.tm_year,
+               &parsed_time.tm_mon,
+               &parsed_time.tm_mday,
+               &parsed_time.tm_hour,
+               &parsed_time.tm_min,
+               &parsed_time.tm_sec,
+               &millisecond);
 
-  //2020-11-09 06:59:47
-  char current_time_s[20];
-//  size_t size = strftime(current_time_s, 20, "%Y-%m-%d %H:%M:%S", calendar_time);
-  size_t size = strftime(current_time_s, 20, "%F %T", calendar_time);
-  PRINT_INT(size);
-  puts(current_time_s);
+        parsed_time.tm_year -= 1900;//修正年份，parsed_time.tm_year 指的是自 1900 年算起的年数。
+        parsed_time.tm_mon -= 1;//修正月份。
 
-  char *time = "2020-11-10 90:80:32.123";
-  struct tm parsed_time;
-  int millisecond;
-//   unix
-//  char *unparsed_string = strptime(time, "%F %T", &parsed_time);
+        mktime(&parsed_time);//修正时间，自动处理进位。
+    }
 
-// msvc
-  sscanf(time, "%4d-%2d-%2d %2d:%2d:%2d.%3d",
-         &parsed_time.tm_year,
-         &parsed_time.tm_mon,
-         &parsed_time.tm_mday,
-         &parsed_time.tm_hour,
-         &parsed_time.tm_min,
-         &parsed_time.tm_sec,
-         &millisecond);
-
-  parsed_time.tm_year -= 1900;
-  parsed_time.tm_mon -= 1;
-
-  mktime(&parsed_time);
-
-  PRINT_INT(parsed_time.tm_year);
-  PRINT_INT(parsed_time.tm_mon);
-  PRINT_INT(parsed_time.tm_mday);
-  PRINT_INT(parsed_time.tm_hour);
-  PRINT_INT(parsed_time.tm_min);
-  PRINT_INT(parsed_time.tm_sec);
-
-//  puts(unparsed_string);
-//  sscanf(unparsed_string, ".%3d", &millisecond);
-
-  PRINT_INT(millisecond);
-
-  //20201109070456
-//  size_t size2 = strftime(current_time_s, 20, "%Y%m%d%H%M%S", calendar_time);
-//  sprintf(current_time_s + 14, "%03d", current_time_millisecond);
-//  PRINT_INT(size2);
-//  puts(current_time_s);
-  return 0;
+    PRINTLNF("parsed time:");
+    PRINTLNF("------------------------------------------------------");
+    PRINT_INT(parsed_time.tm_year);
+    PRINT_INT(parsed_time.tm_mon);
+    PRINT_INT(parsed_time.tm_mday);
+    PRINT_INT(parsed_time.tm_hour);
+    PRINT_INT(parsed_time.tm_min);
+    PRINT_INT(parsed_time.tm_sec);
+    PRINT_INT(millisecond);
+    PRINTLNF("------------------------------------------------------");
+    return 0;
 }

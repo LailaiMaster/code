@@ -21,7 +21,6 @@ FIND_PACKAGE(PkgConfig REQUIRED)
 
 foreach (dep ${DEPS})
     PKG_CHECK_MODULES(${dep} REQUIRED ${dep})
-
     INCLUDE_DIRECTORIES(${${dep}_INCLUDE_DIRS})
     LINK_DIRECTORIES(${${dep}_LIBRARY_DIRS})
 endforeach ()

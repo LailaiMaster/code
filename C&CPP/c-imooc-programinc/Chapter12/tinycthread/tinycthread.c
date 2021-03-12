@@ -601,9 +601,9 @@ int thrd_create(thrd_t *thr, thrd_start_t func, void *arg)
   ti->mArg = arg;
 
   /* Create the thread */
-#if defined(_TTHREAD_WIN32_)
+#if defined(_TTHREAD_WIN32_)//windows 平台用 windows 平台的线程 API。
   *thr = CreateThread(NULL, 0, _thrd_wrapper_function, (LPVOID) ti, 0, NULL);
-#elif defined(_TTHREAD_POSIX_)
+#elif defined(_TTHREAD_POSIX_)//其他平台用 posix 标准
   if(pthread_create(thr, NULL, _thrd_wrapper_function, (void *)ti) != 0)
   {
     *thr = 0;

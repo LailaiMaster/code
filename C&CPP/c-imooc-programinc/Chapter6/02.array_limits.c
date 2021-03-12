@@ -3,21 +3,21 @@
 
 #define ARRAY_SIZE 5
 
+//=============== 数组的边界 ===============
 int main() {
-  int array[ARRAY_SIZE];
-  int array_with_expression[3 + 2];
-  PRINT_INT(array[0]);
-  PRINT_INT(array[5]);
+    //=============== 明确定义数组的范围 ===============
+    int array[ARRAY_SIZE];
+    int array_with_expression[3 + 2];
+    PRINT_INT(array[0]);
+    PRINT_INT(array[5]);//数组越界不报错，值未知。
 
-  int value = 2;
+    //=============== 变长数组（VLA） ===============
+    // C99 开始支持，gcc 在 C99 前单独做了支持。
+    // MSVC 不支持。
+    int value = 2;
+    int array_size_of_value[value];
 
-  // ....
-  // C99, VLA; gcc OK; MSVC ERROR
-  int array_size_of_value[value];
-
-  const int kSize = 5; // C++ OK
-  int array_size_of_const[kSize]; // C99, VLA; gcc OK; MSVC ERROR
-
-  // array[5] => array + 5
-  return 0;
+    const int kSize = 5; // C++ 支持，C++ 中常量是真的常量。
+    int array_size_of_const[kSize];
+    return 0;
 }

@@ -1,6 +1,7 @@
 #include <io_utils.h>
 #include <curl/curl.h>
 
+//=============== C 的第三方依赖管理工具：conan ===============
 int main(void) {
   FILE *file = fopen("bennyhuo.json", "w");
   CURL *curl = curl_easy_init();
@@ -10,6 +11,7 @@ int main(void) {
 
   curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
   curl_easy_setopt(curl, CURLOPT_URL, "https://api.github.com/users/bennyhuo");
+  //curl_easy_setopt(curl, CURLOPT_URL, "https://www.baidu.com");
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, fwrite);
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
   curl_easy_setopt(curl, CURLOPT_SSL_OPTIONS, CURLSSLOPT_NATIVE_CA);

@@ -1,5 +1,6 @@
 package com.bennyhuo.jni;
 
+//=============== 从 Java 调用 C ===============
 public class JniMain {
 
     static {

@@ -14,11 +14,12 @@ if (!MSVC)
 endif ()
 
 file(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.c")
-foreach(file ${files})
+foreach (file ${files})
     get_filename_component(name ${file} NAME)
     add_executable(${name} ${file} tinycthread/tinycthread.c)
 
+    #如果是 Unix 和 Linux 平台，要主动链接 pthread 库【默认不链接】。
     if (UNIX OR Linux)
         target_link_libraries(${name} pthread)
     endif ()
-endforeach()
+endforeach ()

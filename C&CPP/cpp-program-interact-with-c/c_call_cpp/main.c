@@ -10,9 +10,13 @@
 #include <stdio.h>
 #include "CppLibrary.h"
 
-//C中调用 C++ 函数：extern "C"需要放在 C++ 头文件中。
-
 int main() {
+#ifdef  __cplusplus
+    printf("main.c running in the cpp\n");
+#else
+    printf("main.c running in the c\n");
+#endif
+
     int a = 10;
     int b = 90;
     int ret = add(a, b);

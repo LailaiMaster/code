@@ -52,12 +52,13 @@ extern "C" {
 * tinycthread.h.
 */
 
+/*在哪个平台*/
 /* Which platform are we on? */
 #if !defined(_TTHREAD_PLATFORM_DEFINED_)
 #if defined(_WIN32) || defined(__WIN32__) || defined(__WINDOWS__)
-#define _TTHREAD_WIN32_
+#define _TTHREAD_WIN32_//Windows 平台
 #else
-#define _TTHREAD_POSIX_
+#define _TTHREAD_POSIX_//其他平台用 Posix 标准
 #endif
 #define _TTHREAD_PLATFORM_DEFINED_
 #endif
@@ -65,18 +66,18 @@ extern "C" {
 /* Activate some POSIX functionality (e.g. clock_gettime and recursive mutexes) */
 #if defined(_TTHREAD_POSIX_)
 #undef _FEATURES_H
-  #if !defined(_GNU_SOURCE)
-    #define _GNU_SOURCE
-  #endif
-  #if !defined(_POSIX_C_SOURCE) || ((_POSIX_C_SOURCE - 0) < 199309L)
-    #undef _POSIX_C_SOURCE
-    #define _POSIX_C_SOURCE 199309L
-  #endif
-  #if !defined(_XOPEN_SOURCE) || ((_XOPEN_SOURCE - 0) < 500)
-    #undef _XOPEN_SOURCE
-    #define _XOPEN_SOURCE 500
-  #endif
-  #define _XPG6
+#if !defined(_GNU_SOURCE)
+#define _GNU_SOURCE
+#endif
+#if !defined(_POSIX_C_SOURCE) || ((_POSIX_C_SOURCE - 0) < 199309L)
+#undef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 199309L
+#endif
+#if !defined(_XOPEN_SOURCE) || ((_XOPEN_SOURCE - 0) < 500)
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 500
+#endif
+#define _XPG6
 #endif
 
 /* Generic includes */
@@ -90,7 +91,9 @@ extern "C" {
 #define WIN32_LEAN_AND_MEAN
 #define __UNDEF_LEAN_AND_MEAN
 #endif
+
 #include <Windows.h>
+
 #ifdef __UNDEF_LEAN_AND_MEAN
 #undef WIN32_LEAN_AND_MEAN
 #undef __UNDEF_LEAN_AND_MEAN
@@ -114,13 +117,14 @@ extern "C" {
 
 #if defined(_TTHREAD_WIN32_)
 struct _tthread_timespec {
-  time_t tv_sec;
-  long   tv_nsec;
+    time_t tv_sec;
+    long tv_nsec;
 };
 #define timespec _tthread_timespec
 #endif
 
 int _tthread_timespec_get(struct timespec *ts, int base);
+
 #define timespec_get _tthread_timespec_get
 #endif
 
@@ -182,13 +186,13 @@ int _tthread_timespec_get(struct timespec *ts, int base);
 /* Mutex */
 #if defined(_TTHREAD_WIN32_)
 typedef struct {
-  union {
-    CRITICAL_SECTION cs;      /* Critical section handle (used for non-timed mutexes) */
-    HANDLE mut;               /* Mutex handle (used for timed mutex) */
-  } mHandle;                  /* Mutex handle */
-  int mAlreadyLocked;         /* TRUE if the mutex is already locked */
-  int mRecursive;             /* TRUE if the mutex is recursive */
-  int mTimed;                 /* TRUE if the mutex is timed */
+    union {
+        CRITICAL_SECTION cs;      /* Critical section handle (used for non-timed mutexes) */
+        HANDLE mut;               /* Mutex handle (used for timed mutex) */
+    } mHandle;                  /* Mutex handle */
+    int mAlreadyLocked;         /* TRUE if the mutex is already locked */
+    int mRecursive;             /* TRUE if the mutex is recursive */
+    int mTimed;                 /* TRUE if the mutex is timed */
 } mtx_t;
 #else
 typedef pthread_mutex_t mtx_t;
@@ -252,9 +256,9 @@ int mtx_unlock(mtx_t *mtx);
 /* Condition variable */
 #if defined(_TTHREAD_WIN32_)
 typedef struct {
-  HANDLE mEvents[2];                  /* Signal and broadcast event HANDLEs. */
-  unsigned int mWaitersCount;         /* Count of the number of waiters. */
-  CRITICAL_SECTION mWaitersCountLock; /* Serialize access to mWaitersCount. */
+    HANDLE mEvents[2];                  /* Signal and broadcast event HANDLEs. */
+    unsigned int mWaitersCount;         /* Count of the number of waiters. */
+    CRITICAL_SECTION mWaitersCountLock; /* Serialize access to mWaitersCount. */
 } cnd_t;
 #else
 typedef pthread_cond_t cnd_t;
@@ -452,13 +456,13 @@ int tss_set(tss_t key, void *val);
 
 #if defined(_TTHREAD_WIN32_)
 typedef struct {
-  LONG volatile status;
-  CRITICAL_SECTION lock;
+    LONG volatile status;
+    CRITICAL_SECTION lock;
 } once_flag;
 #define ONCE_FLAG_INIT {0,}
 #else
 #define once_flag pthread_once_t
-  #define ONCE_FLAG_INIT PTHREAD_ONCE_INIT
+#define ONCE_FLAG_INIT PTHREAD_ONCE_INIT
 #endif
 
 /** Invoke a callback exactly once
@@ -467,7 +471,9 @@ typedef struct {
  * @param func Callback to invoke.
  */
 #if defined(_TTHREAD_WIN32_)
+
 void call_once(once_flag *flag, void (*func)(void));
+
 #else
 #define call_once(flag,func) pthread_once(flag,func)
 #endif

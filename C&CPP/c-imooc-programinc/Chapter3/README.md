@@ -1,1 +1,1 @@
-# 慕课网：[C 语言体系化精讲](https://coding.imooc.com/class/463.html) 第三章-C语言快速入门
+# 慕课网《[C 语言体系化精讲](https://coding.imooc.com/class/463.html) 》 第三章-C语言快速入门

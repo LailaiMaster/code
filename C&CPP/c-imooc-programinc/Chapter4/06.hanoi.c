@@ -18,8 +18,8 @@ void Move(int n, char src, char dest, char tmp) {
   }
 }
 
+/**案例：汉诺塔*/
 int main(void) {
   Move(3, 'A', 'C', 'B');
-
   return 0;
 }

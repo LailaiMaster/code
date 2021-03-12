@@ -1,5 +1,5 @@
-#ifndef INTERACTOR_CPPLIBRARY_H
-#define INTERACTOR_CPPLIBRARY_H
+#ifndef INTERACTOR_CLIBRARY_H
+#define INTERACTOR_CLIBRARY_H
 
 #ifdef  __cplusplus
 extern "C" {
@@ -10,5 +10,6 @@ int add(int a, int b);
 #ifdef  __cplusplus
 }
 #endif
+
 
 #endif

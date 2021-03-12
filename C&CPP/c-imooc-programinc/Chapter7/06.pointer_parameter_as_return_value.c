@@ -32,9 +32,12 @@ Student TestStruct() {
   return student;
 }
 
+//=============== 指针参数作为返回值 ===============
 int main() {
   int array[] = {0, 1, 2, 3, 4};
+  //方式1：内存被拷贝两次
   int sum = SumIntArray(array, 5);
+  //方式2：内存只拷贝一次
   int sum2;
   SumIntArray2(array, 5, &sum2);
 
@@ -42,7 +45,6 @@ int main() {
   PRINT_INT(sum2);
 
   __int128 big_int = TestBigValue();
-
   Student student = TestStruct();
   return 0;
 }

@@ -1,5 +1,6 @@
 [requires]
 libcurl/7.71.0
+sqlite3/3.32.3
 
 [generators]
 cmake

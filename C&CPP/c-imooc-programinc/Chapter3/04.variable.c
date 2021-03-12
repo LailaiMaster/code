@@ -13,7 +13,12 @@ int main() {
 
     value_init = value;
     printf("size of value: %d\n", sizeof(value));
-    printf("address of value: %#x\n", &value);//"%#x " 中 x 的作用是在打印的内容前加进制标识，比如十六进制位 0x。
+    //"%#x " 中的 # 用于表示用指定的进制输出，其中 x 的作用是在打印的内容前加进制标识，比如十六进制位 0x。
+    //# indcates an alternative format. For x this means that 0x is prepended to the output.
+    // 参考：
+    //      <https://stackoverflow.com/questions/3529777/do-you-know-about-x-in-c-language-format-string>
+    //      <http://www.cplusplus.com/reference/cstdio/printf/>
+    printf("address of value: %#x\n", &value);
 
     //=============== 变量命名 ===============
     // key words 标识符 identifier

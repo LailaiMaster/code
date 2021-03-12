@@ -6,20 +6,27 @@
 // 6 : -1.56805e+015
 #define MAX_CHAR 13
 
+/**上下文*/
 typedef struct {
-  char input_buffer[MAX_CHAR + 1];
-  int input_buffer_position;
-  double result;
+    /*存储输入的内容*/
+    char input_buffer[MAX_CHAR + 1];
+    /*输入到几个位置*/
+    int input_buffer_position;
+    /*上一次计算的结构*/
+    double result;
 
-  Operation previous_operation;
-  Operation current_operation;
+    /*之前的运算*/
+    Operation previous_operation;
+    /*当前的计算*/
+    Operation current_operation;
 
-  void (*display_text)(char *);
+    /*函数指针，用于输出一个结果*/
+    void (*display_text)(char *);
 } CalcContext;
 
-int HandleInput(CalcContext *context, char input_value);
-
 CalcContext *CreateCalcContext();
+
+int HandleInput(CalcContext *context, char input_value);
 
 void DestroyCalcContext(CalcContext **p_context);
 

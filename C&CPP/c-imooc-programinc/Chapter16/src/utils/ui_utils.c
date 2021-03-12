@@ -25,7 +25,8 @@ GtkBuilder *OpenWindowWithStyle(char *layout_path, char *style_path, int quit_on
     return NULL;
   }
 
-  /* Construct a GtkBuilder instance and load our UI description */
+ Construct a GtkBuilder instance and load our UI description
+
   GtkBuilder *builder = gtk_builder_new();
 
   if (gtk_builder_add_from_file(builder, layout_path, &error) == 0) {
@@ -34,7 +35,8 @@ GtkBuilder *OpenWindowWithStyle(char *layout_path, char *style_path, int quit_on
     return NULL;
   }
 
-  /* Connect signal handlers to the constructed widgets. */
+ Connect signal handlers to the constructed widgets.
+
   GtkWindow *window = (GtkWindow *) gtk_builder_get_object(builder, "window");
   gtk_style_context_add_provider_for_screen(gtk_window_get_screen(window),
                                             (GtkStyleProvider *) css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);

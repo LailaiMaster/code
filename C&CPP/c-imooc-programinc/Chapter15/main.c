@@ -6,13 +6,16 @@
 
 int main(int argc, char *argv[]) {
 
-  if (argc > 1) {
-    if (strcasecmp(argv[1], "console") == 0) {
-      return RunConsoleUi(argc, argv);
-    } else if (strcasecmp(argv[1], "ut") == 0) {
-      return RunUnitTest(argc, argv);
+    if (argc > 1) {
+        if (strcasecmp(argv[1], "console") == 0) {
+            /*命令行模式*/
+            return RunConsoleUi(argc, argv);
+        } else if (strcasecmp(argv[1], "ut") == 0) {
+            /*单元测试模式*/
+            return RunUnitTest(argc, argv);
+        }
     }
-  }
 
-  return RunGtkUi(argc, argv);
+    /*GTK UI*/
+    return RunGtkUi(argc, argv);
 }

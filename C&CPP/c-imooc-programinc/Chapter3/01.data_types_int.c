@@ -12,18 +12,20 @@ int main() {
     unsigned long unsigned_long = 111;
 
     //=============== 格式化输出 ===============
-    // d = decimal
-    // x = hex
-    // o = oct
-    // hd%: short decimal
-    // %d: decimal
-    // %ld: long decimal
-    // %lld: long long decimal
-    // %hu: unsigned short decimal
-    // \n: new line
-    // zu: prints size_t as unsigned decimal
-    // zx: prints size_t as hex
-    // zd: prints size_t as signed decimal
+    /*
+        d = decimal
+        x = hex
+        o = oct
+        hd%: short decimal
+        %d: decimal
+        %ld: long decimal
+        %lld: long long decimal
+        %hu: unsigned short decimal
+        \n: new line
+        zu: prints size_t as unsigned decimal
+        zx: prints size_t as hex
+        zd: prints size_t as signed decimal
+     */
     printf("short int %d\n", short_int);
     printf("int in oct: %o\n", i);
     size_t size_of_int = sizeof(int);
