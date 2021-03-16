@@ -1,6 +1,7 @@
 package tcp;
 
 public class Tools {
+
     public static int byteArrayToInt(byte[] b) {
         return b[3] & 0xFF |
                 (b[2] & 0xFF) << 8 |
@@ -16,4 +17,5 @@ public class Tools {
                 (byte) (a & 0xFF)
         };
     }
+
 }

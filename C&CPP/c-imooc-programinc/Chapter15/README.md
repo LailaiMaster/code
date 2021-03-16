@@ -4,10 +4,10 @@
 
 **计算器效果**：
 
-![image](imgs/1.png)
+![image](../imgs/calculator_ui.png)
 
 **计算器接口设计**：
 
 核心思想，UI 与逻辑分离，只要定义好接口，就可以多人协作开发。
 
-![image](imgs/2.png)
+![image](../imgs/calculator_arch.png)

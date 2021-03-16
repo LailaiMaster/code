@@ -15,7 +15,7 @@ import clink.utils.CharUtils;
  */
 public class IoArgs {
 
-    //todo，容量改为 4 个字节，模拟单消息不完整问题
+    //TODO，容量改为 4 个字节，模拟单消息不完整问题
     private byte[] byteBuffer = new byte[4];
     private ByteBuffer buffer = ByteBuffer.wrap(byteBuffer);
 
@@ -28,8 +28,9 @@ public class IoArgs {
         return socketChannel.write(buffer);
     }
 
+    //TODO，去掉减去换行符的逻辑
     public String bufferString() {
-        return new String(byteBuffer, 0, buffer.position() - CharUtils.LINE_BREAK_LENGTH /*丢弃换行符*/);
+        return new String(byteBuffer, 0, buffer.position() /*- CharUtils.LINE_BREAK_LENGTH*/ /*丢弃换行符*/);
     }
 
     public interface IoArgsEventListener {

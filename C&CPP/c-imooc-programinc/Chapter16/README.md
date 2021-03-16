@@ -2,6 +2,22 @@
 
 本章程序仅支持 Windows + Mingw 环境【因为如果使用 msvc 的话，就要自己编译 gtk】。
 
+## 项目介绍
+
+**下载器效果**：
+
+![image](../imgs/download_ui.png)
+
+**下载器接口设计**：
+
+![image](../imgs/download_arch.png)
+
+**下载器技术栈**：
+
+![image](../imgs/download_statck.png)
+
+## 遇到问题
+
 使用 conan 下载 sqlite3 然后用 mingw 编译时，失败了，遇到如下问题：
 
 ```shell

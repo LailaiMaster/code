@@ -37,7 +37,9 @@ class TCPServer {
         mForwardingThreadPoolExecutor = Executors.newSingleThreadExecutor();
     }
 
-    /*启动服务器*/
+    /**
+     * 启动服务器
+     */
     boolean start() {
         try {
             mSelector = Selector.open();
@@ -58,7 +60,9 @@ class TCPServer {
         }
     }
 
-    /*给所有客户端发送消息*/
+    /**
+     * 给所有客户端发送消息
+     */
     void broadcast(String line) {
         synchronized (this) {
             System.out.println("TCPServer send: " + line + " to clients: " + mClientHandlers.size());
@@ -68,14 +72,16 @@ class TCPServer {
         }
     }
 
-    /*停止服务器*/
+    /**
+     * 停止服务器
+     */
     void stop() {
-
         synchronized (this) {
             for (ClientHandler clientHandler : mClientHandlers) {
                 clientHandler.exit();
             }
         }
+
         mClientHandlers.clear();
         mClientListener.exit();
 

@@ -1,4 +1,4 @@
-package tcp;
+package udp;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -6,12 +6,13 @@ import java.net.DatagramSocket;
 import java.util.UUID;
 
 /**
- * UDP 提供者，用于提供服务
+ * UDP 提供者，用于提供服务：监听收到的广播，然后回复一个特定的 sn。
  */
 public class UDPProvider {
 
     public static void main(String[] args) throws IOException {
         // 生成一份唯一标示
+        System.out.println("开启 UDPProvider");
         String sn = UUID.randomUUID().toString();
         Provider provider = new Provider(sn);
         provider.start();
@@ -89,7 +90,6 @@ public class UDPProvider {
                 ds = null;
             }
         }
-
 
         /**
          * 提供结束

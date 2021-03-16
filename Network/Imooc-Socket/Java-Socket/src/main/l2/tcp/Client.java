@@ -29,7 +29,6 @@ class Client {
         // 释放资源
         socket.close();
         System.out.println("客户端已退出～");
-
     }
 
     private static void todo(Socket client) throws IOException {
@@ -64,7 +63,6 @@ class Client {
         // 资源释放
         socketPrintStream.close();
         socketBufferedReader.close();
-
     }
 
 }

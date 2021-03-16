@@ -73,20 +73,22 @@ public class SocketChannelAdapter implements Sender, Receiver, Closeable {
         }
     }
 
-    private IoProvider.HandleInputCallback mHandleInputCallback = new IoProvider.HandleInputCallback() {
+    private final IoProvider.HandleInputCallback mHandleInputCallback = new IoProvider.HandleInputCallback() {
 
         @Override
         protected void canProviderInput() {
             if (mIsClosed.get()) {
                 return;
             }
+            //TODO：这里每次都创建一个新的 IoArgs，还需要优化以实现 IoArgs 的复用。
             IoArgs ioArgs = new IoArgs();
             IoArgs.IoArgsEventListener listener = mReceiveIoEventListener;
             if (listener != null) {
                 listener.onStarted(ioArgs);
             }
 
-            //具体的读取操作（假设一次就能读完）
+            // 具体的读取操作
+            // TODO：这里是假设一次就能读完，但是实际情况中并不一定。
             try {
                 if (ioArgs.read(mChannel) > 0 && listener != null) {
                     // 读取完成回调
@@ -102,17 +104,16 @@ public class SocketChannelAdapter implements Sender, Receiver, Closeable {
 
     };
 
+    /*异步写暂未实现*/
     private final IoProvider.HandleOutputCallback mHandleOutputCallback = new IoProvider.HandleOutputCallback() {
         @Override
         protected void canProviderOutput(Object attach) {
             if (mIsClosed.get()) {
                 return;
             }
-            // TODO
             mSendIoEventListener.onCompleted(null);
         }
     };
-
 
     public interface OnChannelStatusChangedListener {
         void onChannelClosed(SocketChannel channel);

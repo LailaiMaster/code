@@ -9,6 +9,8 @@ import foo.UDPConstants;
 
 
 /**
+ * 服务端启动入口
+ *
  * @author Ztiany
  * Email ztiany3@gmail.com
  * Date 2018/11/1 21:17
@@ -27,7 +29,7 @@ class Server {
         //启动 UDP 接受，让 TCP 服务可以通过 UDP 广播被搜索到
         UDPProvider.start(UDPConstants.PORT_SERVER);
 
-        //读取键盘输入，发送给已连接的 tcp 客户端
+        //读取键盘输入，发送给已连接的所有 tcp 客户端
         InputStreamReader inputStreamReader = new InputStreamReader(System.in);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         String line = null;

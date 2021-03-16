@@ -78,7 +78,9 @@ class ClientHandler {
         void onNewMessageArrived(ClientHandler clientHandler, String message);
     }
 
-    /*从客户端读取数据*/
+    /**
+     * 从客户端读取数据，用的是非阻塞方式。
+     */
     private class ClientReadHandler extends Thread {
 
         private volatile boolean mDone;
@@ -94,6 +96,7 @@ class ClientHandler {
         public void run() {
             System.out.println("TCPServer start to read");
             String line;
+
             try {
 
                 while (!mDone) {
@@ -108,6 +111,7 @@ class ClientHandler {
 
                     //处理可得的Socket
                     Iterator<SelectionKey> iterator = mSelector.selectedKeys().iterator();
+
                     while (iterator.hasNext()) {
                         if (mDone) {
                             break;
@@ -151,7 +155,9 @@ class ClientHandler {
 
     }//ClientReadHandler end
 
-    /*负责向客户端写数据，内部实现为一个 SingleThreadExecutor*/
+    /**
+     * 负责向客户端写数据，内部实现为一个 SingleThreadExecutor，用的还是阻塞的方式。
+     */
     private class ClientWriteHandler {
 
         private final Selector mSelector;

@@ -73,8 +73,11 @@ class TCPServer {
         public void run() {
             System.out.println("服务器准备就绪～");
             /*
-             *一个死循环不断地读取
-             * 是try cache包裹while，还是 while包裹try cache？当发生异常后不需要再继续循环时，就使用 try cache 包裹 while，否则  while 中使用 try cache 包裹执行代码。
+             *一个死循环不断地读取：是 try cache 包裹 while，还是 while 包裹 try cache？
+             *
+             *  1. 当发生异常后不需要再继续循环时，就使用 try cache 包裹 while。
+             *  2. 否则  while 中使用 try cache 包裹执行代码。
+             *
              * 这里发生异常没关系，表示接受这个连接时出错了，后面可以接收其他的连接。
              */
             do {

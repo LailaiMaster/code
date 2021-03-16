@@ -22,12 +22,18 @@ public interface IoProvider extends Closeable {
      */
     boolean registerOutput(SocketChannel channel, HandleOutputCallback callback);
 
+    /**
+     * 不再关心channel的可读事件
+     */
     void unRegisterInput(SocketChannel channel);
 
+    /**
+     * 不再关心channel的可写事件
+     */
     void unRegisterOutput(SocketChannel channel);
 
     /**
-     * 与关心可读的SocketChannel对应
+     * 与关心可读的SocketChannel对应的回调
      */
     abstract class HandleInputCallback implements Runnable {
         @Override
@@ -35,11 +41,12 @@ public interface IoProvider extends Closeable {
             canProviderInput();
         }
 
+        /**表示可以执行读操作*/
         protected abstract void canProviderInput();
     }
 
     /**
-     * 与关心可写的SocketChannel对应
+     * 与关心可写的SocketChannel对应的回调
      */
     abstract class HandleOutputCallback implements Runnable {
 
@@ -58,7 +65,7 @@ public interface IoProvider extends Closeable {
         }
 
         /**
-         * 当对应的 SocketChannel 可写时，此方法会被调用
+         * 当对应的 SocketChannel 可写时，此方法会被调用。
          */
         protected abstract void canProviderOutput(Object attach);
     }

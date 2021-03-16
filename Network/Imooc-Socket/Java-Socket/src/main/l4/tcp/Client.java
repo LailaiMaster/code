@@ -9,6 +9,9 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.nio.ByteBuffer;
 
+/**
+ * TCP 客户端
+ */
 public class Client {
 
     private static final int PORT = 20000;
@@ -36,7 +39,6 @@ public class Client {
         // 释放资源
         socket.close();
         System.out.println("客户端已退出～");
-
     }
 
     private static Socket createSocket() throws IOException {
@@ -84,29 +86,29 @@ public class Client {
         // 是否需要在长时无数据响应时发送确认数据（类似心跳包），时间大约为2小时
         socket.setKeepAlive(true);
 
-        // 对于close关闭操作行为进行怎样的处理；默认为false，0
-        // false、0：默认情况，关闭时立即返回，底层系统接管输出流，将缓冲区内的数据发送完成
-        // true、0：关闭时立即返回，缓冲区数据抛弃，直接发送RST结束命令到对方，并无需经过2MSL等待
-        // true、200：关闭时最长阻塞200毫秒，随后按第二情况处理
+        // 对于 close 关闭操作行为进行怎样的处理；默认为 false，0
+        // false、0：默认情况，关闭时立即返回，底层系统接管输出流，将缓冲区内的数据发送完成。
+        // true、0：关闭时立即返回，缓冲区数据抛弃，直接发送RST结束命令到对方，并无需经过2MSL等待。
+        // true、200：关闭时最长阻塞200毫秒，随后按第二情况处理。
         socket.setSoLinger(true, 20);
 
         // 是否让紧急数据内敛，默认false；紧急数据通过 socket.sendUrgentData(1);发送
-        //启用/禁用 OOBINLINE（TCP 紧急数据的接收者） 默认情况下，此选项是禁用的，即在套接字上接收的 TCP 紧急数据被静默丢弃。
+        // 启用/禁用 OOBINLINE（TCP 紧急数据的接收者） 默认情况下，此选项是禁用的，即在套接字上接收的 TCP 紧急数据被静默丢弃。
         // 如果用户希望接收到紧急数据，则必须启用此选项。启用时，可以将紧急数据内嵌在普通数据中接收，注意，仅为处理传入紧急数据提供有限支持。
         // 特别要指出的是，不提供传入紧急数据的任何通知并且不存在区分普通数据和紧急数据的功能（除非更高级别的协议提供）。
         //不建议使用，可能导致常规数据混乱
         socket.setOOBInline(false);
 
         // 设置接收发送缓冲器大小，默认32k
-        //将此 Socket 的 SO_SNDBUF 选项设置为指定的值。平台的网络连接代码将 SO_SNDBUF 选项用作设置底层网络 I/O 缓存的大小的提示。
-        //由于 SO_SNDBUF 是一种提示，想要验证缓冲区设置大小的应用程序应该调用 getSendBufferSize()。
+        // 将此 Socket 的 SO_SNDBUF 选项设置为指定的值。平台的网络连接代码将 SO_SNDBUF 选项用作设置底层网络 I/O 缓存的大小的提示。
+        // 由于 SO_SNDBUF 是一种提示，想要验证缓冲区设置大小的应用程序应该调用 getSendBufferSize()。
         socket.setReceiveBufferSize(64 * 1024 * 1024);
         socket.setSendBufferSize(64 * 1024 * 1024);
 
         // 设置性能参数：短链接，延迟，带宽的相对重要性（权重值）
-        //默认情况下套接字使用 TCP/IP 协议。有些实现可能提供与 TCP/IP 具有不同性能特征的替换协议。
+        // 默认情况下套接字使用 TCP/IP 协议。有些实现可能提供与 TCP/IP 具有不同性能特征的替换协议。
         // 此方法允许应用程序在实现从可用协议中作出选择时表达它自己关于应该如何进行折衷的偏好。
-        //性能偏好由三个整数描述，它们的值分别指示短连接时间、低延迟和高带宽的相对重要性。这些整数的绝对值没有意义；
+        // 性能偏好由三个整数描述，它们的值分别指示短连接时间、低延迟和高带宽的相对重要性。这些整数的绝对值没有意义；
         // 为了选择协议，需要简单比较它们的值，较大的值指示更强的偏好。负值表示的优先级低于正值。例如，如果应用程序相对于低延迟和高带宽更偏好短连接时间，
         // 则其可以使用值 (1, 0, 0) 调用此方法。如果应用程序相对于低延迟更偏好高带宽，而相对于短连接时间更偏好低延迟，则其可以使用值 (0, 1, 2) 调用此方法。
         socket.setPerformancePreferences(1, 1, 0);

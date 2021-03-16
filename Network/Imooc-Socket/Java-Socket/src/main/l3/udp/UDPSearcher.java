@@ -1,4 +1,4 @@
-package tcp;
+package udp;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -21,15 +21,15 @@ public class UDPSearcher {
         //开始监听
         Listener listener = listen();
 
-        //发送一个广播，用于搜索 UDP  通信端
+        //发送一个广播，用于搜索 UDP 通信端
         sendBroadcast();
 
-        // 读取任意键盘信息后可以退出
+        // 读取任意键盘信息后可以退出【停一会，如果收到消息就按一下继续】
         //noinspection ResultOfMethodCallIgnored
         System.in.read();
 
+        /*回复广播的所有设备*/
         List<Device> devices = listener.getDevicesAndClose();
-
         for (Device device : devices) {
             System.out.println("Device:" + device.toString());
         }
@@ -48,6 +48,9 @@ public class UDPSearcher {
         return listener;
     }
 
+    /**
+     * 发送一个广播出去，期待收到一个回复。
+     */
     private static void sendBroadcast() throws IOException {
         System.out.println("UDPSearcher sendBroadcast started.");
         // 作为搜索方，让系统自动分配端口
@@ -72,13 +75,16 @@ public class UDPSearcher {
         System.out.println("UDPSearcher sendBroadcast finished.");
     }
 
+    /**
+     * 搜索到的设备
+     */
     private static class Device {
 
         final int port;
         final String ip;
         final String sn;
 
-        private Device(int port, String ip, String sn) {
+        Device(int port, String ip, String sn) {
             this.port = port;
             this.ip = ip;
             this.sn = sn;
@@ -92,8 +98,13 @@ public class UDPSearcher {
                     ", sn='" + sn + '\'' +
                     '}';
         }
+
     }
 
+
+    /**
+     * 监听回复广播的 UDP 消息的线程
+     */
     private static class Listener extends Thread {
 
         private final int listenPort;

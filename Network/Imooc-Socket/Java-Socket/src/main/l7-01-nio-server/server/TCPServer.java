@@ -25,10 +25,14 @@ class TCPServer implements ClientHandler.ClientHandlerCallback {
 
     private final int mPortServer;
     private final List<ClientHandler> mClientHandlers;
-    private final ExecutorService mForwardingThreadPoolExecutor;
     private ClientListener mClientListener;
     private Selector mSelector;
     private ServerSocketChannel mServerSocketChannel;
+
+    /**
+     * 用一个线程池来处理转发。
+     */
+    private final ExecutorService mForwardingThreadPoolExecutor;
 
     TCPServer(int portServer) {
         mPortServer = portServer;
@@ -69,12 +73,12 @@ class TCPServer implements ClientHandler.ClientHandlerCallback {
 
     /*停止服务器*/
     void stop() {
-
         synchronized (this) {
             for (ClientHandler clientHandler : mClientHandlers) {
                 clientHandler.exit();
             }
         }
+
         mClientHandlers.clear();
         mClientListener.exit();
 
@@ -93,6 +97,7 @@ class TCPServer implements ClientHandler.ClientHandlerCallback {
     public synchronized void onNewMessageArrived(ClientHandler clientHandler, String message) {
         final String senderClient = clientHandler.getClientInfo();
         System.out.println("收到客户端：" + senderClient + " 信息： " + message);
+        //转发给其他客户端
         mForwardingThreadPoolExecutor.execute(() -> {
             synchronized (TCPServer.this) {
                 for (ClientHandler handler : mClientHandlers) {
@@ -106,7 +111,7 @@ class TCPServer implements ClientHandler.ClientHandlerCallback {
     }
 
     /**
-     * TCP监听
+     * TCP监听，这里只用到用 NOI 来做监听。
      */
     private class ClientListener extends Thread {
 
@@ -134,6 +139,7 @@ class TCPServer implements ClientHandler.ClientHandlerCallback {
 
                     //处理已经准备好的连接
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
+
                     while (iterator.hasNext()) {
                         if (mDone) {
                             //可以提前退出
@@ -173,7 +179,7 @@ class TCPServer implements ClientHandler.ClientHandlerCallback {
         private void exit() {
             mDone = true;
             // 使尚未返回的第一个选择操作立即返回。
-            //如果另一个线程目前正阻塞在 select() 或 select(long) 方法的调用中，则该调用将立即返回。
+            // 如果另一个线程目前正阻塞在 select() 或 select(long) 方法的调用中，则该调用将立即返回。
             mSelector.wakeup();
         }
 

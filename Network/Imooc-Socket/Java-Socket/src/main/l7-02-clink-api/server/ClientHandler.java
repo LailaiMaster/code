@@ -35,6 +35,7 @@ class ClientHandler {
 
         //创建连接器并设置
         mConnector = new Connector() {
+
             @Override
             public void onChannelClosed(SocketChannel channel) {
                 super.onChannelClosed(channel);
@@ -51,18 +52,26 @@ class ClientHandler {
         mConnector.setup(mClient);
 
         //写数据处理
+        //TODO：这里没有用到 Connector 的写功能，因为 Connector 中没有实现。
         Selector writeSelector = Selector.open();
         mClient.register(writeSelector, SelectionKey.OP_WRITE);
         mWriteHandler = new ClientWriteHandler(writeSelector);
+
         //初始化客户端信息
         mClientInfo = mClient.getLocalAddress().toString();
         System.out.println("新客户端连接：" + mClientInfo);
     }
 
+    /**
+     * 获取客户端信息
+     */
     String getClientInfo() {
         return mClientInfo;
     }
 
+    /**
+     * 发送消息
+     */
     public void send(String line) {
         mWriteHandler.send(line);
     }
@@ -79,17 +88,22 @@ class ClientHandler {
         mClientHandlerCallback.onSelfClosed(this);
     }
 
+    /**
+     * 用于接收 ClientHandler 事件，包括连接关闭和新消息到达。
+     */
     interface ClientHandlerCallback {
         void onSelfClosed(ClientHandler clientHandler);
 
         void onNewMessageArrived(ClientHandler clientHandler, String message);
     }
 
-    /*负责向客户端写数据，内部实现为一个 SingleThreadExecutor*/
+    /**
+     * 负责向客户端写数据，现在的发送方式还是使用的阻塞方式，内部实现为一个 SingleThreadExecutor
+     */
     private class ClientWriteHandler {
 
         private final Selector mSelector;
-        private ExecutorService mExecutorService;
+        private final ExecutorService mExecutorService;
         private volatile boolean mDone;
         private final ByteBuffer mByteBuffer;
 
@@ -134,7 +148,7 @@ class ClientHandler {
                 try {
                     //开始写
                     while (!mDone && mByteBuffer.hasRemaining()) {
-                        int write = mClient.write(mByteBuffer);
+                        int write = mClient.write(mByteBuffer);//阻塞地写
                         System.out.println("客户端：" + mClientInfo + " write length = " + write);
                         //len = 0 是存在且正常的，因为存在不可写状态
                         // 如果 len <0 则说明不可写了（但是官方文档上并没有指明存在返回复数的情况）。

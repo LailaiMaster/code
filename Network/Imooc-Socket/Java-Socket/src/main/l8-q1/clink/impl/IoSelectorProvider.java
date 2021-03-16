@@ -187,7 +187,9 @@ public class IoSelectorProvider implements IoProvider {
     private void handleSelection(SelectionKey selectionKey, int keyOps, HashMap<SelectionKey, Runnable> map, ExecutorService executorService) {
         // 重点，取消继续对keyOps的监听，为什么要取消呢？因为获取一个可读/写的 Channel 后，是将其交给线程池执行，而不是直接处理，线程池的执行时机是不定的，
         // 如果这里不取消对keyOps的监听，那么轮询 Selector 的线程下一次又会读取获取到还没有被线程池处理的 Channel，又会重新把对应的操作提交给线程池，这就会导致重复任务大量堆积。
-        // selectionKey.interestOps(selectionKey.readyOps() & ~keyOps); todo 制造bug，不取消监听
+
+        //TODO：制造bug，模拟反复收到同一条消息的监听的问题。
+        // selectionKey.interestOps(selectionKey.readyOps() & ~keyOps);
 
         Runnable runnable = null;
 
@@ -275,7 +277,7 @@ public class IoSelectorProvider implements IoProvider {
             this.namePrefix = namePrefix;
         }
 
-        public Thread newThread( Runnable r) {
+        public Thread newThread(Runnable r) {
             Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
             if (t.isDaemon())
                 t.setDaemon(false);

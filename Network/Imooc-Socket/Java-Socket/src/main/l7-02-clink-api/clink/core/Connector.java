@@ -8,20 +8,32 @@ import java.util.UUID;
 import clink.impl.SocketChannelAdapter;
 
 /**
- * 代表一个 SocketChannel 连接，用于调用 Sender 和  Receiver 执行读写操作。
+ * 代表一个 SocketChannel 连接，用于调用 Sender 和  Receiver 执行读写操作。【现在只实现了接收端】
  */
 public class Connector implements Closeable {
 
-    /*该连接的唯一标识*/
-    private UUID key = UUID.randomUUID();
-    /*实际的连接*/
+    /**
+     * 该连接的唯一标识
+     */
+    private final UUID key = UUID.randomUUID();
+
+    /**
+     * 实际的连接
+     */
     private SocketChannel channel;
-    /*数据发送者*/
+
+    /**
+     * 数据发送者
+     */
+
     private Sender sender;
-    /*数据接收者*/
+
+    /**
+     * 数据接收者
+     */
     private Receiver receiver;
 
-    private SocketChannelAdapter.OnChannelStatusChangedListener mOnChannelStatusChangedListener = channel -> {
+    private final SocketChannelAdapter.OnChannelStatusChangedListener mOnChannelStatusChangedListener = channel -> {
         //no op
     };
 
@@ -53,7 +65,7 @@ public class Connector implements Closeable {
         //no op
     }
 
-    private IoArgs.IoArgsEventListener echoReceiveListener = new IoArgs.IoArgsEventListener() {
+    private final IoArgs.IoArgsEventListener echoReceiveListener = new IoArgs.IoArgsEventListener() {
 
         @Override
         public void onStarted(IoArgs args) {
@@ -68,6 +80,16 @@ public class Connector implements Closeable {
         }
     };
 
+    /**
+     * 链接关闭时的回调
+     */
+    protected void onChannelClosed(SocketChannel channel) {
+
+    }
+
+    /**
+     * 新消息到达时的回调
+     */
     protected void onReceiveNewMessage(String newMessage) {
         System.out.println("Connector: " + key.toString() + ": " + newMessage);
     }

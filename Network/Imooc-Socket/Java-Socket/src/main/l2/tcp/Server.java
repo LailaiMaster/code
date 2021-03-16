@@ -31,7 +31,7 @@ class Server {
      */
     private static class ClientHandler extends Thread {
 
-        private Socket socket;
+        private final Socket socket;
         private boolean flag = true;
 
         ClientHandler(Socket socket) {

@@ -53,12 +53,15 @@ public class IoSelectorProvider implements IoProvider {
         inputHandlePool = Executors.newFixedThreadPool(4, new IoProviderThreadFactory("IoProvider-Input-Thread-"));
         outputHandlePool = Executors.newFixedThreadPool(4, new IoProviderThreadFactory("IoProvider-Output-Thread-"));
 
-        // 开始输入的监听
+        //开始输入的监听
         startRead();
-        // 开始输出的监听
+        //开始输出的监听
         startWrite();
     }
 
+    /**
+     * 开始监听可读事件
+     */
     private void startRead() {
         //这个线程只负责从选择器中获取可读的 Channel，然后交给线程池处理。
         Thread thread = new Thread("Clink IoSelectorProvider ReadSelector Thread") {
@@ -69,8 +72,10 @@ public class IoSelectorProvider implements IoProvider {
                     try {
                         //阻塞等待可写
                         if (readSelector.select() == 0) {
-                            //在 registerSelection 操作中，对 selector 进行了唤醒操作，这时该线程会从 waitSelection 中返回。
-                            //等待“注册读过程”
+                            /*
+                            在 registerSelection 操作中，对 selector 进行了唤醒操作，
+                            这时该线程会从 waitSelection 中返回。等待“注册读过程”
+                             */
                             waitSelection(inRegInput);
                             continue;
                         }
@@ -96,6 +101,9 @@ public class IoSelectorProvider implements IoProvider {
         thread.start();
     }
 
+    /**
+     * 开始监听可读事件
+     */
     private void startWrite() {
         //这个线程只负责从选择器中获取可写的 Channel，然后交给线程池处理。
         Thread thread = new Thread("Clink IoSelectorProvider WriteSelector Thread") {
@@ -132,58 +140,6 @@ public class IoSelectorProvider implements IoProvider {
         thread.start();
     }
 
-    @Override
-    public boolean registerInput(SocketChannel channel, HandleInputCallback callback) {
-        //注册关心可读的SocketChannel
-        return registerSelection(channel, readSelector, SelectionKey.OP_READ, inRegInput, inputCallbackMap, callback) != null;
-    }
-
-    @Override
-    public boolean registerOutput(SocketChannel channel, HandleOutputCallback callback) {
-        //注册关心可写的SocketChannel
-        return registerSelection(channel, writeSelector, SelectionKey.OP_WRITE, inRegOutput, outputCallbackMap, callback) != null;
-    }
-
-    @Override
-    public void unRegisterInput(SocketChannel channel) {
-        unRegisterSelection(channel, readSelector, inputCallbackMap);
-    }
-
-    @Override
-    public void unRegisterOutput(SocketChannel channel) {
-        unRegisterSelection(channel, writeSelector, outputCallbackMap);
-    }
-
-    private void unRegisterSelection(SocketChannel channel, Selector selector, Map<SelectionKey, Runnable> map) {
-        if (channel.isRegistered()) {
-            SelectionKey selectionKey = channel.keyFor(selector);
-            // 取消监听的方法
-            if (selectionKey != null) {
-                selectionKey.cancel();
-                map.remove(selectionKey);
-            }
-            //重新唤醒一个 Selector，进行下一次选择操作。
-            selector.wakeup();
-        }
-    }
-
-    @Override
-    public void close() {
-        if (isClosed.compareAndSet(false, true)) {
-            inputHandlePool.shutdown();
-            outputHandlePool.shutdown();
-
-            inputCallbackMap.clear();
-            outputCallbackMap.clear();
-
-            readSelector.wakeup();
-            writeSelector.wakeup();
-
-            CloseUtils.close(readSelector, writeSelector);
-        }
-    }
-
-
     private void handleSelection(SelectionKey selectionKey, int keyOps, Map<SelectionKey, Runnable> map, ExecutorService executorService) {
         // 重点，取消继续对keyOps的监听，为什么要取消呢？因为获取一个可读/写的 Channel 后，是将其交给线程池执行，而不是直接处理，线程池的执行时机是不定的，
         // 如果这里不取消对keyOps的监听，那么轮询 Selector 的线程下一次又会读取获取到还没有被线程池处理的 Channel，又会重新把对应的操作提交给线程池，这就会导致重复任务大量堆积。
@@ -206,6 +162,7 @@ public class IoSelectorProvider implements IoProvider {
         //noinspection SynchronizationOnLocalVariableOrMethodParameter
         synchronized (locker) {
             //如果处于 locker 所表示的状态，让该线程等待。
+            //Todo：感觉这里用 while 才说的得过去，以为线程有可能从 wait() 假醒过来。
             if (locker.get()) {
                 try {
                     locker.wait();
@@ -216,17 +173,46 @@ public class IoSelectorProvider implements IoProvider {
         }
     }
 
+    @Override
+    public boolean registerInput(SocketChannel channel, HandleInputCallback callback) {
+        //注册关心可读的SocketChannel
+        return registerSelection(channel, readSelector, SelectionKey.OP_READ, inRegInput, inputCallbackMap, callback) != null;
+    }
+
+    @Override
+    public boolean registerOutput(SocketChannel channel, HandleOutputCallback callback) {
+        //注册关心可写的SocketChannel
+        return registerSelection(channel, writeSelector, SelectionKey.OP_WRITE, inRegOutput, outputCallbackMap, callback) != null;
+    }
+
+    @Override
+    public void unRegisterInput(SocketChannel channel) {
+        //反注册关心可读的SocketChannel
+        unRegisterSelection(channel, readSelector, inputCallbackMap);
+    }
+
+    @Override
+    public void unRegisterOutput(SocketChannel channel) {
+        //反注册关心可写的SocketChannel
+        unRegisterSelection(channel, writeSelector, outputCallbackMap);
+    }
+
     /**
      * 给SocketChannel注册对应的事件，该方法是线程安全的，因为还有另外的线程对 map 进行操作。
      */
     private SelectionKey registerSelection(SocketChannel channel, Selector selector, int registerOps, AtomicBoolean locker, Map<SelectionKey, Runnable> map, Runnable runnable) {
-        //要求线程安全
         //noinspection SynchronizationOnLocalVariableOrMethodParameter
         synchronized (locker) {
             //设置位锁定状态
             locker.set(true);
             try {
-                // 唤醒当前的selector，让selector不处于select()状态
+                /*
+                唤醒当前的 Selector，让 Selector 不处于 select() 状态，这里唤醒是为了让对应的监听 Selector 的线程进入
+                阻塞状态（阻塞状态由 locker 控制），此时 Selector 就没有储于 select() 状态（即没有阻塞在 select() 方法上）
+                然后再向 Selector 注册当前要注册的 channel，等待注册完毕，再唤醒 Selector 去继续 select()。
+
+                如果不这么做到话，那么当前正在阻塞 select() 方法的 Selector，是感知不到现在这个 channel 注册或修改的 key 的 。
+                 */
                 selector.wakeup();
 
                 SelectionKey selectionKey = null;
@@ -262,6 +248,42 @@ public class IoSelectorProvider implements IoProvider {
         }
     }
 
+    /**
+     * 给SocketChannel反注册对应的事件。
+     */
+    private void unRegisterSelection(SocketChannel channel, Selector selector, Map<SelectionKey, Runnable> map) {
+        //TODO：既然 registerSelection 中有同步的逻辑，那么这里应该也是要的，因为这里通用改变了 channel 注册的 key，同时也对 map 进行了操作。
+        if (channel.isRegistered()) {
+            SelectionKey selectionKey = channel.keyFor(selector);
+            // 取消监听的方法
+            if (selectionKey != null) {
+                selectionKey.cancel();
+                map.remove(selectionKey);
+            }
+            //重新唤醒一个 Selector，进行下一次选择操作，之后就不再关注被取消的 key。
+            selector.wakeup();
+        }
+    }
+
+    @Override
+    public void close() {
+        if (isClosed.compareAndSet(false, true)) {
+            inputHandlePool.shutdown();
+            outputHandlePool.shutdown();
+
+            inputCallbackMap.clear();
+            outputCallbackMap.clear();
+
+            readSelector.wakeup();
+            writeSelector.wakeup();
+
+            CloseUtils.close(readSelector, writeSelector);
+        }
+    }
+
+    /**
+     * 线程工厂
+     */
     private static class IoProviderThreadFactory implements ThreadFactory {
 
         private final ThreadGroup group;

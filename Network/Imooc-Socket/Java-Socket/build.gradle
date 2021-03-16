@@ -12,13 +12,30 @@ repositories {
 }
 
 sourceSets {
-    main{
+    main {
         java {
-            srcDir("src/main/chat-room-v4-optimize")
+            //srcDir("src/main/l2")
+            //srcDir("src/main/l3")
+            //srcDir("src/main/l4")
+            //srcDir("src/main/l5")
+            //srcDir("src/main/l6")
+            //srcDir("src/main/l7-01-nio-server")
+            //srcDir("src/main/l7-02-clink-api")
+            //srcDir("src/main/l8-q2")
+            //srcDir("src/main/l8-q3")
+            //srcDir("src/main/l8-q4-chat-room-v1-bytes")
+            //srcDir("src/main/l9-chat-room-v2-stream")
+            //srcDir("src/main/l9-chat-room-v3-sharding")
+            //srcDir("src/main/l10-chat-room-v4-optimize")
+            srcDir("src/main/l12-chat-room-v5-fixed")
         }
     }
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }

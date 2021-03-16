@@ -74,8 +74,11 @@ class ClientHandler {
             System.out.println("TCPServer start to read");
             String line;
             /*
-             *一个死循环不断地读取
-             * 是try cache包裹while，还是 while包裹try cache？当发生异常后不需要再继续循环时，就使用 try cache 包裹while，，否则  while 中使用 try cache 包裹执行代码。
+             *一个死循环不断地读取：是try cache包裹while，还是 while 包裹 try cache？
+             *
+             *  1. 当发生异常后不需要再继续循环时，就使用 try cache 包裹 while。
+             *  2. 否则  while 中使用 try cache 包裹执行代码。
+             *
              * 这里发生异常就表示连接断开了或者读取超时了，没有继续循环的必要。
              */
             try {
@@ -83,7 +86,7 @@ class ClientHandler {
                 while (!mDone) {
                     //客户端拿到数据
                     line = bufferedReader.readLine();
-                    if (line == null) {//读取超时、socket异常、EOF时，str可能为null
+                    if (line == null) {//读取超时、socket 异常、EOF 时，str 可能为null
                         System.out.println("客户端已无法读取数据！");
                         // 退出当前客户端
                         ClientHandler.this.exitBySelf();
