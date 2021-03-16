@@ -1,7 +1,9 @@
 # [慕课网实战《Socket网络编程进阶与实战》](https://coding.imooc.com/down/286.html) 代码
 
-笔记参考 [有道云笔记](http://note.youdao.com/noteshare?id=8489412fc4e17619d1247ba522d8d373&sub=AFF5FA73188948D7BB9C652744D0CB57)
-。
+笔记参考
+
+- [有道云笔记](http://note.youdao.com/noteshare?id=8489412fc4e17619d1247ba522d8d373&sub=AFF5FA73188948D7BB9C652744D0CB57) 
+- [讨论专区](https://coding.imooc.com/learn/qa/286.html)
 
 码列表如下：
 
