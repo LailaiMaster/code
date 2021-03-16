@@ -87,7 +87,8 @@ public class UDPSearcher {
             byteBuffer.putInt(UDPConstants.PORT_CLIENT_RESPONSE);//对方通过这个端口会送TCP服务器信息
 
             DatagramPacket datagramPacket = new DatagramPacket(byteBuffer.array(), byteBuffer.position() + 1);
-            datagramPacket.setAddress(InetAddress.getByName("255.255.255.255"));
+            //datagramPacket.setAddress(InetAddress.getByName("255.255.255.255"));//works when running client and server at the same machine.
+            datagramPacket.setAddress(InetAddress.getByName("192.168.8.255"));//works when sending to local net.
             datagramPacket.setPort(UDPConstants.PORT_SERVER);
 
             datagramSocket.send(datagramPacket);
@@ -106,7 +107,7 @@ public class UDPSearcher {
         private DatagramSocket mDatagramSocket;
         private final byte[] buffer = new byte[128];
         private final int mMinLen = (UDPConstants.HEADER.length/*通用头*/ + 2/*两个字节的cmd*/ + 4/*4个字节的端口*/);
-        private List<ServerInfo> mInfoArrayList = new ArrayList<>();
+        private final List<ServerInfo> mInfoArrayList = new ArrayList<>();
         private volatile boolean mDone;
 
         Listener(int listenPort, CountDownLatch startCountDownLatch, CountDownLatch receiveLatch) {

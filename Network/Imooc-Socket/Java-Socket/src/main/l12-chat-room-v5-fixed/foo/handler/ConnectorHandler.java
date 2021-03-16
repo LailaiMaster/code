@@ -81,7 +81,6 @@ public class ConnectorHandler extends Connector {
 
     @Override
     protected void onReceiveNewPacket(ReceivePacket packet) {
-        System.out.println("ConnectorHandler.onReceiveNewPacket running at " + Thread.currentThread());
         super.onReceiveNewPacket(packet);
         switch (packet.getType()) {
             case Packet.TYPE_MEMORY_STRING: {

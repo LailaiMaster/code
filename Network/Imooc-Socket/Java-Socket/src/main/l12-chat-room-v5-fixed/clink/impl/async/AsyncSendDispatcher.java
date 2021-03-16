@@ -107,9 +107,11 @@ public class AsyncSendDispatcher implements SendDispatcher, IoArgs.IoArgsEventPr
             if (mAsyncPacketReader.requestTakePacket()) {
                 try {
                     //必须保证 postSendAsync 只被调用一次。
+                    mIsSending.set(true);
+                    // 可能立即就执行完成了
                     boolean success = mSender.postSendAsync();
-                    if (success) {
-                        mIsSending.set(true);
+                    if (!success) {
+                        mIsSending.set(false);
                     }
                 } catch (IOException e) {
                     closeAndNotify();
@@ -166,8 +168,6 @@ public class AsyncSendDispatcher implements SendDispatcher, IoArgs.IoArgsEventPr
 
     @Override
     public void onConsumeCompleted(IoArgs args) {
-        //System.out.println(Thread.currentThread()+" onConsumeCompleted "+this);
-
         // 设置当前发送状态
         synchronized (mIsSending) {
             mIsSending.set(false);

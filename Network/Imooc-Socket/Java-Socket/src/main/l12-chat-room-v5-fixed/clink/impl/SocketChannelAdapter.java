@@ -63,8 +63,16 @@ public class SocketChannelAdapter implements Sender, Receiver, Cloneable {
         checkState();
         //进行 Callback 状态监测，判断是否处于自循环状态。
         outputCallback.checkAttachNull();
+
         //向 IoProvider 注册读回调，当可写时，mHandleOutputCallback 会被回调
-        return ioProvider.registerOutput(channel, outputCallback);
+        //return ioProvider.registerOutput(channel, outputCallback);
+
+        /*
+        TODO：性能优化点 1。
+                因为 run 方法可以处理好写数据的逻辑，并且没有写完会自动注册，所以这里第一次不像 IOProvider 注册，而是直接尝试写，避免一次同步操作。
+         */
+        outputCallback.run();
+        return true;
     }
 
     @Override
@@ -147,10 +155,12 @@ public class SocketChannelAdapter implements Sender, Receiver, Cloneable {
                         //没有读完，下次再读
                         attach = args;
                         ioProvider.registerOutput(channel, this);
+                        System.out.println("register again");
                     } else {
                         //读完置为null
                         attach = null;
                         // 读取完成回调
+                        System.out.println("send completed");
                         processor.onConsumeCompleted(args);
                     }
 

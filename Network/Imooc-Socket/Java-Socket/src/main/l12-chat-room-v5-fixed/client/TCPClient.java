@@ -22,9 +22,11 @@ import foo.handler.ConnectorStringPacketChain;
  */
 public class TCPClient extends ConnectorHandler {
 
-    private TCPClient(SocketChannel client, File cachePath) throws IOException {
-        super(client, cachePath);
-        getStringPacketChain().appendLast(new PrintStringPacketChain());
+    private TCPClient(SocketChannel socketChannel, File cachePath, boolean printReceiveString) throws IOException {
+        super(socketChannel, cachePath);
+        if (printReceiveString) {
+            getStringPacketChain().appendLast(new PrintStringPacketChain());
+        }
     }
 
     private static class PrintStringPacketChain extends ConnectorStringPacketChain {
@@ -36,7 +38,11 @@ public class TCPClient extends ConnectorHandler {
         }
     }
 
-    public static TCPClient linkWith(ServerInfo info, File cachePath) {
+    public static TCPClient linkWith(ServerInfo info, File cachePath) throws IOException {
+        return linkWith(info, cachePath, true);
+    }
+
+    public static TCPClient linkWith(ServerInfo info, File cachePath, boolean printReceiveString) {
         SocketChannel socketChannel = null;
         try {
             socketChannel = SocketChannel.open();
@@ -44,7 +50,7 @@ public class TCPClient extends ConnectorHandler {
             System.out.println("已发起服务器连接，并进入后续流程～");
             System.out.println("客户端信息：" + socketChannel.getLocalAddress());
             System.out.println("服务器信息：" + socketChannel.getRemoteAddress());
-            return new TCPClient(socketChannel, cachePath);
+            return new TCPClient(socketChannel, cachePath, printReceiveString);
         } catch (IOException e) {
             System.out.println("连接异常");
             //关闭

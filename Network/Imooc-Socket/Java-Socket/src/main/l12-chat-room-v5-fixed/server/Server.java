@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import clink.core.IoContext;
-import clink.impl.IoSelectorProvider;
+import clink.impl.single.SingleSelectorProvider;
+import clink.impl.stealing.IoStealingSelectorProvider;
 import clink.impl.SchedulerImpl;
 import foo.Foo;
 import foo.FooGui;
@@ -24,7 +25,11 @@ class Server {
     public static void main(String... args) throws IOException {
         //启动IoContext
         IoContext.setup()
-                .ioProvider(new IoSelectorProvider())
+                //.ioProvider(new IoSelectorProvider())
+                //TODO：性能优化2（单线程selector）
+                //.ioProvider(new SingleSelectorProvider())
+                //TODO：性能优化3（多线程任务窃取）
+                .ioProvider(new IoStealingSelectorProvider(3))
                 .scheduler(new SchedulerImpl(1))
                 .start();
 

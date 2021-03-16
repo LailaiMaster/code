@@ -51,9 +51,9 @@ public class IoSelectorProvider implements IoProvider {
         readSelector = Selector.open();
         writeSelector = Selector.open();
 
-        inputHandlePool = Executors.newFixedThreadPool(20, new NameableThreadFactory("IoProvider-Input-Thread-"));
+        inputHandlePool = Executors.newFixedThreadPool(4, new NameableThreadFactory("IoProvider-Input-Thread-"));
 
-        outputHandlePool = Executors.newFixedThreadPool(20, new NameableThreadFactory("IoProvider-Output-Thread-"));
+        outputHandlePool = Executors.newFixedThreadPool(4, new NameableThreadFactory("IoProvider-Output-Thread-"));
 
         // 开始输出输入的监听
         startRead();
@@ -149,12 +149,13 @@ public class IoSelectorProvider implements IoProvider {
         }
     }
 
+    //TODO：性能问题
     private static void handleSelection(SelectionKey selectionKey, int keyOps, HashMap<SelectionKey, Runnable> map, ExecutorService executorService, AtomicBoolean locker) {
         /*
         重点：
         1：这里同步是因为，interestOps 也是对 Selector 队列进行操作 ，此时 Selector 虽然肯定不处于 select 状态，但是还是要防止多个线程同时操作队列。
 
-        2：selectionKey.interestOps(selectionKey.readyOps() & ~keyOps);，这里取消继续对 keyOps 的监听，为什么要取消呢？因为获取一个可读/写的 Channel 后，是将其交给线程池执行，
+        2：selectionKey.interestOps(selectionKey.interestOps() & ~keyOps);，这里取消继续对 keyOps 的监听，为什么要取消呢？因为获取一个可读/写的 Channel 后，是将其交给线程池执行，
             而不是直接处理，线程池的执行时机是不定的，如果这里不取消对keyOps的监听，那么轮询 Selector 的线程下一次又会读取获取到还没有被线程池处理的 Channel，
             又会重新把对应的操作提交给线程池，这就会导致重复任务大量堆积。
          */
@@ -163,7 +164,7 @@ public class IoSelectorProvider implements IoProvider {
         synchronized (locker) {
             try {
                 //取消操作可能在其他的线程执行。如果key被取消，可能抛出异常，直接返回。
-                selectionKey.interestOps(selectionKey.readyOps() & ~keyOps);
+                selectionKey.interestOps(selectionKey.interestOps() & ~keyOps);
             } catch (CancelledKeyException e) {
                 return;
             }
@@ -226,10 +227,8 @@ public class IoSelectorProvider implements IoProvider {
                     //获取表示通道向给定选择器注册的键。 当此通道是向给定选择器注册的最后一个通道时返回该键，如果此通道当前未向该选择器注册，则返回 null
                     selectionKey = channel.keyFor(selector);
                     if (selectionKey != null) {
-                        // selectionKey 中的 readyOps 值是一个复合值，注册多个事件到 selectionKey 中，将以位的形式保存。
-                        // readyOps 用于获取此键的 ready 操作集合。
                         // interestOps 用于将此键的 interest 集合设置为给定值。下面按位或的操作就是组合多个操作
-                        selectionKey.interestOps(selectionKey.readyOps() | registerOps);
+                        selectionKey.interestOps(selectionKey.interestOps() | registerOps);
                     }
                 }
                 //如果没有注册过，则注册后添加

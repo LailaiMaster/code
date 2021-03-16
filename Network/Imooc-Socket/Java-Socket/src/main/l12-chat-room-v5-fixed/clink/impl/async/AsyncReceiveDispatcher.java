@@ -104,6 +104,7 @@ public class AsyncReceiveDispatcher implements ReceiveDispatcher {
             do {
                 asyncPacketWriter.consumeIoArgs(args);
             } while (args.remained() && !isClosed.get());
+
             //再次注册
             registerReceive();
         }

@@ -5,13 +5,7 @@
 
 码列表如下：
 
-1. l2-l6：是 BIO 数据传输演示。
-2. l7-chat-room-v5-bridge：不是 NIO 框架的不断迭代。
-    - l7-01-nio-server：是使用 NIO 改写 l6 基于阻塞 IO 实现的聊天室功能。
-    - l7-02-clink-api：尝试定义一套框架，封装 NIO API，对外提供异步 IO 能力。
-    - l8-q1 到 l8-q3 是展示网络编程中的丢包和粘包线程，以及将非阻塞式 NIO 封装成异步 IO 会遇到的问题。
-
-## 1、**l2-l6**：BIO 数据传输演示
+## 1、l2-l6：BIO 数据传输演示
 
 ### l2：模拟服务端和客户端【Socket网络编程快速入门】
 
@@ -43,7 +37,7 @@
 - 通信的双方没有制定任何协议。
 - 服务器线程数量：一个客户端需要 2 个线程，n 个客户端需要 `2*n+` 线程。==大部分线程都处于等待。CPU 需要扫描所有线程的状态==，但==大部分线程还是等待中的。
 
-## 2、 **l7**：NIO 改写服务器
+## 2、l7：NIO 改写服务器
 
 ### l7-01-nio-server
 
@@ -184,7 +178,7 @@ ClientHandler(SocketChannel client,ClientHandlerCallback clientHandlerCallback)t
 
 如果对这部分封装还有不理解，也可以参考 [对第七章结束代码的理解](https://coding.imooc.com/learn/questiondetail/204073.html)
 
-## 3、**l8**：复现粘包，消息不完整的问题
+## 3、l8：复现粘包，消息不完整的问题
 
 **l8-q1**：模拟同一个消息反复收到消息到达的回调，修改内容如下：
 
@@ -722,15 +716,99 @@ public int writeTo(SocketChannel socketChannel) throws IOException {
 1. 引入直流传输。
 2. 为支持直流传输，引入桥接数据。
 
-## 9、l11-chat-room-v4-bridge：【性能优化与 bug 修复】
+## 9、l11-chat-room-v5-fixed：【性能优化与 bug 修复】
 
-### 性能优化
+多线程调度瓶颈：
 
-#### 性能分析工具
+1. 对于多核计算机而言，发挥计算机速度的手段则是多 CPU 并行。
+2. 并行-多线程-数量并非越多越好。
+3. 对于单核计算机而言，是通过 CPU 切换时间片实现多线程调度，但并非多线程并行-实则串行。
+4. 对于多核 CPU，但有临界值存在，则需要尽可能少的长时间占用临界资源。
+5. 司步块缩小范围，或同步块让线程独占。
+6. 多 Selector 代替单 Selector，Selector 内部自循环自消费。
 
-1. 服务端分析并发量，统计统计没两秒钟刷新一次，查看每两秒发送的数据量。
+### 压测程序
+
+压测程序 PressureTester 说明
+
+```java
+public class PressureTester {
+
+    /*
+    不考虑发送消耗，并发量：
+        2000*4/400*1000 = 2w/s 算上来回 2 次数据解析：4w/s
+        2000 个客户端 4 个线程每 400 毫秒发送一次数据。
+     */
+    private static final int CLIENT_SIZE = 2000;
+    private static final int SEND_THREAD_SIZE = 4;
+    private static final int SEND_THREAD_DELAY = 400;
+
+}
+```
+
+优化步骤：
+
+1. 服务端分析并发量，统计统计每两秒钟刷新一次，查看每两秒发送的数据量。
 2. 用 VisualVM 查看线程状态和内存占用 。
 3. dump 出线程状态进行分析。
 
+### 优化 SocketChannelAdapter【减少阻塞】
 
+启动客户端和服务器，分别使用 VisualVM 查看客户端状态
 
+客户端，大量 IO 调度线程长期处于阻塞状态。
+
+![image](images/c1.png)
+
+![image](images/c2.png)
+
+优化点：
+
+```
+@Override
+public boolean postSendAsync() throws IOException {
+    //检查是否已经关闭。
+    checkState();
+    //进行 Callback 状态监测，判断是否处于自循环状态。
+    outputCallback.checkAttachNull();
+
+    //向 IoProvider 注册读回调，当可写时，mHandleOutputCallback 会被回调
+    //return ioProvider.registerOutput(channel, outputCallback);
+
+    /*
+    TODO：性能优化点 1。
+            因为 run 方法可以处理好写数据的逻辑，并且没有写完会自动注册，所以这里第一次不像 IOProvider 注册，而是直接尝试写，避免一次同步操作。
+     */
+    outputCallback.run();
+    return true;
+}
+```
+
+另外还减少了线程数量：SocketChannelAdapter 中的调度线程从 20 改为 4。优化后的效果
+
+![image](images/c3.png)
+
+### IoProvider 的优化【单线程 Selector，无锁优化】
+
+新增 SingleSelectorProvider 实现单线程 Selector，优化效果：
+
+![image](images/c4.png)
+
+### IoProvider 的优化【多线程任务窃取】
+
+新增 StealingService 实现，优化效果：
+
+## 10、内存复用优化
+
+关注两个方面：
+
+1. 内存抖动：register 方法中，Task 反复创建和销毁，优化反复，复用 Task。
+2. 内存溢出：消息队列优化，不无限制存储任务。
+
+![image](images/c6.png)
+
+代码参考 [Java-Socket-Latest](../Java-Socket-Latest/README.md)。
+
+## 11、总结与后续后话
+
+![](images/last.png)

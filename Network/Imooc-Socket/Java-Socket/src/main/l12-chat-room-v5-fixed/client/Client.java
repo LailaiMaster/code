@@ -14,6 +14,7 @@ import clink.core.ScheduleJob;
 import clink.core.schedule.IdleTimeoutScheduleJob;
 import clink.impl.IoSelectorProvider;
 import clink.impl.SchedulerImpl;
+import clink.impl.stealing.IoStealingSelectorProvider;
 import clink.utils.CloseUtils;
 import foo.Foo;
 import foo.handler.ConnectorCloseChain;
@@ -29,7 +30,11 @@ class Client {
     public static void main(String... args) throws IOException {
         //启动IoContext
         IoContext.setup()
-                .ioProvider(new IoSelectorProvider())
+                //.ioProvider(new IoSelectorProvider())
+                //TODO：性能优化2（单线程selector）
+                //.ioProvider(new SingleSelectorProvider())
+                //TODO：性能优化3（多线程任务窃取）
+                .ioProvider(new IoStealingSelectorProvider(3))
                 .scheduler(new SchedulerImpl(1))
                 .start();
 
@@ -37,7 +42,7 @@ class Client {
         File cachePath = Foo.getCacheDir("server");
 
         //使用广播搜索服务器
-        ServerInfo info = UDPSearcher.searchServer(10000);
+        ServerInfo info = UDPSearcher.searchServer(100000);
         System.out.println("Server: " + info);
 
         if (info != null) {
