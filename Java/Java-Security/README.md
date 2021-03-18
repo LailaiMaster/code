@@ -5,17 +5,19 @@ jdk 加密相关类库的包路径为：
 - `java.security`
 - `javax.crypto`
 
+详细资料参考：[密码学](密码学.html)。
+
 ## 1 ASCII
 
 ASCII （American Standard Code for Information Interchange，美国信息交换标准代码）是基于拉丁字母的一套计算机编码系统。它主要用于显示现代英语，而其扩展版本 EASCII 则可以部分支持其他西欧语言，并等同于国际标准ISO/IEC 646。
 
-具体参考[wiki/ASCII](https://zh.wikipedia.org/wiki/ASCII)。
+具体参考 [wiki/ASCII](https://zh.wikipedia.org/wiki/ASCII) 。
 
 ## 2 凯撒密码
 
 在密码学中，凯撒密码（英语：Caesar cipher），或称凯撒加密、凯撒变换、变换加密，是一种最简单且最广为人知的加密技术。它是一种替换加密的技术，明文中的所有字母都在字母表上向后（或向前）按照一个固定数目进行偏移后被替换成密文。例如，当偏移量是3的时候，所有的字母A将被替换成D，B变成E，以此类推。这个加密方法是以罗马共和时期恺撒的名字命名的，据称当年恺撒曾用此方法与其将军们进行联系。
 
-具体参考[wiki/凯撒密码](https://zh.wikipedia.org/wiki/%E5%87%B1%E6%92%92%E5%AF%86%E7%A2%BC)。
+具体参考 [wiki/凯撒密码](https://zh.wikipedia.org/wiki/%E5%87%B1%E6%92%92%E5%AF%86%E7%A2%BC) 。
 
 破解方式：
 
@@ -78,7 +80,7 @@ RSA加解密算法目前主流的有 RSA-1024， RSA-2048，RSA-4096等，数字
 
 具体参考：
 
-- [getting-a-illegalblocksizeexception-data-must-not-be-longer-than-256-bytes-when](https://stackoverflow.com/questions/10007147/getting-a-illegalblocksizeexception-data-must-not-be-longer-than-256-bytes-when)。
+- [getting-a-illegalblocksizeexception-data-must-not-be-longer-than-256-bytes-when](https://stackoverflow.com/questions/10007147/getting-a-illegalblocksizeexception-data-must-not-be-longer-than-256-bytes-when) 。
 - [RSA密钥长度、明文长度和密文长度](https://blog.csdn.net/lvxiangan/article/details/45487943)
 
 ## 7 消息摘要
@@ -103,4 +105,3 @@ RSA加解密算法目前主流的有 RSA-1024， RSA-2048，RSA-4096等，数字
 
 - [Java加密与解密](https://www.jianshu.com/p/213d69ac27b3)
 - [加廖雪峰：Java 加密与安全](https://www.liaoxuefeng.com/wiki/1252599548343744/1255943717668160)
-- [Security 相关笔记](../../../Security/README.md)

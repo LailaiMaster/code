@@ -34,16 +34,18 @@ public class ForkJoinTaskExample extends RecursiveTask<Integer> {
             ForkJoinTaskExample leftTask = new ForkJoinTaskExample(start, middle);
             ForkJoinTaskExample rightTask = new ForkJoinTaskExample(middle + 1, end);
 
-            // 执行子任务
+            //wrong usage
+           /* // 执行子任务
             leftTask.fork();
             rightTask.fork();
-
             // 等待任务执行结束合并其结果
             int leftResult = leftTask.join();
             int rightResult = rightTask.join();
-
             // 合并子任务
-            sum = leftResult + rightResult;
+            sum = leftResult + rightResult;*/
+
+            //right usage
+            sum = leftTask.compute() + rightTask.fork().join();
         }
         return sum;
     }
@@ -54,11 +56,13 @@ public class ForkJoinTaskExample extends RecursiveTask<Integer> {
         //生成一个计算任务，计算1+2+3+4
         ForkJoinTaskExample task = new ForkJoinTaskExample(1, 100);
 
+        long start = System.currentTimeMillis();
         //执行一个任务
         Future<Integer> result = forkjoinPool.submit(task);
 
         try {
             log.info("result:{}", result.get());
+            System.out.println("cost: " + (System.currentTimeMillis() - start));
         } catch (Exception e) {
             log.error("exception", e);
         }

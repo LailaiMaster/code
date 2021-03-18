@@ -1,12 +1,3 @@
-# Kotlin Coroutine Framework Lite
+# 《深入理解 Kotlin 协程》CoroutineLite 项目学习
 
-**DO NOT use this in the production environment.**
-
-This is only for learning purpose. It is designed and developed according to the official coroutine framework [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) to make it easier to understand.
-
-If you are interested in the theories of Kotlin coroutines, just play with this project.
-
-
-# License
-
-* [MIT License](LICENSE)
+书籍说明：[《深入理解 Kotlin 协程》这书该怎么读？](https://www.bennyhuo.com/2021/01/31/how-to-read-the-book-of-coroutines/)

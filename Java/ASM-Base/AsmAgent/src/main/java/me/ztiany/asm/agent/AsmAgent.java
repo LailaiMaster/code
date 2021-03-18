@@ -11,7 +11,7 @@ import java.security.ProtectionDomain;
 public class AsmAgent implements ClassFileTransformer {
 
     private final String agentArgs;
-    private AsmTransformer asmTransformer = new AsmTransformer();
+    private final AsmTransformer asmTransformer = new AsmTransformer();
 
     private AsmAgent(String agentArgs) {
         this.agentArgs = agentArgs;

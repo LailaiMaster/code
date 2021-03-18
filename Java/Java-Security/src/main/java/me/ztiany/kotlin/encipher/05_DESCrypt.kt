@@ -10,7 +10,6 @@ import javax.crypto.spec.IvParameterSpec
 /**
  * DES加密，解密
  */
-
 object DESCrypt {
 
     //算法/工作模式/填充模式

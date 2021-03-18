@@ -17,7 +17,15 @@ public class AopMethodVisitor extends MethodVisitor implements Opcodes {
 
     @Override
     public void visitInsn(int opcode) {
-        if (opcode >= IRETURN && opcode <= RETURN) {// 在返回之前安插after 代码。
+        /*
+            int IRETURN = 172; // visitInsn
+            int LRETURN = 173; // -
+            int FRETURN = 174; // -
+            int DRETURN = 175; // -
+            int ARETURN = 176; // -
+            int RETURN = 177; // -
+        */
+        if (opcode >= IRETURN && opcode <= RETURN) {// 在返回之前安插 after 代码。
             this.visitMethodInsn(INVOKESTATIC, "me/ztiany/asm/sample/AopInteceptor", "after", "()V", false);
         }
         super.visitInsn(opcode);

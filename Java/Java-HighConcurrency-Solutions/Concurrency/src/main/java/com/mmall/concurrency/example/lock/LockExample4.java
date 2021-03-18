@@ -8,6 +8,7 @@ public class LockExample4 {
         private double x, y;
         private final StampedLock sl = new StampedLock();
 
+        //独占地写
         void move(double deltaX, double deltaY) { // an exclusively locked method
             long stamp = sl.writeLock();
             try {
@@ -34,7 +35,7 @@ public class LockExample4 {
             return Math.sqrt(currentX * currentX + currentY * currentY);
         }
 
-        //下面是悲观读锁案例
+        //下面是悲观读锁案例，如果 Point 没有被修改过，就修改它。
         void moveIfAtOrigin(double newX, double newY) { // upgrade
             // Could instead start with optimistic, not read mode
             long stamp = sl.readLock();
