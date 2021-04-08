@@ -1,6 +1,7 @@
 package a.java.util;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -11,8 +12,48 @@ import java.util.Objects;
 public class HashMapTest {
 
     public static void main(String... args) {
-        //aspect1Hash();
-        aspect2GetFromHashMap();
+        aspect1Hash();
+        //aspect2GetFromHashMap();
+
+        testHashCode();
+    }
+
+    private static class Person {
+
+        String name;
+        int age;
+
+        public Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Person person = (Person) o;
+            if (age != person.age) return false;
+            return Objects.equals(name, person.name);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = name != null ? name.hashCode() : 0;
+            result = 31 * result + age;
+            return result;
+        }
+    }
+
+    private static void testHashCode() {
+        Map<Person, String> map = new HashMap<>();
+        Person person = new Person("Zhan", 30);
+        map.put(person, "TianYou");
+        System.out.println(person.hashCode());
+        System.out.println(map.get(person));//TianYou
+        person.age++;
+        System.out.println(person.hashCode());
+        System.out.println(map.get(person));//null
     }
 
     private static class HashCollision {
@@ -97,6 +138,7 @@ public class HashMapTest {
     }
 
     private static int index(int hash, int n) {
+        System.out.println("===================== index(" + hash + ", " + n + ") ===========================");
         System.out.println("hash=h ^ rh          \t\t" + toBinary(hash) + "\t\t" + hash);
         System.out.println("n    =               \t\t" + toBinary(n) + "\t\t" + (n));
         System.out.println("n - 1=               \t\t" + toBinary(n - 1) + "\t\t" + (n - 1));

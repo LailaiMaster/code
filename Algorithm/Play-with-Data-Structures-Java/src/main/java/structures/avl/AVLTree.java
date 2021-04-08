@@ -82,13 +82,13 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
     }
 
     // 对节点y进行向左旋转操作，返回旋转后新的根节点x
-    //         y                                            x
+    //         y                                           x
     //       /  \                                        /   \
-    //      T1   x          向左旋转 (y)       y        z
-    //           / \        - - - - - - - ->     / \        / \
-    //        T2    z                           T1  T2   T3  T4
+    //      T1   x          向左旋转 (y)                 y      z
+    //           / \        - - - - - - - ->         / \      / \
+    //        T2    z                              T1  T2    T3  T4
     //        /        \
-    //      T3       T4
+    //      T3         T4
     private Node leftRotate(Node y) {
         Node x = y.right;
         Node t2 = x.left;
@@ -104,12 +104,12 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
         return x;
     }
 
-    // 对节点y进行向右旋转操作，返回旋转后新的根节点x
-    //          y                                         x
+    // 对节点 y 进行向右旋转操作，返回旋转后新的根节点 x
+    //          y                                        x
     //         / \                                     /   \
-    //        x   T4     向右旋转 (y)        z        y
-    //       / \           - - - - - - - ->    / \      / \
-    //      z   T3                              T1  T2 T3 T4
+    //        x   T4     向右旋转 (y)                 z       y
+    //       / \           - - - - - - - ->        / \      / \
+    //      z   T3                               T1  T2    T3  T4
     //     / \
     //   T1   T2
     private Node rightRotate(Node y) {
@@ -182,7 +182,6 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
     }
 
     /*删除指定元素的节点*/
-    @SuppressWarnings("all")
     private Node remove(Node node, Key key) {
         if (node == null) {
             return null;
@@ -263,7 +262,6 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
         }
         return minimum(node.left);
     }
-
 
     public Value get(Key key) {
         Node node = getNode(root, key);

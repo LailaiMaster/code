@@ -5,7 +5,12 @@ buildscript {
     ext.kotlin_version = '1.2.31'
 
     repositories {
-        mavenCentral()
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url 'https://dl.google.com/dl/android/maven2/' }
+        maven { url 'https://jitpack.io' }
+        maven { url "https://kotlin.bintray.com/kotlinx" }
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -18,7 +23,11 @@ apply plugin: 'kotlin'
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+    maven { url "https://maven.aliyun.com/repository/google" }
+    maven { url 'https://dl.google.com/dl/android/maven2/' }
+    maven { url 'https://jitpack.io' }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+    jcenter()
 }
 
 dependencies {

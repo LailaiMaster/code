@@ -46,13 +46,15 @@ public class JavaEncoding {
         System.out.println("Charset.defaultCharset().name(): " + Charset.defaultCharset().name());
         System.out.println("file.encoding = " + System.getProperty("file.encoding", "un-know"));
         System.out.println("=========================================================");
-        System.out.println("中 in jvm = " + Integer.toHexString("中".codePointAt(0)));
+        System.out.println("中 code point = " + Integer.toHexString("中".codePointAt(0)));
         System.out.println("=========================================================");
         System.out.println("中 default = " + getCode("中", ""));//跟随Charset.defaultCharset()编码
         System.out.println("中 UTF8 = " + getCode("中", "UTF-8"));
         System.out.println("中 UTF16 = " + getCode("中", "UTF-16"));
         System.out.println("中 UNICODE = " + getCode("中", "UNICODE"));
         System.out.println("中 GBK = " + getCode("中", "GBK"));
+
+        //char a = '😢';
     }
 
     public static String getCode(String content, String format) throws UnsupportedEncodingException {

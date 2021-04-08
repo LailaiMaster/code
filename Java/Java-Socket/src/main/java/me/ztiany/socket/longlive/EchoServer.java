@@ -81,7 +81,6 @@ final class EchoServer implements Closeable {
         }
     }
 
-
     void start(@NotNull Callback callback) {
         mServerExecutor.execute(() -> {
             try {
