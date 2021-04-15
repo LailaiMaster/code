@@ -1,8 +1,18 @@
+/*
+ ============================================================================
+
+ Author      : Ztiany
+ Description : 类的定义
+
+ ============================================================================
+ */
+
 #include <iostream>
 
-using std::istream; using std::ostream;
+using std::istream;
+using std::ostream;
 
-#include "Sales_data.h"
+#include "02.Sales_data.h"
 
 Sales_data::Sales_data(std::istream &is) {
     read(is, *this);
@@ -38,4 +48,8 @@ ostream &print(ostream &os, const Sales_data &item) {
     os << item.isbn() << " " << item.units_sold << " "
        << item.revenue << " " << item.avg_price();
     return os;
+}
+
+int main() {
+    return EXIT_SUCCESS;
 }

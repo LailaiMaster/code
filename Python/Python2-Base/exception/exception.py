@@ -1,6 +1,6 @@
 # coding=utf-8
 
-# 使用except而带多种异常类型
+# 使用 except 捕获多种异常类型
 try:
     a = 9 / 0
 except(ZeroDivisionError, SystemError):

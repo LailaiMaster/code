@@ -36,7 +36,6 @@ private:
     double revenue = 0.0;
 };
 
-
 //非成员函数接口
 Sales_data add(const Sales_data &, const Sales_data &);
 

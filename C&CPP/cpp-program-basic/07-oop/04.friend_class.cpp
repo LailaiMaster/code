@@ -7,7 +7,7 @@
  ============================================================================
  */
 
-#include "friend_class.h"
+#include "04.friend_class.h"
 
 using namespace std;
 

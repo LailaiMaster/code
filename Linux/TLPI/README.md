@@ -1,4 +1,4 @@
-# 《The Linux Programming Interface》 notes
+# 《The Linux Programming Interface》 codes
 
 [The Linux Programming Interface](http://man7.org/tlpi/index.html) web site
 

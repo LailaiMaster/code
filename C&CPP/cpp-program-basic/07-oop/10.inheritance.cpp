@@ -7,7 +7,7 @@
  ============================================================================
  */
 
-#include "inheritance.h"
+#include "10.inheritance.h"
 #include <iostream>
 
 using namespace std;
