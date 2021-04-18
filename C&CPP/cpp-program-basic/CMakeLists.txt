@@ -16,8 +16,8 @@ set(CMAKE_CXX_STANDARD 17)
 #add_compile_options(-fno-elide-constructors)
 
 # 获取当前项目目录下所有 .cpp 文件
-#set(CURRENT_CHAPTER 01-type)
-set(CURRENT_CHAPTER 07-oop)
+set(CURRENT_CHAPTER 01-type)
+#set(CURRENT_CHAPTER 07-oop)
 file(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/${CURRENT_CHAPTER}/*.cpp")
 
 # 将每个文件添加为可执行程序

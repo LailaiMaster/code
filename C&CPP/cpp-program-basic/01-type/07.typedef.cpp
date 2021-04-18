@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include <iostream>
 
-//使用typedef定义类型别名
+//使用 typedef 定义类型别名
 typedef int Integer;
 typedef const char *String;
 

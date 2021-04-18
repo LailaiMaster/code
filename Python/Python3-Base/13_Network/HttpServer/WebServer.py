@@ -76,11 +76,11 @@ class HTTPServer(object):
         self.server_socket.bind(("", port))
 
 
-# python WebServer.py  WebFramework:app
+# python web-server.py  WebFramework:app
 def main():
     sys.path.insert(1, WSGI_PYTHON_DIR)
     if len(sys.argv) < 2:
-        sys.exit("python WebServer.py Module:app")
+        sys.exit("python web-server.py Module:app")
     module_name, app_name = sys.argv[1].split(":")
     m = __import__(module_name)
     app = getattr(m, app_name)

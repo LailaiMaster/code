@@ -2,17 +2,16 @@
  ============================================================================
  
  Author      : Ztiany
- Description : 使用struct自定义数据结构
+ Description : 使用 struct 自定义数据结构
 
  ============================================================================
  */
 
 #include <iostream>
-#include "struct_type.h"
 #include <cstring>
+#include "06.struct_type.h"
 
 using namespace std;
-
 
 static void test_sales_data() {
 
